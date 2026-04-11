@@ -65,11 +65,6 @@ export default function Home() {
         <RightNow />
       </section>
 
-      {/* Divider */}
-      <div className="mt-16">
-        <div className="h-px w-full" style={{ background: 'color-mix(in srgb, var(--accent) 15%, transparent)' }} />
-      </div>
-
       {/* THE FIVE SEASONS section */}
       <section className="mt-16">
         <PageHeader label="The Five Seasons" />
@@ -106,11 +101,6 @@ export default function Home() {
           })}
         </div>
       </section>
-
-      {/* Divider */}
-      <div className="mt-16">
-        <div className="h-px w-full" style={{ background: 'color-mix(in srgb, var(--accent) 15%, transparent)' }} />
-      </div>
 
       {/* EXPLORE FURTHER section */}
       <section className="mt-16">
@@ -178,29 +168,21 @@ function ExploreCard({ to, title, description, image }) {
   return (
     <Link
       to={to}
-      className="group relative block h-[120px] overflow-hidden rounded transition-opacity hover:opacity-90"
+      className="block transition-opacity hover:opacity-90"
     >
-      {/* Background image */}
+      {/* Image on top */}
       <img
         src={image}
         alt=""
-        className="h-full w-full object-cover"
+        className="h-[120px] w-full rounded object-cover"
       />
 
-      {/* Dark gradient overlay */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.55))',
-        }}
-      />
-
-      {/* Text content */}
-      <div className="absolute bottom-0 left-0 right-0 p-3">
-        <h3 className="cinzel text-[11px] uppercase tracking-[0.28em] text-white">
+      {/* Text below */}
+      <div className="pt-2">
+        <h3 className="cinzel text-[11px] uppercase tracking-[0.28em] text-heading">
           {title}
         </h3>
-        <p className="mt-1 text-[11px] italic leading-[1.5] text-white/80">
+        <p className="mt-1 text-[13px] italic text-muted">
           {description}
         </p>
       </div>

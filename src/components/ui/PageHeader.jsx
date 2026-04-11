@@ -1,7 +1,7 @@
 export default function PageHeader({ label }) {
   return (
     <div className="mb-7 flex items-center gap-4">
-      <span className="cinzel whitespace-nowrap text-[10px] font-light uppercase tracking-[0.3em] text-accent">
+      <span className="cinzel whitespace-nowrap text-[13px] font-light uppercase tracking-[0.25em] text-accent">
         {label}
       </span>
       <div
