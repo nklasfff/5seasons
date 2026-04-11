@@ -44,12 +44,14 @@ function SeasonRow({ season }) {
         style={{
           borderColor:
             'color-mix(in srgb, var(--accent) 18%, transparent)',
+          background: 'transparent',
         }}
       >
         <img
           src={seasonCardImages[season.id]}
           alt=""
-          className="h-[124px] w-[124px] flex-shrink-0 rounded-sm object-contain"
+          className="h-[124px] w-[124px] flex-shrink-0 object-contain"
+          style={{ background: 'transparent' }}
         />
         <div className="min-w-0 flex-1">
           <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">

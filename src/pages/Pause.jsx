@@ -333,11 +333,13 @@ function SeasonsSection({ seasonalPractices }) {
             key={practice.season}
             to={`/pause/${practice.season}`}
             className={`${seasonClass(seasonId)} block transition-opacity hover:opacity-75`}
+            style={{ background: 'transparent' }}
           >
             <img
               src={SEASON_CARDS[seasonId]}
               alt={practice.season_name}
               className="mx-auto mb-4 w-[180px]"
+              style={{ background: 'transparent' }}
             />
             <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
               {practice.season_name}

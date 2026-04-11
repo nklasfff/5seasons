@@ -83,6 +83,7 @@ export default function PauseSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={practice.season_name}
         className="mx-auto mb-6 w-[180px]"
+        style={{ background: 'transparent' }}
       />
 
       {/* Season name and element */}

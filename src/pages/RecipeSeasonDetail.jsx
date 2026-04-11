@@ -81,6 +81,7 @@ export default function RecipeSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={season.name}
         className="mx-auto mb-6 w-[180px]"
+        style={{ background: 'transparent' }}
       />
 
       {/* Season name and element */}
