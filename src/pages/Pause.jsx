@@ -4,60 +4,100 @@ import pauseData from '../data/pause_presence.json'
 import Hero from '../components/ui/Hero.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
-import BreathExercise from '../components/ui/BreathExercise.jsx'
 import heroImage from '../assets/images/hero-pause.jpg'
+import cardSpring from '../assets/images/card-spring.png'
+import cardSummer from '../assets/images/card-summer.png'
+import cardLateSummer from '../assets/images/card-latesummer.png'
+import cardAutumn from '../assets/images/card-autumn.png'
+import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
 
-const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
+const SEASON_CARDS = {
+  spring: cardSpring,
+  summer: cardSummer,
+  late_summer: cardLateSummer,
+  autumn: cardAutumn,
+  winter: cardWinter,
+}
+
+// Four topics for MINDFULNESS & BREATH section
+const TOPICS = [
+  { id: 'mindfulness', name: 'Mindfulness' },
+  { id: 'pause', name: 'The Pause' },
+  { id: 'breath', name: 'The Breath' },
+  { id: 'rhythm', name: 'A Daily Rhythm' },
+]
 
 export default function Pause() {
-  const { meta, mindfulness, the_pause, breath, breath_practices, daily_practice, seasonal_practices } =
-    pauseData
+  const { meta, introduction, mindfulness, the_pause, breath, breath_practices, daily_practice, seasonal_practices } = pauseData
 
-  const [tab, setTab] = useState('mindfulness')
+  const [activeSection, setActiveSection] = useState('mindfulness_breath')
+  const [selectedTopicIndex, setSelectedTopicIndex] = useState(null)
+
+  // Get universal breath practices (season: "all")
+  const universalBreathPractices = useMemo(
+    () => breath_practices.filter((bp) => bp.season === 'all'),
+    [breath_practices],
+  )
 
   return (
     <div className="spring">
-      <Hero
-        image={heroImage}
-        label="Pause & Presence"
-        title={meta.title}
-        subtitle={meta.subtitle}
-      />
+      {/* Hero image - no text overlay */}
+      <Hero image={heroImage} />
 
-      {/* Lead paragraph */}
-      <p className="lead">{meta.description}</p>
+      {/* Title section */}
+      <div className="mb-10">
+        <h1 className="cinzel text-[22px] font-light uppercase tracking-[0.12em] text-heading md:text-[24px]">
+          {meta.title}
+        </h1>
+        <p className="cinzel mt-1 text-[9px] uppercase tracking-[0.3em] text-muted">
+          {meta.subtitle}
+        </p>
+        <p className="lead mt-8">
+          {introduction.text[0]} {introduction.text[1]}
+        </p>
+      </div>
 
-      {/* Two tabs */}
-      <div className="mt-8">
-        <Tabs
-          tabs={[
-            { id: 'mindfulness', label: 'Mindfulness & Breath' },
-            { id: 'seasons', label: 'The Seasons' },
-          ]}
-          active={tab}
-          onChange={setTab}
+      {/* Two navigation buttons */}
+      <div className="flex gap-x-7 border-b pb-2" style={{ borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)' }}>
+        <NavButton
+          label="Mindfulness & Breath"
+          active={activeSection === 'mindfulness_breath'}
+          onClick={() => {
+            setActiveSection('mindfulness_breath')
+            setSelectedTopicIndex(null)
+          }}
+        />
+        <NavButton
+          label="The Seasons"
+          active={activeSection === 'seasons'}
+          onClick={() => {
+            setActiveSection('seasons')
+            setSelectedTopicIndex(null)
+          }}
         />
       </div>
 
-      <div className="mt-10">
-        {tab === 'mindfulness' && (
-          <MindfulnessTab
+      {/* Content area */}
+      <div className="mt-10 mb-16">
+        {activeSection === 'mindfulness_breath' && (
+          <MindfulnessBreathSection
+            topics={TOPICS}
+            selectedTopicIndex={selectedTopicIndex}
+            setSelectedTopicIndex={setSelectedTopicIndex}
             mindfulness={mindfulness}
             thePause={the_pause}
             breath={breath}
-            breathPractices={breath_practices}
+            universalBreathPractices={universalBreathPractices}
             dailyPractice={daily_practice}
           />
         )}
-
-        {tab === 'seasons' && (
-          <SeasonsTab seasonalPractices={seasonal_practices} />
+        {activeSection === 'seasons' && (
+          <SeasonsSection seasonalPractices={seasonal_practices} />
         )}
       </div>
 
-      <div className="mt-16 mb-6">
+      <div className="mb-6">
         <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
           Isabelle Evita Søndergaard
         </p>
@@ -67,306 +107,246 @@ export default function Pause() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Tab 1: Mindfulness & Breath                                        */
+/* Navigation Button                                                  */
 /* ------------------------------------------------------------------ */
 
-function MindfulnessTab({ mindfulness, thePause, breath, breathPractices, dailyPractice }) {
-  const [openSection, setOpenSection] = useState(null)
+function NavButton({ label, active, onClick }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="cinzel pb-1 text-[11px] font-light uppercase tracking-[0.26em] transition-colors"
+      style={{
+        color: active ? 'var(--accent)' : 'var(--muted)',
+        borderBottom: active ? '0.5px solid var(--accent)' : '0.5px solid transparent',
+        marginBottom: '-9px',
+      }}
+    >
+      {label}
+    </button>
+  )
+}
 
-  const toggleSection = (id) => {
-    setOpenSection((prev) => (prev === id ? null : id))
+/* ------------------------------------------------------------------ */
+/* MINDFULNESS & BREATH Section                                       */
+/* ------------------------------------------------------------------ */
+
+function MindfulnessBreathSection({
+  topics,
+  selectedTopicIndex,
+  setSelectedTopicIndex,
+  mindfulness,
+  thePause,
+  breath,
+  universalBreathPractices,
+  dailyPractice,
+}) {
+  // If a topic is selected, show its content
+  if (selectedTopicIndex !== null) {
+    const topic = topics[selectedTopicIndex]
+    const prevIndex = selectedTopicIndex === 0 ? topics.length - 1 : selectedTopicIndex - 1
+    const nextIndex = selectedTopicIndex === topics.length - 1 ? 0 : selectedTopicIndex + 1
+
+    return (
+      <div>
+        {/* Topic 1: MINDFULNESS */}
+        {topic.id === 'mindfulness' && (
+          <div>
+            <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
+              {mindfulness.title}
+            </h2>
+            <p className="lead mt-6">
+              {mindfulness.text[0]} {mindfulness.text[1]}
+            </p>
+
+            <div className="mt-10">
+              {mindfulness.four_elements.map((element) => (
+                <PracticeRow
+                  key={element.name}
+                  title={element.name}
+                  description={element.description}
+                />
+              ))}
+            </div>
+
+            <InsightBlock label={mindfulness.key_insight.label}>
+              {mindfulness.key_insight.text}
+            </InsightBlock>
+          </div>
+        )}
+
+        {/* Topic 2: THE PAUSE */}
+        {topic.id === 'pause' && (
+          <div>
+            <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
+              {thePause.title}
+            </h2>
+            <p className="lead mt-6">
+              {thePause.text[0]}
+            </p>
+
+            <div className="mt-10">
+              {thePause.four_kinds.map((kind) => (
+                <PracticeRow
+                  key={kind.type}
+                  title={kind.type}
+                  description={kind.description}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Topic 3: THE BREATH */}
+        {topic.id === 'breath' && (
+          <div>
+            <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
+              {breath.title}
+            </h2>
+            <p className="lead mt-6">
+              {breath.text[0]}
+            </p>
+
+            <InsightBlock label="Before you begin">
+              {breath.before_you_begin}
+            </InsightBlock>
+
+            <div className="mt-10 space-y-8">
+              {universalBreathPractices.map((practice, i) => (
+                <div key={practice.id} className={i > 0 ? 'mt-8' : ''}>
+                  <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+                    {practice.name}
+                  </h3>
+                  <p className="mt-1 text-[12px] italic text-muted">
+                    {practice.suitable_for}
+                  </p>
+                  <ol className="mt-4 list-decimal space-y-2 pl-5 text-[13px] leading-[1.75] text-body">
+                    {practice.steps.map((step, idx) => (
+                      <li key={idx}>{step}</li>
+                    ))}
+                  </ol>
+                  {practice.note && (
+                    <InsightBlock label="Note">
+                      {practice.note}
+                    </InsightBlock>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Topic 4: A DAILY RHYTHM */}
+        {topic.id === 'rhythm' && (
+          <div>
+            <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
+              {dailyPractice.title}
+            </h2>
+
+            <div className="mt-10">
+              <h3 className="cinzel mb-4 text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+                Morning
+              </h3>
+              {dailyPractice.morning.map((item) => (
+                <PracticeRow
+                  key={item.practice}
+                  title={item.practice}
+                  description={item.description}
+                />
+              ))}
+            </div>
+
+            <div className="mt-10">
+              <h3 className="cinzel mb-4 text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+                Evening
+              </h3>
+              {dailyPractice.evening.map((item) => (
+                <PracticeRow
+                  key={item.practice}
+                  title={item.practice}
+                  description={item.description}
+                />
+              ))}
+            </div>
+
+            <InsightBlock label="Building a practice">
+              {dailyPractice.building_practice_note}
+            </InsightBlock>
+          </div>
+        )}
+
+        {/* Topic navigation */}
+        <div className="mt-12 flex items-center justify-center gap-8">
+          <button
+            type="button"
+            onClick={() => setSelectedTopicIndex(prevIndex)}
+            className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
+          >
+            ← {topics[prevIndex].name}
+          </button>
+          <button
+            type="button"
+            onClick={() => setSelectedTopicIndex(nextIndex)}
+            className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
+          >
+            {topics[nextIndex].name} →
+          </button>
+        </div>
+      </div>
+    )
   }
 
-  // Get specific breath practices
-  const foundationalPractice = breathPractices.find((p) => p.id === 'foundational')
-  const abdominalPractice = breathPractices.find((p) => p.id === 'abdominal')
-  const nadiPractice = breathPractices.find((p) => p.id === 'nadi_shodhana')
-
+  // Otherwise, show the list of topics to choose from
   return (
-    <div className="space-y-3">
-      {/* Section 1: What Mindfulness Is */}
-      <CollapsibleSection
-        title="What Mindfulness Is"
-        intro="Conscious presence. Deliberate attention."
-        isOpen={openSection === 'mindfulness'}
-        onToggle={() => toggleSection('mindfulness')}
-      >
-        <div className="space-y-4">
-          {mindfulness.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <h4 className="cinzel mb-2 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
-            Four Elements
-          </h4>
-          <div>
-            {mindfulness.four_elements.map((el) => (
-              <PracticeRow
-                key={el.name}
-                title={el.name}
-                description={el.description}
-              />
-            ))}
-          </div>
-        </div>
-
-        {mindfulness.key_insight && (
-          <InsightBlock label={mindfulness.key_insight.label}>
-            {mindfulness.key_insight.text}
-          </InsightBlock>
-        )}
-      </CollapsibleSection>
-
-      {/* Section 2: The Pause */}
-      <CollapsibleSection
-        title="The Pause"
-        intro="Rest as a radical act."
-        isOpen={openSection === 'pause'}
-        onToggle={() => toggleSection('pause')}
-      >
-        <div className="space-y-4">
-          {thePause.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
-
-        <div className="mt-6">
-          <h4 className="cinzel mb-2 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
-            The Four Kinds of Pause
-          </h4>
-          <div>
-            {thePause.four_kinds.map((k) => (
-              <PracticeRow
-                key={k.type}
-                title={k.type}
-                description={k.description}
-              />
-            ))}
-          </div>
-        </div>
-      </CollapsibleSection>
-
-      {/* Section 3: The Breath */}
-      <CollapsibleSection
-        title="The Breath"
-        intro="The foundation of every practice."
-        isOpen={openSection === 'breath'}
-        onToggle={() => toggleSection('breath')}
-      >
-        <div className="space-y-4">
-          {breath.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
-
-        {breath.before_you_begin && (
-          <InsightBlock label="Before You Begin">
-            {breath.before_you_begin}
-          </InsightBlock>
-        )}
-
-        <div className="mt-6 space-y-6">
-          {foundationalPractice && (
-            <BreathExercise
-              title={foundationalPractice.name}
-              suitableFor={foundationalPractice.suitable_for}
-              steps={foundationalPractice.steps}
-              note={foundationalPractice.note}
-            />
-          )}
-          {abdominalPractice && (
-            <BreathExercise
-              title={abdominalPractice.name}
-              suitableFor={abdominalPractice.suitable_for}
-              steps={abdominalPractice.steps}
-              note={abdominalPractice.note}
-            />
-          )}
-          {nadiPractice && (
-            <BreathExercise
-              title={nadiPractice.name}
-              suitableFor={nadiPractice.suitable_for}
-              steps={nadiPractice.steps}
-              note={nadiPractice.note}
-            />
-          )}
-        </div>
-      </CollapsibleSection>
-
-      {/* Section 4: A Rhythm to Grow Into */}
-      <CollapsibleSection
-        title="A Rhythm to Grow Into"
-        intro="Morning, midday and evening."
-        isOpen={openSection === 'rhythm'}
-        onToggle={() => toggleSection('rhythm')}
-      >
-        <h4 className="cinzel mb-2 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
-          Morning
-        </h4>
-        <div>
-          {dailyPractice.morning.map((r, i) => (
-            <PracticeRow
-              key={i}
-              title={r.practice}
-              description={r.description}
-            />
-          ))}
-        </div>
-
-        <h4 className="cinzel mb-2 mt-6 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
-          Evening
-        </h4>
-        <div>
-          {dailyPractice.evening.map((r, i) => (
-            <PracticeRow
-              key={i}
-              title={r.practice}
-              description={r.description}
-            />
-          ))}
-        </div>
-
-        {dailyPractice.building_practice_note && (
-          <InsightBlock label="Building the Practice">
-            {dailyPractice.building_practice_note}
-          </InsightBlock>
-        )}
-      </CollapsibleSection>
+    <div className="space-y-4">
+      {topics.map((topic, i) => (
+        <button
+          key={topic.id}
+          type="button"
+          onClick={() => setSelectedTopicIndex(i)}
+          className="w-full text-left transition-opacity hover:opacity-75"
+        >
+          <p className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-heading">
+            {topic.name}
+          </p>
+        </button>
+      ))}
     </div>
   )
 }
 
 /* ------------------------------------------------------------------ */
-/* Collapsible Section                                                */
+/* THE SEASONS Section                                                */
 /* ------------------------------------------------------------------ */
 
-function CollapsibleSection({ title, intro, isOpen, onToggle, children }) {
+function SeasonsSection({ seasonalPractices }) {
   return (
-    <article>
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-baseline justify-between gap-4 border-b py-4 text-left transition-colors"
-        style={{
-          borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)',
-        }}
-        aria-expanded={isOpen}
-      >
-        <div className="flex-1">
-          <p className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-            {title}
-          </p>
-          <p className="mt-1 text-[12px] italic text-muted">{intro}</p>
-        </div>
-        <span
-          className="cinzel text-[14px] font-light text-muted"
-          aria-hidden="true"
-        >
-          {isOpen ? '−' : '+'}
-        </span>
-      </button>
+    <div className="space-y-8">
+      {seasonalPractices.map((practice) => {
+        const seasonId = practice.season
+        const firstSentence = practice.invitation.split(/[.!?]/)[0].trim() + '.'
 
-      <div className="collapse-grid" data-open={isOpen}>
-        <div className="collapse-inner">
-          <div className="pb-6 pt-5">{children}</div>
-        </div>
-      </div>
-    </article>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* Tab 2: The Seasons                                                 */
-/* ------------------------------------------------------------------ */
-
-function SeasonsTab({ seasonalPractices }) {
-  return (
-    <>
-      <p className="lead mb-6">
-        Each season carries its own invitation — a way to meet the breath,
-        the body, and what you hold inside.
-      </p>
-
-      <div className="space-y-6">
-        {SEASON_ORDER.map((seasonId) => {
-          const practice = seasonalPractices.find((sp) => sp.season === seasonId)
-          if (!practice) return null
-
-          return (
-            <Link
-              key={seasonId}
-              to={`/pause/${seasonId}`}
-              className={`${seasonClass(seasonId)} flex gap-5 items-start border-b pb-6 last:border-0 transition-opacity hover:opacity-75`}
-              style={{
-                borderColor:
-                  'color-mix(in srgb, var(--accent) 10%, transparent)',
-              }}
-            >
-              <img
-                src={seasonCardImages[seasonId]}
-                alt=""
-                className="w-[110px] h-[110px] object-contain rounded-sm"
-              />
-              <div className="flex-1 pt-1">
-                <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
-                  {practice.element}
-                </p>
-                <h3 className="cinzel mt-1 text-[16px] font-light uppercase tracking-[0.18em] text-accent">
-                  {practice.season_name}
-                </h3>
-                <p className="mt-3 text-[13.5px] italic leading-[1.75] text-lead">
-                  {practice.invitation}
-                </p>
-              </div>
-            </Link>
-          )
-        })}
-      </div>
-    </>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* Tabs                                                                */
-/* ------------------------------------------------------------------ */
-
-function Tabs({ tabs, active, onChange }) {
-  return (
-    <div
-      className="flex gap-x-7 border-b pb-2"
-      style={{
-        borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)',
-      }}
-      role="tablist"
-    >
-      {tabs.map((t) => {
-        const isActive = active === t.id
         return (
-          <button
-            key={t.id}
-            type="button"
-            role="tab"
-            aria-selected={isActive}
-            onClick={() => onChange(t.id)}
-            className="cinzel pb-1 text-[11px] font-light uppercase tracking-[0.26em] transition-colors"
-            style={{
-              color: isActive ? 'var(--accent)' : 'var(--muted)',
-              borderBottom: isActive
-                ? '0.5px solid var(--accent)'
-                : '0.5px solid transparent',
-              marginBottom: '-9px',
-            }}
+          <Link
+            key={practice.season}
+            to={`/pause/${practice.season}`}
+            className={`${seasonClass(seasonId)} block transition-opacity hover:opacity-75`}
           >
-            {t.label}
-          </button>
+            <img
+              src={SEASON_CARDS[seasonId]}
+              alt={practice.season_name}
+              className="mx-auto mb-4 w-[180px]"
+            />
+            <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
+              {practice.season_name}
+            </h3>
+            <p className="cinzel mt-1 text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+              {practice.element}
+            </p>
+            <p className="lead mt-4 text-center">
+              {firstSentence}
+            </p>
+          </Link>
         )
       })}
     </div>
