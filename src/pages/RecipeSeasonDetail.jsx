@@ -65,7 +65,7 @@ export default function RecipeSeasonDetail() {
   const mealRecipes = seasonRecipes.filter((r) => r.meal_type === activeMealType)
 
   return (
-    <div className={seasonClass(seasonId)}>
+    <div className={seasonClass(seasonId)} style={{ background: 'transparent' }}>
       {/* Back link */}
       <div className="pt-4 pl-4">
         <Link

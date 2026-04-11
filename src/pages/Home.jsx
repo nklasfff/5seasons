@@ -86,7 +86,7 @@ export default function Home() {
           {meta.description}
         </p>
 
-        <div className="space-y-8">
+        <div className="space-y-8" style={{ background: 'transparent' }}>
           {seasons.map((season) => {
             const firstSentence = season.description.split(/[.!?]/)[0].trim() + '.'
 

@@ -67,7 +67,7 @@ export default function PauseSeasonDetail() {
   const nextSeasonId = currentIndex === SEASON_ORDER.length - 1 ? SEASON_ORDER[0] : SEASON_ORDER[currentIndex + 1]
 
   return (
-    <div className={seasonClass(seasonId)}>
+    <div className={seasonClass(seasonId)} style={{ background: 'transparent' }}>
       {/* Back link */}
       <div className="pt-4 pl-4">
         <Link

@@ -24,7 +24,7 @@ export default function Seasons() {
 
       <Divider />
 
-      <div className="flex flex-col">
+      <div className="flex flex-col" style={{ background: 'transparent' }}>
         {seasons.map((season) => (
           <SeasonRow key={season.id} season={season} />
         ))}

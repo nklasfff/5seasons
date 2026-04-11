@@ -40,7 +40,7 @@ export default function Recipes() {
       </div>
 
       {/* Five season entries */}
-      <div className="space-y-8">
+      <div className="space-y-8" style={{ background: 'transparent' }}>
         {SEASON_ORDER.map((seasonId) => {
           const season = seasons[seasonId]
           const firstSentence = season.principle.split(/[.!?]/)[0].trim() + '.'

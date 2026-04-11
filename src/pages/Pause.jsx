@@ -323,7 +323,7 @@ function MindfulnessBreathSection({
 
 function SeasonsSection({ seasonalPractices }) {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" style={{ background: 'transparent' }}>
       {seasonalPractices.map((practice) => {
         const seasonId = practice.season
         const firstSentence = practice.invitation.split(/[.!?]/)[0].trim() + '.'
