@@ -4,6 +4,7 @@ import seasonsData from '../data/seasons.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
 import Divider from '../components/ui/Divider.jsx'
 import { seasonClass } from '../lib/seasonClass.js'
+import { seasonCardImages } from '../lib/seasonImage.js'
 
 const GUIDE_SECTIONS = [
   {
@@ -129,17 +130,19 @@ function SeasonTile({ season }) {
       className={`${seasonClass(season.id)} group block`}
     >
       <div
-        className="flex h-full flex-col items-center px-3 pb-4 pt-3 text-center"
+        className="flex h-full flex-col items-center px-3 pb-4 pt-4 text-center"
         style={{
-          background: 'var(--accent-light)',
+          background:
+            'color-mix(in srgb, var(--accent-light) 55%, transparent)',
           border:
-            '0.5px solid color-mix(in srgb, var(--accent) 25%, transparent)',
+            '0.5px solid color-mix(in srgb, var(--accent) 22%, transparent)',
           borderRadius: '2px',
         }}
       >
-        <div
-          className="mb-3 h-[6px] w-[6px] rounded-full"
-          style={{ background: 'var(--accent)' }}
+        <img
+          src={seasonCardImages[season.id]}
+          alt=""
+          className="mb-3 h-[92px] w-[92px] object-contain"
         />
         <p className="cinzel text-[8.5px] font-light uppercase tracking-[0.22em] text-muted">
           {season.element}

@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
 import pauseData from '../data/pause_presence.json'
-import PageHeader from '../components/ui/PageHeader.jsx'
+import Hero from '../components/ui/Hero.jsx'
 import Divider from '../components/ui/Divider.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import BreathExercise from '../components/ui/BreathExercise.jsx'
 import JournalQuestion from '../components/ui/JournalQuestion.jsx'
+import heroImage from '../assets/images/hero-pause.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
@@ -56,14 +57,12 @@ export default function Pause() {
 
   return (
     <div className={wrapperClass}>
-      {/* Hero header */}
-      <PageHeader label="Pause & Presence" />
-      <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
-        {meta.title}
-      </h1>
-      <p className="lead">{meta.subtitle}</p>
-
-      <Divider />
+      <Hero
+        image={heroImage}
+        label="Pause & Presence"
+        title={meta.title}
+        subtitle={meta.subtitle}
+      />
 
       <p className="text-[15px] leading-[1.82]">{meta.description}</p>
 

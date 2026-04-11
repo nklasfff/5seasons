@@ -1,4 +1,4 @@
-import PlaceholderImage from './PlaceholderImage.jsx'
+import { seasonCardImages } from '../../lib/seasonImage.js'
 
 export default function SeasonCard({ season }) {
   const meta = [
@@ -10,9 +10,10 @@ export default function SeasonCard({ season }) {
 
   return (
     <div className="my-4 flex items-start gap-5">
-      <PlaceholderImage
-        label={season.name}
-        className="h-[148px] w-[148px] rounded-sm"
+      <img
+        src={seasonCardImages[season.id]}
+        alt=""
+        className="h-[148px] w-[148px] flex-shrink-0 rounded-sm object-contain"
       />
       <div className="flex-1">
         <p className="cinzel text-[17px] font-light uppercase tracking-[0.18em] text-accent">

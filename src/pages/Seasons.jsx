@@ -1,27 +1,28 @@
 import { Link } from 'react-router-dom'
 import seasonsData from '../data/seasons.json'
-import PageHeader from '../components/ui/PageHeader.jsx'
+import Hero from '../components/ui/Hero.jsx'
 import Divider from '../components/ui/Divider.jsx'
-import PlaceholderImage from '../components/ui/PlaceholderImage.jsx'
+import heroImage from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
+import { seasonCardImages } from '../lib/seasonImage.js'
 
 export default function Seasons() {
   const { meta, seasons } = seasonsData
 
   return (
     <div className="spring">
-      <PageHeader label="The Five Seasons" />
+      <Hero
+        image={heroImage}
+        label="The Five Seasons"
+        title={meta.title}
+        subtitle={meta.subtitle}
+      />
 
-      <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
-        {meta.title}
-      </h1>
-      <p className="lead mb-2">{meta.subtitle}</p>
+      <p className="text-[15px] leading-[1.82]">{meta.description}</p>
 
       <Divider />
 
-      <p className="mb-6 text-[15px] leading-[1.82]">{meta.description}</p>
-
-      <div className="mt-10 flex flex-col">
+      <div className="flex flex-col">
         {seasons.map((season) => (
           <SeasonRow key={season.id} season={season} />
         ))}
@@ -43,9 +44,10 @@ function SeasonRow({ season }) {
             'color-mix(in srgb, var(--accent) 18%, transparent)',
         }}
       >
-        <PlaceholderImage
-          label={season.name}
-          className="h-[124px] w-[124px] flex-shrink-0 rounded-sm"
+        <img
+          src={seasonCardImages[season.id]}
+          alt=""
+          className="h-[124px] w-[124px] flex-shrink-0 rounded-sm object-contain"
         />
         <div className="min-w-0 flex-1">
           <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
