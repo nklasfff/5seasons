@@ -3,6 +3,8 @@ import bodyclockData from '../data/bodyclock.json'
 import Hero from '../components/ui/Hero.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
+import StickyNav from '../components/ui/StickyNav.jsx'
+import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import heroImage from '../assets/images/hero-body-clock.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
 
@@ -79,6 +81,19 @@ export default function BodyClock() {
 
   return (
     <div className="spring">
+      {/* Back link - only show in period detail */}
+      {selectedPeriodIndex !== null && (
+        <div className="pt-4 pl-4">
+          <button
+            type="button"
+            onClick={() => setSelectedPeriodIndex(null)}
+            className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted transition-colors hover:text-accent"
+          >
+            ← The Clock
+          </button>
+        </div>
+      )}
+
       {/* Hero image - no text overlay */}
       <Hero image={heroImage} />
 
@@ -135,11 +150,29 @@ export default function BodyClock() {
         {activeSection === 'symptoms' && <SymptomsSection items={symptoms_guide} />}
       </div>
 
-      <div className="mb-6">
+      <div className="mt-16 mb-6">
         <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
           Isabelle Evita Søndergaard
         </p>
       </div>
+
+      {/* Sticky navigation - only show in period detail */}
+      {selectedPeriodIndex !== null && (() => {
+        const prevIndex = selectedPeriodIndex === 0 ? TIME_PERIODS.length - 1 : selectedPeriodIndex - 1
+        const nextIndex = selectedPeriodIndex === TIME_PERIODS.length - 1 ? 0 : selectedPeriodIndex + 1
+        return (
+          <StickyNav
+            prevLabel={TIME_PERIODS[prevIndex].name}
+            prevOnClick={() => setSelectedPeriodIndex(prevIndex)}
+            nextLabel={TIME_PERIODS[nextIndex].name}
+            nextOnClick={() => setSelectedPeriodIndex(nextIndex)}
+            currentLabel={TIME_PERIODS[selectedPeriodIndex].name}
+          />
+        )
+      })()}
+
+      {/* Scroll to top button */}
+      <ScrollToTop />
     </div>
   )
 }
@@ -211,23 +244,6 @@ function TheClockSection({
           ))}
         </div>
 
-        {/* Period navigation */}
-        <div className="mt-12 flex items-center justify-center gap-8">
-          <button
-            type="button"
-            onClick={() => setSelectedPeriodIndex(prevIndex)}
-            className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
-          >
-            ← {periods[prevIndex].name}
-          </button>
-          <button
-            type="button"
-            onClick={() => setSelectedPeriodIndex(nextIndex)}
-            className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
-          >
-            {periods[nextIndex].name} →
-          </button>
-        </div>
       </div>
     )
   }

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import seasonsData from '../data/seasons.json'
 import Hero from '../components/ui/Hero.jsx'
+import StickyNav from '../components/ui/StickyNav.jsx'
+import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import heroImage from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
 
@@ -30,6 +32,16 @@ export default function SeasonDetail() {
 
   return (
     <div className={seasonClass(season.id)}>
+      {/* Back link */}
+      <div className="pt-4 pl-4">
+        <Link
+          to="/seasons"
+          className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted transition-colors hover:text-accent"
+        >
+          ← All Seasons
+        </Link>
+      </div>
+
       {/* Hero image - no text overlay */}
       <Hero image={heroImage} />
 
@@ -74,27 +86,23 @@ export default function SeasonDetail() {
         </div>
       )}
 
-      {/* Season navigation */}
-      <div className="mt-8 mb-6 flex items-center justify-center gap-8">
-        <Link
-          to={`/seasons/${prevSeason}`}
-          className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
-        >
-          ← {SEASON_LABELS[prevSeason]}
-        </Link>
-        <Link
-          to={`/seasons/${nextSeason}`}
-          className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
-        >
-          {SEASON_LABELS[nextSeason]} →
-        </Link>
-      </div>
-
-      <div className="mb-6">
+      <div className="mt-16 mb-6">
         <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
           Isabelle Evita Søndergaard
         </p>
       </div>
+
+      {/* Sticky bottom navigation */}
+      <StickyNav
+        prevLabel={SEASON_LABELS[prevSeason]}
+        prevUrl={`/seasons/${prevSeason}`}
+        nextLabel={SEASON_LABELS[nextSeason]}
+        nextUrl={`/seasons/${nextSeason}`}
+        currentLabel={season.name}
+      />
+
+      {/* Scroll to top button */}
+      <ScrollToTop />
     </div>
   )
 }

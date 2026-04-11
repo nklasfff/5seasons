@@ -3,6 +3,7 @@ import recipesData from '../data/recipes.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
 import Divider from '../components/ui/Divider.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
+import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import { seasonClass } from '../lib/seasonClass.js'
 
 const SEASON_LABELS = {
@@ -28,16 +29,19 @@ export default function RecipeDetail() {
 
   return (
     <div className={seasonClass(recipe.season)}>
+      {/* Back link */}
+      <div className="pt-4 pl-4">
+        <Link
+          to={`/recipes/${recipe.season}`}
+          className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted transition-colors hover:text-accent"
+        >
+          ← The Seasons
+        </Link>
+      </div>
+
       <PageHeader
         label={`${SEASON_LABELS[recipe.season]} · ${MEAL_LABELS[recipe.meal_type]}`}
       />
-
-      <Link
-        to={`/recipes/${recipe.season}`}
-        className="cinzel mb-4 inline-block text-[9px] uppercase tracking-[0.28em] text-muted hover:text-accent"
-      >
-        ← {SEASON_LABELS[recipe.season]} recipes
-      </Link>
 
       <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
         {recipe.title}
@@ -107,6 +111,9 @@ export default function RecipeDetail() {
       <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
         {SEASON_LABELS[recipe.season]} · {MEAL_LABELS[recipe.meal_type]}
       </p>
+
+      {/* Scroll to top button */}
+      <ScrollToTop />
     </div>
   )
 }

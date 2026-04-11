@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import recipesData from '../data/recipes.json'
+import StickyNav from '../components/ui/StickyNav.jsx'
+import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import cardSpring from '../assets/images/card-spring.png'
 import cardSummer from '../assets/images/card-summer.png'
 import cardLateSummer from '../assets/images/card-latesummer.png'
@@ -64,6 +66,16 @@ export default function RecipeSeasonDetail() {
 
   return (
     <div className={seasonClass(seasonId)}>
+      {/* Back link */}
+      <div className="pt-4 pl-4">
+        <Link
+          to="/recipes"
+          className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted transition-colors hover:text-accent"
+        >
+          ← The Seasons
+        </Link>
+      </div>
+
       {/* Season card image - 180px centered */}
       <img
         src={SEASON_CARDS[seasonId]}
@@ -130,21 +142,23 @@ export default function RecipeSeasonDetail() {
         )}
       </div>
 
-      {/* Season navigation */}
-      <div className="mt-8 mb-6 flex items-center justify-center gap-8">
-        <Link
-          to={`/recipes/${prevSeasonId}`}
-          className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
-        >
-          ← {SEASON_NAMES[prevSeasonId]}
-        </Link>
-        <Link
-          to={`/recipes/${nextSeasonId}`}
-          className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
-        >
-          {SEASON_NAMES[nextSeasonId]} →
-        </Link>
+      <div className="mt-16 mb-6">
+        <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+          Isabelle Evita Søndergaard
+        </p>
       </div>
+
+      {/* Sticky bottom navigation */}
+      <StickyNav
+        prevLabel={SEASON_NAMES[prevSeasonId]}
+        prevUrl={`/recipes/${prevSeasonId}`}
+        nextLabel={SEASON_NAMES[nextSeasonId]}
+        nextUrl={`/recipes/${nextSeasonId}`}
+        currentLabel={season.name}
+      />
+
+      {/* Scroll to top button */}
+      <ScrollToTop />
     </div>
   )
 }
