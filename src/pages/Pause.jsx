@@ -30,6 +30,7 @@ function getCurrentSeason() {
 export default function Pause() {
   const {
     meta,
+    introduction,
     mindfulness,
     the_pause,
     breath,
@@ -47,7 +48,7 @@ export default function Pause() {
     [breath_practices],
   )
 
-  const [tab, setTab] = useState('mindfulness')
+  const [tab, setTab] = useState('foundations')
   const [seasonId, setSeasonId] = useState(() => getCurrentSeason())
 
   const wrapperClass = tab === 'seasons' ? seasonClass(seasonId) : 'spring'
@@ -61,18 +62,27 @@ export default function Pause() {
         subtitle={meta.subtitle}
       />
 
+      {/* Warm italic lead */}
+      <p className="lead">{meta.description}</p>
+      <p className="mt-5 text-[14.5px] italic leading-[1.86] text-lead">
+        {introduction.text[0]}
+      </p>
+
+      <Divider />
+
       <Tabs
         tabs={[
-          { id: 'mindfulness', label: 'Mindfulness' },
-          { id: 'seasons', label: 'Seasons' },
+          { id: 'foundations', label: 'Mindfulness & Breath' },
+          { id: 'seasons', label: 'The Seasons' },
         ]}
         active={tab}
         onChange={setTab}
       />
 
       <div className="mt-12">
-        {tab === 'mindfulness' ? (
-          <MindfulnessTab
+        {tab === 'foundations' ? (
+          <FoundationsTab
+            intro={introduction.text[2]}
             thePause={the_pause}
             breath={breath}
             practices={generalPractices}
@@ -81,6 +91,7 @@ export default function Pause() {
           />
         ) : (
           <SeasonsTab
+            intro={introduction.text[3]}
             seasonalPractices={seasonal_practices}
             practicesById={practicesById}
             selected={seasonId}
@@ -99,17 +110,18 @@ export default function Pause() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Tab 1: Mindfulness — four expandable cards, one open at a time      */
+/* Tab 1: Mindfulness & Breath                                         */
 /* ------------------------------------------------------------------ */
 
-function MindfulnessTab({
+function FoundationsTab({
+  intro,
   thePause,
   breath,
   practices,
   dailyPractice,
   mindfulness,
 }) {
-  const [openId, setOpenId] = useState(null)
+  const [openId, setOpenId] = useState('pause')
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id))
 
   const cards = [
@@ -140,19 +152,23 @@ function MindfulnessTab({
   ]
 
   return (
-    <div className="space-y-4">
-      {cards.map((c) => (
-        <ExpandableCard
-          key={c.id}
-          title={c.title}
-          oneLine={c.oneLine}
-          open={openId === c.id}
-          onToggle={() => toggle(c.id)}
-        >
-          {c.render()}
-        </ExpandableCard>
-      ))}
-    </div>
+    <>
+      <p className="text-[14px] italic leading-[1.8] text-lead">{intro}</p>
+
+      <div className="mt-10 space-y-4">
+        {cards.map((c) => (
+          <ExpandableCard
+            key={c.id}
+            title={c.title}
+            oneLine={c.oneLine}
+            open={openId === c.id}
+            onToggle={() => toggle(c.id)}
+          >
+            {c.render()}
+          </ExpandableCard>
+        ))}
+      </div>
+    </>
   )
 }
 
@@ -188,17 +204,20 @@ function ExpandableCard({ title, oneLine, open, onToggle, children }) {
           {open ? '−' : '+'}
         </span>
       </button>
-      {open && (
-        <div
-          className="border-t px-6 pb-7 pt-5"
-          style={{
-            borderColor:
-              'color-mix(in srgb, var(--accent) 16%, transparent)',
-          }}
-        >
-          {children}
+
+      <div className="collapse-grid" data-open={open}>
+        <div className="collapse-inner">
+          <div
+            className="border-t px-6 pb-7 pt-5"
+            style={{
+              borderColor:
+                'color-mix(in srgb, var(--accent) 16%, transparent)',
+            }}
+          >
+            {children}
+          </div>
         </div>
-      )}
+      </div>
     </article>
   )
 }
@@ -376,15 +395,25 @@ function MindfulnessContent({ data }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Tab 2: Seasons — one season at a time                               */
+/* Tab 2: Seasons                                                      */
 /* ------------------------------------------------------------------ */
 
-function SeasonsTab({ seasonalPractices, practicesById, selected, onSelect }) {
+function SeasonsTab({
+  intro,
+  seasonalPractices,
+  practicesById,
+  selected,
+  onSelect,
+}) {
   const current = seasonalPractices.find((sp) => sp.season === selected)
 
   return (
     <>
-      <SeasonSelector selected={selected} onSelect={onSelect} />
+      <p className="text-[14px] italic leading-[1.8] text-lead">{intro}</p>
+
+      <div className="mt-10">
+        <SeasonSelector selected={selected} onSelect={onSelect} />
+      </div>
 
       {current && (
         <div className="mt-10">
@@ -434,8 +463,22 @@ function SeasonalPractice({ practice, breath }) {
       <h2 className="cinzel mt-1 text-[19px] font-light uppercase tracking-[0.18em] text-accent">
         {practice.season_name}
       </h2>
+      <p
+        className="mt-1 text-[11px] italic"
+        style={{
+          color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
+        }}
+      >
+        {practice.organs} · {practice.direction}
+      </p>
 
       <InsightBlock label="Invitation">{practice.invitation}</InsightBlock>
+
+      {practice.inner_practice && (
+        <p className="mt-4 text-[14.5px] leading-[1.8]">
+          {practice.inner_practice}
+        </p>
+      )}
 
       {breath && (
         <div className="mt-8">
@@ -448,6 +491,11 @@ function SeasonalPractice({ practice, breath }) {
             steps={breath.steps}
             note={breath.note}
           />
+          {practice.breath_note && (
+            <p className="mt-2 text-[13px] italic leading-[1.7] text-muted">
+              {practice.breath_note}
+            </p>
+          )}
         </div>
       )}
 
@@ -489,7 +537,7 @@ function Tabs({ tabs, active, onChange }) {
             role="tab"
             aria-selected={isActive}
             onClick={() => onChange(t.id)}
-            className="cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors"
+            className="cinzel pb-1 text-[11px] font-light uppercase tracking-[0.26em] transition-colors"
             style={{
               color: isActive ? 'var(--accent)' : '#5a6a58',
               borderBottom: isActive
