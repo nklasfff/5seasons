@@ -60,6 +60,13 @@ export default function Recipes() {
         subtitle={meta.subtitle}
       />
 
+      <p className="lead mb-10">
+        Food is medicine. Each season brings its own flavours, its own
+        organs, and its own invitation to nourish the body from the inside
+        out. Use the filter below to find recipes for the season you are
+        living in right now.
+      </p>
+
       <SeasonFilter selected={selected} onSelect={setSelected} />
 
       <div className="mt-10">

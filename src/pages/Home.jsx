@@ -40,11 +40,15 @@ export default function Home() {
       {/* Right Now — centerpiece */}
       <section className="mt-14">
         <PageHeader label="Right Now" />
-        <p className="mt-1 text-[13.5px] italic leading-[1.74] text-muted">
-          The twelve organ windows of the day. Where you are — and what is
-          coming.
+        <h2 className="cinzel mb-4 text-[20px] font-light uppercase tracking-[0.14em] text-heading">
+          What Is Active in You
+        </h2>
+        <p className="lead">
+          Every two hours, energy shifts to a new organ. The clock below
+          shows where your body’s vitality is focused right now — and what
+          that means for how you eat, move, rest, and feel.
         </p>
-        <div className="mt-8">
+        <div className="mt-10">
           <RightNow />
         </div>
       </section>
