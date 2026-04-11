@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import bodyclockData from '../../data/bodyclock.json'
-import InsightBlock from './InsightBlock.jsx'
 import PracticeRow from './PracticeRow.jsx'
 import { seasonClass } from '../../lib/seasonClass.js'
 
@@ -10,6 +9,17 @@ const SEASON_NAME_TO_ID = {
   'Late Summer': 'late_summer',
   Autumn: 'autumn',
   Winter: 'winter',
+}
+
+// Bright element palette used inside the SVG clock + on the wisdom card.
+// These are intentionally more saturated than the CLAUDE.md season accents so
+// they read on the deep-forest center hub.
+const ELEMENT_COLOUR = {
+  Wood: '#5cc98e',
+  Fire: '#e88585',
+  Earth: '#deb87a',
+  Metal: '#a8c4d6',
+  Water: '#7ba4da',
 }
 
 const hourOf = (t) => parseInt(t.split(':')[0], 10)
@@ -24,12 +34,6 @@ function findOrganIndexForHour(organs, hour) {
   return 0
 }
 
-function firstSentence(text) {
-  if (!text) return ''
-  const m = text.match(/^[^.!?]*[.!?]/)
-  return m ? m[0] : text
-}
-
 function formatClockTime(date) {
   const h = String(date.getHours()).padStart(2, '0')
   const m = String(date.getMinutes()).padStart(2, '0')
@@ -41,7 +45,7 @@ export default function RightNow() {
   const [now, setNow] = useState(() => new Date())
   const [userSelected, setUserSelected] = useState(null)
 
-  // Tick every minute so the active segment shifts when a new window begins.
+  // Tick every minute so the active segment and the hub time stay in sync.
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 60 * 1000)
     return () => clearInterval(id)
@@ -53,13 +57,9 @@ export default function RightNow() {
   )
   const selectedIndex = userSelected ?? activeIndex
   const selected = organs[selectedIndex]
+  const selectedColour = ELEMENT_COLOUR[selected.element] || '#a8c4d6'
   const seasonId = SEASON_NAME_TO_ID[selected.season] || 'spring'
 
-  const head = firstSentence(selected.description)
-  const rest = selected.description.slice(head.length).trim()
-
-  // Reset user override when the clicked index catches up to the active one,
-  // so after a while the page naturally follows the hour again.
   const handleSelect = (i) => {
     setUserSelected((prev) => {
       if (i === activeIndex) return null
@@ -72,36 +72,16 @@ export default function RightNow() {
       <Clock
         organs={organs}
         activeIndex={activeIndex}
-        selectedIndex={selectedIndex}
+        selectedOrgan={selected}
+        selectedColour={selectedColour}
         now={now}
         onSelect={handleSelect}
       />
 
-      {/* Selected organ detail */}
-      <div className="mt-10 text-center">
-        <p className="cinzel text-[9px] font-light uppercase tracking-[0.3em] text-muted">
-          {selected.time_start} — {selected.time_end} · {selected.element} ·{' '}
-          {selected.season}
-        </p>
-        <h3 className="cinzel mt-3 text-[26px] font-light uppercase leading-[1.1] tracking-[0.18em] text-accent">
-          {selected.organ}
-        </h3>
-      </div>
+      <WisdomCard organ={selected} colour={selectedColour} />
 
-      <p className="lead mt-6 text-center">{head}</p>
-      {rest && (
-        <p className="mt-5 text-[14.5px] leading-[1.8]">{rest}</p>
-      )}
-
-      {/* Three collapsible cards */}
-      <div className="mt-10 space-y-4">
-        <CollapsibleCard
-          title="Right Now"
-          oneLine="A gentle practice for this hour"
-        >
-          <InsightBlock label="Practice">{selected.practice}</InsightBlock>
-        </CollapsibleCard>
-
+      {/* Progressive disclosure — signs and today’s rhythm */}
+      <div className="mt-6 space-y-4">
         <CollapsibleCard
           title="Signs of Imbalance"
           oneLine={`${selected.signs_of_imbalance.length} signs to recognise`}
@@ -125,10 +105,10 @@ export default function RightNow() {
 
 const CX = 200
 const CY = 200
-const INNER_R = 96
-const OUTER_R = 146
-const ACTIVE_OUTER_R = 156
-const SEGMENT_GAP_DEG = 0.7 // thin gap between segments
+const INNER_R = 102
+const OUTER_R = 152
+const ACTIVE_OUTER_R = 162
+const SEGMENT_GAP_DEG = 0.6
 
 function polar(cx, cy, r, deg) {
   const rad = (deg * Math.PI) / 180
@@ -151,17 +131,15 @@ function ringSegmentPath(cx, cy, rInner, rOuter, startDeg, endDeg) {
   ].join(' ')
 }
 
-function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
-  // Convert a time-of-day hour (0-24, may wrap) into an SVG angle where
-  // 0h = top (-90°) and we proceed clockwise.
+function Clock({
+  organs,
+  activeIndex,
+  selectedOrgan,
+  selectedColour,
+  now,
+  onSelect,
+}) {
   const timeToDeg = (hours) => (hours / 24) * 360 - 90
-
-  const cardinals = [
-    { hour: 0, label: '00' },
-    { hour: 6, label: '06' },
-    { hour: 12, label: '12' },
-    { hour: 18, label: '18' },
-  ]
 
   return (
     <div className="mx-auto w-full max-w-[360px]">
@@ -179,32 +157,22 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
           const startDeg = timeToDeg(startH) + SEGMENT_GAP_DEG / 2
           const endDeg = timeToDeg(adjustedEnd) - SEGMENT_GAP_DEG / 2
           const isActive = i === activeIndex
-          const isSelected = i === selectedIndex
           const rOuter = isActive ? ACTIVE_OUTER_R : OUTER_R
           const d = ringSegmentPath(CX, CY, INNER_R, rOuter, startDeg, endDeg)
-          const colour = organ.element_colour
-          // Opacity tokens adjust in dark mode via index.css theme vars.
-          const fillOpacity = isActive
-            ? 'var(--seg-active-fill)'
-            : isSelected
-              ? 'var(--seg-selected-fill)'
-              : 'var(--seg-inactive-fill)'
-          const strokeOpacity = isActive
-            ? 'var(--seg-active-stroke)'
-            : isSelected
-              ? 'var(--seg-selected-stroke)'
-              : 'var(--seg-inactive-stroke)'
+          const colour = ELEMENT_COLOUR[organ.element] || '#a8c4d6'
           return (
             <path
               key={i}
               d={d}
               fill={colour}
               stroke={colour}
-              strokeWidth={isActive ? 1.1 : 0.6}
+              strokeWidth={isActive ? 1.4 : 0.6}
               style={{
-                fillOpacity,
-                strokeOpacity,
-                filter: isActive ? `drop-shadow(0 0 10px ${colour})` : undefined,
+                fillOpacity: isActive ? 0.55 : 0.2,
+                strokeOpacity: isActive ? 0.95 : 0.42,
+                filter: isActive
+                  ? `drop-shadow(0 0 14px ${colour})`
+                  : undefined,
                 cursor: 'pointer',
                 transition:
                   'fill-opacity 320ms ease, stroke-opacity 320ms ease',
@@ -214,75 +182,112 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
           )
         })}
 
-        {/* Cardinal time labels outside the outer ring */}
-        {cardinals.map(({ hour, label }) => {
-          const deg = timeToDeg(hour)
-          const { x, y } = polar(CX, CY, ACTIVE_OUTER_R + 18, deg)
-          return (
-            <text
-              key={hour}
-              x={x}
-              y={y}
-              textAnchor="middle"
-              dominantBaseline="middle"
-              className="cinzel"
-              fontSize="10"
-              style={{
-                fill: 'var(--muted)',
-                letterSpacing: '0.22em',
-                fontWeight: 300,
-              }}
-            >
-              {label}
-            </text>
-          )
-        })}
-
-        {/* Inner hub */}
+        {/* Dark center hub */}
         <circle
           cx={CX}
           cy={CY}
           r={INNER_R - 8}
-          strokeWidth={0.75}
           style={{
-            fill: 'var(--surface)',
-            stroke: 'var(--heading)',
-            strokeOpacity: 0.06,
+            fill: '#0a0a0f',
+            stroke: 'rgba(255,255,255,0.08)',
           }}
+          strokeWidth={0.75}
         />
 
-        {/* Current time in the hub */}
+        {/* Current time */}
         <text
           x={CX}
-          y={CY - 4}
+          y={CY - 8}
           textAnchor="middle"
           dominantBaseline="middle"
           className="cinzel"
-          fontSize="17"
+          fontSize="24"
           style={{
-            fill: 'var(--heading)',
-            letterSpacing: '0.18em',
+            fill: '#e8f0e8',
+            letterSpacing: '0.16em',
             fontWeight: 300,
           }}
         >
           {formatClockTime(now)}
         </text>
+
+        {/* Active organ name — in its element colour */}
         <text
           x={CX}
-          y={CY + 18}
+          y={CY + 22}
           textAnchor="middle"
           dominantBaseline="middle"
           className="cinzel"
-          fontSize="8.5"
+          fontSize="11"
           style={{
-            fill: 'var(--muted)',
-            letterSpacing: '0.32em',
+            fill: selectedColour,
+            letterSpacing: '0.28em',
             fontWeight: 300,
+            textTransform: 'uppercase',
           }}
         >
-          RIGHT NOW
+          {selectedOrgan.organ}
         </text>
       </svg>
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Wisdom / description box — dark card below the clock                */
+/* ------------------------------------------------------------------ */
+
+function WisdomCard({ organ, colour }) {
+  return (
+    <div
+      className="mt-10 rounded-sm p-7 md:p-8"
+      style={{
+        background: '#0f1410',
+        border: '0.5px solid rgba(255,255,255,0.08)',
+        color: '#d4cfc8',
+      }}
+    >
+      <p
+        className="cinzel text-[9px] font-light uppercase tracking-[0.3em]"
+        style={{ color: 'rgba(232,240,232,0.45)' }}
+      >
+        {organ.time_start} — {organ.time_end} · {organ.element} ·{' '}
+        {organ.season}
+      </p>
+
+      <h3
+        className="cinzel mt-3 text-[22px] font-light uppercase leading-[1.2] tracking-[0.18em] md:text-[24px]"
+        style={{ color: colour }}
+      >
+        {organ.organ}
+      </h3>
+
+      <p
+        className="mt-5 text-[14.5px] italic leading-[1.82]"
+        style={{ color: '#e8f0e8' }}
+      >
+        {organ.description}
+      </p>
+
+      {organ.practice && (
+        <div
+          className="mt-6 pt-5"
+          style={{ borderTop: '0.5px solid rgba(255,255,255,0.08)' }}
+        >
+          <p
+            className="cinzel text-[9px] font-light uppercase tracking-[0.28em]"
+            style={{ color: colour }}
+          >
+            Practice
+          </p>
+          <p
+            className="mt-2 text-[13.5px] leading-[1.78]"
+            style={{ color: '#d4cfc8' }}
+          >
+            {organ.practice}
+          </p>
+        </div>
+      )}
     </div>
   )
 }
@@ -340,7 +345,7 @@ function TodayRhythmCard({ organs, activeIndex }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Collapsible card (local — keeps RightNow self-contained)            */
+/* Collapsible card (local)                                            */
 /* ------------------------------------------------------------------ */
 
 function CollapsibleCard({ title, oneLine, children }) {
