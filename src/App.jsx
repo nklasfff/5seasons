@@ -5,6 +5,7 @@ import Seasons from './pages/Seasons.jsx'
 import SeasonDetail from './pages/SeasonDetail.jsx'
 import Recipes from './pages/Recipes.jsx'
 import RecipeDetail from './pages/RecipeDetail.jsx'
+import Pause from './pages/Pause.jsx'
 import Stub from './pages/Stub.jsx'
 
 export default function App() {
@@ -24,16 +25,7 @@ export default function App() {
             />
           }
         />
-        <Route
-          path="pause"
-          element={
-            <Stub
-              label="Pause & Presence"
-              title="Pause & Presence"
-              note="Breath practices and journal questions."
-            />
-          }
-        />
+        <Route path="pause" element={<Pause />} />
         <Route path="recipes" element={<Recipes />} />
         <Route path="recipes/:id" element={<RecipeDetail />} />
       </Route>
