@@ -79,13 +79,12 @@ export default function PauseSeasonDetail() {
       </div>
 
       {/* Season card image - 180px centered */}
-      <div className="mx-auto mb-6 h-[180px] w-[180px]" style={{ background: '#faf8f5' }}>
-        <img
-          src={SEASON_CARDS[seasonId]}
-          alt={practice.season_name}
-          className="h-full w-full object-contain"
-        />
-      </div>
+      <img
+        src={SEASON_CARDS[seasonId]}
+        alt={practice.season_name}
+        className="mx-auto mb-6 w-[180px]"
+        style={{ borderRadius: '50%', background: '#ffffff' }}
+      />
 
       {/* Season name and element */}
       <h1 className="cinzel text-center text-[22px] font-light uppercase tracking-[0.14em] text-accent md:text-[24px]">
