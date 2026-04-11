@@ -77,22 +77,6 @@ export default function RightNow() {
       />
 
       <WisdomCard organ={selected} colour={selectedColour} />
-
-      {/* Progressive disclosure — signs and today’s rhythm */}
-      <div className="mt-6 space-y-4">
-        <CollapsibleCard
-          title="Signs of Imbalance"
-          oneLine={`${selected.signs_of_imbalance.length} signs to recognise`}
-        >
-          <div>
-            {selected.signs_of_imbalance.map((s, i) => (
-              <PracticeRow key={i} description={s} />
-            ))}
-          </div>
-        </CollapsibleCard>
-
-        <TodayRhythmCard organs={organs} activeIndex={activeIndex} />
-      </div>
     </div>
   )
 }
@@ -257,26 +241,21 @@ function Clock({
 
 function WisdomCard({ organ, colour }) {
   return (
-    <div className="mt-6 px-1">
-      <p className="cinzel mb-1 text-[10px] uppercase tracking-[0.3em] text-accent">
-        {organ.organ} · {organ.time_start}—{organ.time_end}
-      </p>
+    <div className="mt-6">
+      <h3 className="cinzel mb-2 text-[20px] font-light uppercase tracking-[0.14em] text-accent">
+        {organ.organ}
+      </h3>
 
-      <p className="cinzel mb-3 text-[18px] font-light tracking-[0.12em] text-heading">
+      <p className="cinzel mb-4 text-[9px] uppercase tracking-[0.3em] text-muted">
         {organ.element} · {organ.season}
       </p>
 
-      <p className="mb-4 text-[14px] italic leading-[1.82]">
+      <p className="lead mb-6">
         {organ.description}
       </p>
 
       {organ.practice && (
-        <>
-          <p className="cinzel mb-2 text-[9px] uppercase tracking-[0.22em] text-accent/70">
-            Practice
-          </p>
-          <p className="text-[13.5px] leading-[1.74]">{organ.practice}</p>
-        </>
+        <p className="text-[13.5px] leading-[1.74] text-body">{organ.practice}</p>
       )}
     </div>
   )

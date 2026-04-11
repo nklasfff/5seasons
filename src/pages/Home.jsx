@@ -2,33 +2,21 @@ import { Link } from 'react-router-dom'
 import coverImage from '../assets/images/cover-seasons-poster.jpg'
 import seasonsData from '../data/seasons.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
-import Divider from '../components/ui/Divider.jsx'
 import RightNow from '../components/ui/RightNow.jsx'
+import cardSpring from '../assets/images/card-spring.png'
+import cardSummer from '../assets/images/card-summer.png'
+import cardLateSummer from '../assets/images/card-latesummer.png'
+import cardAutumn from '../assets/images/card-autumn.png'
+import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
 
-const GUIDE_SECTIONS = [
-  {
-    to: '/seasons',
-    label: 'Seasons',
-    text: 'The five seasons — their elements, organs, emotions, and the practices each one asks for.',
-  },
-  {
-    to: '/body-clock',
-    label: 'Body Clock',
-    text: 'The twelve organ windows of the day and how to live in rhythm with them.',
-  },
-  {
-    to: '/pause',
-    label: 'Pause & Presence',
-    text: 'Breath practices and journal questions for each season.',
-  },
-  {
-    to: '/recipes',
-    label: 'Recipes',
-    text: 'Forty-five nourishing recipes, arranged by season and by meal.',
-  },
-]
+const SEASON_CARDS = {
+  spring: cardSpring,
+  summer: cardSummer,
+  late_summer: cardLateSummer,
+  autumn: cardAutumn,
+  winter: cardWinter,
+}
 
 export default function Home() {
   const { meta, seasons } = seasonsData
@@ -37,76 +25,96 @@ export default function Home() {
     <div className="spring">
       <Hero />
 
-      {/* Right Now — centerpiece */}
+      {/* RIGHT NOW section */}
       <section className="mt-14">
         <PageHeader label="Right Now" />
-        <h2 className="cinzel mb-4 text-[20px] font-light uppercase tracking-[0.14em] text-heading">
-          What Is Active in You
-        </h2>
-        <p className="lead">
-          Every two hours, energy shifts to a new organ. The clock below
-          shows where your body’s vitality is focused right now — and what
-          that means for how you eat, move, rest, and feel.
+        <p className="lead mb-10">
+          Every two hours, energy shifts to a new organ. The clock below shows where your body's vitality is focused right now.
         </p>
-        <div className="mt-10">
-          <RightNow />
+        <RightNow />
+      </section>
+
+      <div className="mt-10" />
+
+      {/* THE FIVE SEASONS section */}
+      <section className="mt-10">
+        <PageHeader label="The Five Seasons" />
+        <p className="lead mb-10">
+          {meta.description}
+        </p>
+
+        <div className="space-y-8">
+          {seasons.map((season) => {
+            const firstSentence = season.description.split(/[.!?]/)[0].trim() + '.'
+
+            return (
+              <Link
+                key={season.id}
+                to={`/seasons/${season.id}`}
+                className={`${seasonClass(season.id)} block transition-opacity hover:opacity-75`}
+              >
+                <img
+                  src={SEASON_CARDS[season.id]}
+                  alt={season.name}
+                  className="mx-auto mb-4 w-[180px]"
+                />
+                <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
+                  {season.name}
+                </h3>
+                <p className="cinzel mt-1 text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+                  {season.element}
+                </p>
+                <p className="lead mt-4 text-center">
+                  {firstSentence}
+                </p>
+              </Link>
+            )
+          })}
         </div>
       </section>
 
-      <Divider />
+      <div className="mt-10" />
 
-      {/* Intro */}
-      <section>
-        <PageHeader label="The Guide" />
-        <p className="lead">{meta.description}</p>
-      </section>
+      {/* EXPLORE FURTHER section */}
+      <section className="mt-10">
+        <PageHeader label="Explore Further" />
 
-      <Divider />
-
-      {/* Five seasons grid */}
-      <section>
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          The Five Seasons
-        </h2>
-        <p className="mt-2 text-[13.5px] italic leading-[1.74] text-muted">
-          Each season carries its own energy. Some are more perceptible than
-          others, but all are equally important.
-        </p>
-
-        <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-5">
-          {seasons.map((season) => (
-            <SeasonTile key={season.id} season={season} />
-          ))}
+        <div className="space-y-8">
+          <ExploreLink
+            to="/body-clock"
+            title="Body Clock"
+            description="The twelve organs and their daily rhythm."
+          />
+          <ExploreLink
+            to="/pause"
+            title="Pause & Presence"
+            description="Mindfulness, breath and seasonal reflection."
+          />
+          <ExploreLink
+            to="/recipes"
+            title="Recipes"
+            description="Forty-five nourishing recipes, organised by season."
+          />
+          <ExploreLink
+            to="/seasons"
+            title="The Seasons"
+            description="The energy, themes and wisdom of each season."
+          />
         </div>
       </section>
 
-      <Divider />
-
-      {/* How to use this guide */}
-      <section>
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          How to Use This Guide
-        </h2>
-        <p className="mt-2 text-[13.5px] italic leading-[1.74] text-muted">
-          Four ways to meet the seasons through the day, the body, the breath,
-          and the table.
+      <div className="mt-16 mb-6">
+        <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+          Isabelle Evita Søndergaard
         </p>
-
-        <div className="mt-5">
-          {GUIDE_SECTIONS.map((g) => (
-            <GuideRow key={g.to} {...g} />
-          ))}
-        </div>
-      </section>
-
-      <Divider />
-
-      <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
-        Isabelle Evita Søndergaard
-      </p>
+      </div>
     </div>
   )
 }
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                               */
+/* ------------------------------------------------------------------ */
 
 function Hero() {
   return (
@@ -142,65 +150,19 @@ function Hero() {
   )
 }
 
-function SeasonTile({ season }) {
-  return (
-    <Link
-      to={`/seasons/${season.id}`}
-      className={`${seasonClass(season.id)} group block`}
-    >
-      <div
-        className="flex h-full flex-col items-center px-3 pb-4 pt-4 text-center"
-        style={{
-          background:
-            'color-mix(in srgb, var(--accent-light) 55%, transparent)',
-          border:
-            '0.5px solid color-mix(in srgb, var(--accent) 22%, transparent)',
-          borderRadius: '2px',
-        }}
-      >
-        <img
-          src={seasonCardImages[season.id]}
-          alt=""
-          className="mb-3 h-[92px] w-[92px] object-contain"
-        />
-        <p className="cinzel text-[8.5px] font-light uppercase tracking-[0.22em] text-muted">
-          {season.element}
-        </p>
-        <p className="cinzel mt-1 text-[11px] font-light uppercase leading-[1.4] tracking-[0.18em] text-accent">
-          {season.name}
-        </p>
-      </div>
-    </Link>
-  )
-}
+/* ------------------------------------------------------------------ */
+/* Explore Link                                                       */
+/* ------------------------------------------------------------------ */
 
-function GuideRow({ to, label, text }) {
+function ExploreLink({ to, title, description }) {
   return (
     <Link
       to={to}
-      className="flex items-start gap-3 border-b py-4 last:border-0 transition-colors hover:text-lead"
-      style={{
-        borderColor: 'color-mix(in srgb, var(--accent) 14%, transparent)',
-      }}
+      className="block transition-opacity hover:opacity-75"
     >
-      <div
-        className="mt-[9px] h-[5px] w-[5px] min-w-[5px] rounded-full"
-        style={{
-          background: 'color-mix(in srgb, var(--accent) 45%, transparent)',
-        }}
-      />
-      <div className="min-w-0 flex-1">
-        <p className="cinzel text-[10px] font-normal uppercase tracking-[0.25em] text-accent">
-          {label}
-        </p>
-        <p className="mt-1 text-[14px] leading-[1.68]">{text}</p>
-      </div>
-      <span
-        className="cinzel mt-1 text-[10px] tracking-[0.15em] text-muted"
-        aria-hidden="true"
-      >
-        →
-      </span>
+      <p className="cinzel text-[14px] font-light uppercase tracking-wide text-accent">
+        {title} <span className="text-muted">—</span> <span className="text-[13px] italic normal-case tracking-normal text-lead">{description}</span>
+      </p>
     </Link>
   )
 }
