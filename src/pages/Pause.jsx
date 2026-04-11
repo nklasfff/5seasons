@@ -1,14 +1,12 @@
 import { useMemo, useState } from 'react'
 import pauseData from '../data/pause_presence.json'
 import Hero from '../components/ui/Hero.jsx'
-import Divider from '../components/ui/Divider.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import BreathExercise from '../components/ui/BreathExercise.jsx'
 import JournalQuestion from '../components/ui/JournalQuestion.jsx'
 import heroImage from '../assets/images/hero-pause.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
-import { clearAll, getAllEntries } from '../lib/journal.js'
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 const SEASON_LABELS = {
@@ -53,13 +51,6 @@ export default function Pause() {
   const [seasonId, setSeasonId] = useState(() => getCurrentSeason())
 
   const wrapperClass = tab === 'seasons' ? seasonClass(seasonId) : 'spring'
-  const journalQuestionsBySeason = useMemo(
-    () =>
-      Object.fromEntries(
-        seasonal_practices.map((sp) => [sp.season, sp.journal_questions || []]),
-      ),
-    [seasonal_practices],
-  )
 
   return (
     <div className={wrapperClass}>
@@ -72,23 +63,20 @@ export default function Pause() {
 
       {/* Warm italic lead */}
       <p className="lead">{meta.description}</p>
-      <p className="mt-5 text-[14.5px] italic leading-[1.86] text-lead">
-        {introduction.text[0]}
-      </p>
 
-      <Divider />
+      {/* Tabs */}
+      <div className="mt-8">
+        <Tabs
+          tabs={[
+            { id: 'foundations', label: 'Mindfulness & Breath' },
+            { id: 'seasons', label: 'The Seasons' },
+          ]}
+          active={tab}
+          onChange={setTab}
+        />
+      </div>
 
-      <Tabs
-        tabs={[
-          { id: 'foundations', label: 'Mindfulness & Breath' },
-          { id: 'seasons', label: 'The Seasons' },
-          { id: 'journal', label: 'My Journal' },
-        ]}
-        active={tab}
-        onChange={setTab}
-      />
-
-      <div className="mt-12">
+      <div className="mt-10">
         {tab === 'foundations' && (
           <FoundationsTab
             intro={introduction.text[2]}
@@ -108,16 +96,13 @@ export default function Pause() {
             onSelect={setSeasonId}
           />
         )}
-        {tab === 'journal' && (
-          <MyJournalTab questionsBySeason={journalQuestionsBySeason} />
-        )}
       </div>
 
-      <Divider />
-
-      <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
-        Isabelle Evita Søndergaard
-      </p>
+      <div className="mt-16 mb-6">
+        <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+          Isabelle Evita Søndergaard
+        </p>
+      </div>
     </div>
   )
 }
@@ -134,7 +119,7 @@ function FoundationsTab({
   dailyPractice,
   mindfulness,
 }) {
-  const [openId, setOpenId] = useState('pause')
+  const [openId, setOpenId] = useState(null)
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id))
 
   const cards = [
@@ -530,115 +515,6 @@ function SeasonalPractice({ practice, breath }) {
         </div>
       )}
     </section>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* Tab 3: My Journal                                                   */
-/* ------------------------------------------------------------------ */
-
-function MyJournalTab({ questionsBySeason }) {
-  const [entries, setEntries] = useState(() => getAllEntries())
-  const [confirming, setConfirming] = useState(false)
-
-  const seasonsWithEntries = SEASON_ORDER.map((id) => {
-    const byNumber = entries[id] || {}
-    const ordered = Object.entries(byNumber)
-      .map(([n, text]) => ({ number: Number(n), text }))
-      .filter((e) => e.text && e.text.trim().length > 0)
-      .sort((a, b) => a.number - b.number)
-    return {
-      id,
-      label: SEASON_LABELS[id],
-      questions: questionsBySeason[id] || [],
-      entries: ordered,
-    }
-  }).filter((s) => s.entries.length > 0)
-
-  const handleClearAll = () => {
-    if (!confirming) {
-      setConfirming(true)
-      setTimeout(() => setConfirming(false), 3000)
-      return
-    }
-    clearAll()
-    setEntries({})
-    setConfirming(false)
-  }
-
-  if (seasonsWithEntries.length === 0) {
-    return (
-      <div>
-        <p className="text-[14px] italic leading-[1.8] text-muted">
-          Nothing here yet. Choose a season, open its questions, and begin
-          writing — your words will be held here for whenever you return.
-        </p>
-      </div>
-    )
-  }
-
-  return (
-    <div>
-      <p className="text-[14px] italic leading-[1.8] text-lead">
-        What you have written, held season by season. These words live only
-        on this device.
-      </p>
-
-      <div className="mt-10 space-y-14">
-        {seasonsWithEntries.map((s) => (
-          <section key={s.id} className={seasonClass(s.id)}>
-            <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
-              {s.label}
-            </h3>
-            <div className="mt-4">
-              {s.entries.map((e) => (
-                <SavedEntry
-                  key={e.number}
-                  number={e.number}
-                  question={s.questions[e.number - 1]}
-                  text={e.text}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-
-      <Divider />
-
-      <div className="text-center">
-        <button
-          type="button"
-          onClick={handleClearAll}
-          className="cinzel text-[9px] font-light uppercase tracking-[0.28em] text-muted transition-colors hover:text-accent"
-        >
-          {confirming ? 'Tap again to confirm' : 'Clear all journal entries'}
-        </button>
-      </div>
-    </div>
-  )
-}
-
-function SavedEntry({ number, question, text }) {
-  return (
-    <div
-      className="border-b py-5 last:border-0"
-      style={{
-        borderColor: 'color-mix(in srgb, var(--accent) 10%, transparent)',
-      }}
-    >
-      <p className="cinzel mb-1 text-[9px] font-light tracking-[0.22em] text-accent">
-        {String(number).padStart(2, '0')}
-      </p>
-      {question && (
-        <p className="text-[14px] italic leading-[1.72] text-heading">
-          {question}
-        </p>
-      )}
-      <p className="mt-3 whitespace-pre-wrap text-[14.5px] italic leading-[1.82] text-lead">
-        {text}
-      </p>
-    </div>
   )
 }
 
