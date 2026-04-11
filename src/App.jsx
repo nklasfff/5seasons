@@ -6,7 +6,7 @@ import SeasonDetail from './pages/SeasonDetail.jsx'
 import Recipes from './pages/Recipes.jsx'
 import RecipeDetail from './pages/RecipeDetail.jsx'
 import Pause from './pages/Pause.jsx'
-import Stub from './pages/Stub.jsx'
+import BodyClock from './pages/BodyClock.jsx'
 
 export default function App() {
   return (
@@ -15,16 +15,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="seasons" element={<Seasons />} />
         <Route path="seasons/:id" element={<SeasonDetail />} />
-        <Route
-          path="body-clock"
-          element={
-            <Stub
-              label="Body Clock"
-              title="The Body Clock"
-              note="The organ windows of the day."
-            />
-          }
-        />
+        <Route path="body-clock" element={<BodyClock />} />
         <Route path="pause" element={<Pause />} />
         <Route path="recipes" element={<Recipes />} />
         <Route path="recipes/:id" element={<RecipeDetail />} />
