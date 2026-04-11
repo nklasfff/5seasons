@@ -218,9 +218,4 @@
   :root[data-theme='dark'] body {
     background-color: #080d09;
   }
-
-  /* Keep theme toggle inside the 430px frame on desktop */
-  .theme-toggle {
-    right: calc(50% - 203px);
-  }
 }

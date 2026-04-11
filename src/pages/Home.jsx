@@ -13,6 +13,11 @@ import heroPause from '../assets/images/hero-pause.jpg'
 import heroRecipes from '../assets/images/hero-recipes.jpg'
 import heroSeasons from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
+import {
+  applyTheme,
+  setStoredTheme,
+  useThemeMode,
+} from '../lib/theme.js'
 
 const SEASON_CARDS = {
   spring: cardSpring,
@@ -51,6 +56,13 @@ const EXPLORE_CARDS = [
 
 export default function Home() {
   const { meta, seasons } = seasonsData
+  const mode = useThemeMode()
+
+  const toggleTheme = () => {
+    const next = mode === 'dark' ? 'light' : 'dark'
+    setStoredTheme(next)
+    applyTheme(next)
+  }
 
   return (
     <div className="spring">
@@ -113,7 +125,21 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="mt-16 mb-6">
+      {/* Mobile dark mode toggle - only visible on mobile */}
+      <div className="mt-8 mb-6 text-center lg:hidden">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="cinzel text-[11px] text-muted transition-colors hover:text-accent"
+        >
+          <span className="cinzel mr-2 text-[14px]">
+            {mode === 'dark' ? '○' : '●'}
+          </span>
+          {mode === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        </button>
+      </div>
+
+      <div className="mb-6">
         <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
           Isabelle Evita Søndergaard
         </p>
@@ -128,7 +154,7 @@ export default function Home() {
 
 function Hero() {
   return (
-    <div className="-mx-6 -mt-7 flex min-h-[calc(100svh-60px)] flex-col overflow-hidden bg-[#1a2820] md:-mx-16 md:-mt-14 md:min-h-screen">
+    <div className="-mx-6 -mt-7 flex min-h-[calc(100svh-60px)] flex-col overflow-hidden bg-[#1a2820] md:-mx-16 lg:mx-0 lg:mt-12 lg:min-h-[70vh] lg:rounded">
       {/* Image area (top ~75%) */}
       <div className="relative flex-1 bg-[#1a2820]">
         <img
