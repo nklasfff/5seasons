@@ -12,6 +12,7 @@ import cardLateSummer from '../assets/images/card-latesummer.png'
 import cardAutumn from '../assets/images/card-autumn.png'
 import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { useThemeMode } from '../lib/theme.js'
 
 const SEASON_CARDS = {
   spring: cardSpring,
@@ -31,6 +32,7 @@ const TOPICS = [
 
 export default function Pause() {
   const { meta, introduction, mindfulness, the_pause, breath, breath_practices, daily_practice, seasonal_practices } = pauseData
+  const mode = useThemeMode()
 
   const [activeSection, setActiveSection] = useState('mindfulness_breath')
   const [selectedTopicIndex, setSelectedTopicIndex] = useState(null)
@@ -40,6 +42,8 @@ export default function Pause() {
     () => breath_practices.filter((bp) => bp.season === 'all'),
     [breath_practices],
   )
+
+  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
 
   return (
     <div className="spring">
@@ -95,7 +99,7 @@ export default function Pause() {
           />
         )}
         {activeSection === 'seasons' && (
-          <SeasonsSection seasonalPractices={seasonal_practices} />
+          <SeasonsSection seasonalPractices={seasonal_practices} cardStyle={cardStyle} />
         )}
       </div>
 
@@ -321,7 +325,7 @@ function MindfulnessBreathSection({
 /* THE SEASONS Section                                                */
 /* ------------------------------------------------------------------ */
 
-function SeasonsSection({ seasonalPractices }) {
+function SeasonsSection({ seasonalPractices, cardStyle }) {
   return (
     <div className="space-y-8" style={{ background: 'transparent' }}>
       {seasonalPractices.map((practice) => {
@@ -339,7 +343,7 @@ function SeasonsSection({ seasonalPractices }) {
               src={SEASON_CARDS[seasonId]}
               alt={practice.season_name}
               className="mx-auto mb-4 w-[180px]"
-              style={{ borderRadius: '50%', background: '#ffffff' }}
+              style={cardStyle}
             />
             <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
               {practice.season_name}

@@ -11,6 +11,7 @@ import cardLateSummer from '../assets/images/card-latesummer.png'
 import cardAutumn from '../assets/images/card-autumn.png'
 import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { useThemeMode } from '../lib/theme.js'
 
 const SEASON_CARDS = {
   spring: cardSpring,
@@ -32,6 +33,7 @@ const SEASON_NAMES = {
 export default function PauseSeasonDetail() {
   const { seasonId } = useParams()
   const { seasonal_practices, breath_practices } = pauseData
+  const mode = useThemeMode()
 
   const practice = seasonal_practices.find((sp) => sp.season === seasonId)
   const breathPractice = breath_practices.find(
@@ -44,6 +46,8 @@ export default function PauseSeasonDetail() {
     window.scrollTo(0, 0)
     setActiveSection(null)
   }, [seasonId])
+
+  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
 
   if (!practice) {
     return (
@@ -83,7 +87,7 @@ export default function PauseSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={practice.season_name}
         className="mx-auto mb-6 w-[180px]"
-        style={{ borderRadius: '50%', background: '#ffffff' }}
+        style={cardStyle}
       />
 
       {/* Season name and element */}

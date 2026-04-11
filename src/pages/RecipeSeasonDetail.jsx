@@ -9,6 +9,7 @@ import cardLateSummer from '../assets/images/card-latesummer.png'
 import cardAutumn from '../assets/images/card-autumn.png'
 import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { useThemeMode } from '../lib/theme.js'
 
 const SEASON_CARDS = {
   spring: cardSpring,
@@ -30,6 +31,7 @@ const SEASON_NAMES = {
 export default function RecipeSeasonDetail() {
   const { seasonId } = useParams()
   const { seasons, recipes } = recipesData
+  const mode = useThemeMode()
 
   const season = seasons[seasonId]
   const [activeMealType, setActiveMealType] = useState('breakfast')
@@ -38,6 +40,8 @@ export default function RecipeSeasonDetail() {
     window.scrollTo(0, 0)
     setActiveMealType('breakfast')
   }, [seasonId])
+
+  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
 
   if (!season) {
     return (
@@ -81,7 +85,7 @@ export default function RecipeSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={season.name}
         className="mx-auto mb-6 w-[180px]"
-        style={{ borderRadius: '50%', background: '#ffffff' }}
+        style={cardStyle}
       />
 
       {/* Season name and element */}

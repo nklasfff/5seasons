@@ -6,9 +6,12 @@ import Divider from '../components/ui/Divider.jsx'
 import heroImage from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
 import { seasonCardImages } from '../lib/seasonImage.js'
+import { useThemeMode } from '../lib/theme.js'
 
 export default function Seasons() {
   const { meta, seasons } = seasonsData
+  const mode = useThemeMode()
+  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
 
   return (
     <div className="spring">
@@ -26,14 +29,14 @@ export default function Seasons() {
 
       <div className="flex flex-col" style={{ background: 'transparent' }}>
         {seasons.map((season) => (
-          <SeasonRow key={season.id} season={season} />
+          <SeasonRow key={season.id} season={season} cardStyle={cardStyle} />
         ))}
       </div>
     </div>
   )
 }
 
-function SeasonRow({ season }) {
+function SeasonRow({ season, cardStyle }) {
   return (
     <Link
       to={`/seasons/${season.id}`}
@@ -51,7 +54,7 @@ function SeasonRow({ season }) {
           src={seasonCardImages[season.id]}
           alt=""
           className="h-[124px] w-[124px] flex-shrink-0 object-contain"
-          style={{ borderRadius: '50%', background: '#ffffff' }}
+          style={cardStyle}
         />
         <div className="min-w-0 flex-1">
           <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
