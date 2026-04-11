@@ -1,3 +1,4 @@
+import { useMemo, useState } from 'react'
 import pauseData from '../data/pause_presence.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
 import Divider from '../components/ui/Divider.jsx'
@@ -6,6 +7,25 @@ import PracticeRow from '../components/ui/PracticeRow.jsx'
 import BreathExercise from '../components/ui/BreathExercise.jsx'
 import JournalQuestion from '../components/ui/JournalQuestion.jsx'
 import { seasonClass } from '../lib/seasonClass.js'
+
+const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
+const SEASON_LABELS = {
+  spring: 'Spring',
+  summer: 'Summer',
+  late_summer: 'Late Summer',
+  autumn: 'Autumn',
+  winter: 'Winter',
+}
+
+// TCM-ish month mapping. Matches the Recipes page.
+function getCurrentSeason() {
+  const m = new Date().getMonth()
+  if (m >= 2 && m <= 4) return 'spring'
+  if (m === 5 || m === 6) return 'summer'
+  if (m === 7) return 'late_summer'
+  if (m >= 8 && m <= 10) return 'autumn'
+  return 'winter'
+}
 
 export default function Pause() {
   const {
@@ -17,34 +37,83 @@ export default function Pause() {
     seasonal_practices,
   } = pauseData
 
-  const practicesById = Object.fromEntries(
-    breath_practices.map((p) => [p.id, p]),
+  const practicesById = useMemo(
+    () => Object.fromEntries(breath_practices.map((p) => [p.id, p])),
+    [breath_practices],
   )
-  const generalPractices = breath_practices.filter((p) => p.season === 'all')
+  const generalPractices = useMemo(
+    () => breath_practices.filter((p) => p.season === 'all'),
+    [breath_practices],
+  )
+
+  const [tab, setTab] = useState('foundations')
+
+  // Active season (only meaningful when Seasons tab is open). Theming wrapper
+  // tracks it so the page accent shifts when the user picks a season.
+  const [seasonId, setSeasonId] = useState(() => getCurrentSeason())
+
+  const wrapperClass = tab === 'seasons' ? seasonClass(seasonId) : 'spring'
 
   return (
-    <div className="spring">
+    <div className={wrapperClass}>
       {/* Hero header */}
       <PageHeader label="Pause & Presence" />
       <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
         {meta.title}
       </h1>
-      <p className="lead mb-2">{meta.subtitle}</p>
+      <p className="lead">{meta.subtitle}</p>
+
       <Divider />
+
       <p className="text-[15px] leading-[1.82]">{meta.description}</p>
 
+      <div className="mt-12">
+        <Tabs
+          tabs={[
+            { id: 'foundations', label: 'Mindfulness & Breath' },
+            { id: 'seasons', label: 'The Seasons' },
+          ]}
+          active={tab}
+          onChange={setTab}
+        />
+      </div>
+
+      <div className="mt-12">
+        {tab === 'foundations' ? (
+          <FoundationsTab
+            mindfulness={mindfulness}
+            thePause={the_pause}
+            breath={breath}
+            practices={generalPractices}
+          />
+        ) : (
+          <SeasonsTab
+            seasonalPractices={seasonal_practices}
+            practicesById={practicesById}
+            selected={seasonId}
+            onSelect={setSeasonId}
+          />
+        )}
+      </div>
+
       <Divider />
 
-      {/* Part One */}
-      <p className="cinzel text-center text-[10px] font-light uppercase tracking-[0.32em] text-muted">
-        Part One
+      <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+        Isabelle Evita Søndergaard
       </p>
-      <p className="cinzel mt-2 text-center text-[11px] uppercase tracking-[0.26em] text-accent">
-        Foundations
-      </p>
+    </div>
+  )
+}
 
+/* ------------------------------------------------------------------ */
+/* Tab 1: Mindfulness & Breath                                         */
+/* ------------------------------------------------------------------ */
+
+function FoundationsTab({ mindfulness, thePause, breath, practices }) {
+  return (
+    <>
       {/* Mindfulness */}
-      <section className="mt-10">
+      <section>
         <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
           {mindfulness.title}
         </h2>
@@ -83,16 +152,16 @@ export default function Pause() {
 
       <Divider />
 
-      {/* The four kinds of pause */}
+      {/* The Pause */}
       <section>
         <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          {the_pause.title}
+          {thePause.title}
         </h2>
         <p className="mt-1 text-[11px] italic text-muted">
-          {the_pause.subtitle}
+          {thePause.subtitle}
         </p>
         <div className="mt-4 space-y-4">
-          {the_pause.text.map((p, i) => (
+          {thePause.text.map((p, i) => (
             <p key={i} className="text-[14.5px] leading-[1.8]">
               {p}
             </p>
@@ -103,7 +172,7 @@ export default function Pause() {
           The Four Kinds of Pause
         </h3>
         <div>
-          {the_pause.four_kinds.map((k) => (
+          {thePause.four_kinds.map((k) => (
             <PracticeRow
               key={k.type}
               title={k.type}
@@ -115,7 +184,7 @@ export default function Pause() {
 
       <Divider />
 
-      {/* Breath practices (general / all-season) */}
+      {/* Breath + carousel */}
       <section>
         <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
           {breath.title}
@@ -135,51 +204,119 @@ export default function Pause() {
           </InsightBlock>
         )}
 
-        <div className="mt-6">
-          {generalPractices.map((p) => (
-            <BreathExercise
-              key={p.id}
-              title={p.name}
-              suitableFor={p.suitable_for}
-              steps={p.steps}
-              note={p.note}
-            />
-          ))}
-        </div>
+        <BreathCarousel practices={practices} />
       </section>
+    </>
+  )
+}
 
-      <Divider />
+function BreathCarousel({ practices }) {
+  const [i, setI] = useState(0)
+  if (!practices || practices.length === 0) return null
+  const current = practices[i]
+  const atStart = i === 0
+  const atEnd = i === practices.length - 1
 
-      {/* Part Two */}
-      <p className="cinzel text-center text-[10px] font-light uppercase tracking-[0.32em] text-muted">
-        Part Two
-      </p>
-      <p className="cinzel mt-2 text-center text-[11px] uppercase tracking-[0.26em] text-accent">
-        The Five Seasons
-      </p>
-
-      <div className="mt-8 space-y-16">
-        {seasonal_practices.map((sp) => (
-          <SeasonalPractice
-            key={sp.season}
-            practice={sp}
-            breath={practicesById[sp.breath_practice_id]}
-          />
-        ))}
+  return (
+    <div className="mt-8">
+      <div
+        className="flex items-baseline justify-between border-b pb-3"
+        style={{
+          borderColor: 'color-mix(in srgb, var(--accent) 20%, transparent)',
+        }}
+      >
+        <p className="cinzel text-[10px] font-light uppercase tracking-[0.26em] text-accent">
+          Practice {String(i + 1).padStart(2, '0')} ·{' '}
+          <span className="text-muted">
+            of {String(practices.length).padStart(2, '0')}
+          </span>
+        </p>
+        <div className="flex items-center gap-5">
+          <button
+            type="button"
+            onClick={() => setI((idx) => Math.max(0, idx - 1))}
+            disabled={atStart}
+            className="cinzel text-[10px] uppercase tracking-[0.22em] transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+            style={{ color: atStart ? '#5a6a58' : 'var(--accent)' }}
+          >
+            ← Previous
+          </button>
+          <button
+            type="button"
+            onClick={() => setI((idx) => Math.min(practices.length - 1, idx + 1))}
+            disabled={atEnd}
+            className="cinzel text-[10px] uppercase tracking-[0.22em] transition-colors disabled:cursor-not-allowed disabled:opacity-30"
+            style={{ color: atEnd ? '#5a6a58' : 'var(--accent)' }}
+          >
+            Next →
+          </button>
+        </div>
       </div>
 
-      <Divider />
+      <BreathExercise
+        key={current.id}
+        title={current.name}
+        suitableFor={current.suitable_for}
+        steps={current.steps}
+        note={current.note}
+      />
+    </div>
+  )
+}
 
-      <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
-        Isabelle Evita Søndergaard
-      </p>
+/* ------------------------------------------------------------------ */
+/* Tab 2: The Seasons                                                  */
+/* ------------------------------------------------------------------ */
+
+function SeasonsTab({ seasonalPractices, practicesById, selected, onSelect }) {
+  const current = seasonalPractices.find((sp) => sp.season === selected)
+
+  return (
+    <>
+      <SeasonSelector selected={selected} onSelect={onSelect} />
+
+      {current && (
+        <div className="mt-10">
+          <SeasonalPractice
+            practice={current}
+            breath={practicesById[current.breath_practice_id]}
+          />
+        </div>
+      )}
+    </>
+  )
+}
+
+function SeasonSelector({ selected, onSelect }) {
+  return (
+    <div className="flex flex-wrap gap-x-7 gap-y-3">
+      {SEASON_ORDER.map((id) => {
+        const isActive = selected === id
+        return (
+          <button
+            key={id}
+            type="button"
+            onClick={() => onSelect(id)}
+            className={`${seasonClass(id)} cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors`}
+            style={{
+              color: isActive ? 'var(--accent)' : '#5a6a58',
+              borderBottom: isActive
+                ? '0.5px solid var(--accent)'
+                : '0.5px solid transparent',
+            }}
+            aria-pressed={isActive}
+          >
+            {SEASON_LABELS[id]}
+          </button>
+        )
+      })}
     </div>
   )
 }
 
 function SeasonalPractice({ practice, breath }) {
   return (
-    <section className={seasonClass(practice.season)}>
+    <section>
       <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
         {practice.element}
       </p>
@@ -203,9 +340,8 @@ function SeasonalPractice({ practice, breath }) {
         </p>
       )}
 
-      {/* Breath practice for this season */}
       {breath && (
-        <div className="mt-6">
+        <div className="mt-8">
           <h3 className="cinzel mb-2 text-[10.5px] font-normal uppercase tracking-[0.25em] text-heading">
             Breath Practice
           </h3>
@@ -223,9 +359,8 @@ function SeasonalPractice({ practice, breath }) {
         </div>
       )}
 
-      {/* Journal questions */}
       {practice.journal_questions?.length > 0 && (
-        <div className="mt-8">
+        <div className="mt-10">
           <h3 className="cinzel mb-2 text-[10.5px] font-normal uppercase tracking-[0.25em] text-heading">
             Journal Questions
           </h3>
@@ -237,5 +372,44 @@ function SeasonalPractice({ practice, breath }) {
         </div>
       )}
     </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Tabs                                                                */
+/* ------------------------------------------------------------------ */
+
+function Tabs({ tabs, active, onChange }) {
+  return (
+    <div
+      className="flex gap-x-7 border-b pb-2"
+      style={{
+        borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)',
+      }}
+      role="tablist"
+    >
+      {tabs.map((t) => {
+        const isActive = active === t.id
+        return (
+          <button
+            key={t.id}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            onClick={() => onChange(t.id)}
+            className="cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors"
+            style={{
+              color: isActive ? 'var(--accent)' : '#5a6a58',
+              borderBottom: isActive
+                ? '0.5px solid var(--accent)'
+                : '0.5px solid transparent',
+              marginBottom: '-9px',
+            }}
+          >
+            {t.label}
+          </button>
+        )
+      })}
+    </div>
   )
 }
