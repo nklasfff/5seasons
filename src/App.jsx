@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx'
 import Seasons from './pages/Seasons.jsx'
 import SeasonDetail from './pages/SeasonDetail.jsx'
 import Recipes from './pages/Recipes.jsx'
+import RecipeSeasonDetail from './pages/RecipeSeasonDetail.jsx'
 import RecipeDetail from './pages/RecipeDetail.jsx'
 import Pause from './pages/Pause.jsx'
 import PauseSeasonDetail from './pages/PauseSeasonDetail.jsx'
@@ -20,7 +21,8 @@ export default function App() {
         <Route path="pause" element={<Pause />} />
         <Route path="pause/:seasonId" element={<PauseSeasonDetail />} />
         <Route path="recipes" element={<Recipes />} />
-        <Route path="recipes/:id" element={<RecipeDetail />} />
+        <Route path="recipes/:seasonId/:id" element={<RecipeDetail />} />
+        <Route path="recipes/:seasonId" element={<RecipeSeasonDetail />} />
       </Route>
     </Routes>
   )

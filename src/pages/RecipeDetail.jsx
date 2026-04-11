@@ -33,10 +33,10 @@ export default function RecipeDetail() {
       />
 
       <Link
-        to="/recipes"
+        to={`/recipes/${recipe.season}`}
         className="cinzel mb-4 inline-block text-[9px] uppercase tracking-[0.28em] text-muted hover:text-accent"
       >
-        ← All recipes
+        ← {SEASON_LABELS[recipe.season]} recipes
       </Link>
 
       <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
