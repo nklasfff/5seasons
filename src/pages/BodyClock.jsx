@@ -15,11 +15,8 @@ const SEASON_NAME_TO_ID = {
   Winter: 'winter',
 }
 
-// Given an HH:MM string, return the starting hour as an integer.
 const hourOf = (t) => parseInt(t.split(':')[0], 10)
 
-// Find the organ whose two-hour window contains the given hour (handles the
-// Gallbladder window which wraps midnight).
 function findOrganIndexForHour(organs, hour) {
   for (let i = 0; i < organs.length; i++) {
     const s = hourOf(organs[i].time_start)
@@ -30,9 +27,15 @@ function findOrganIndexForHour(organs, hour) {
   return 0
 }
 
+// Return the first sentence of a paragraph (fall back to the whole thing).
+function firstSentence(text) {
+  if (!text) return ''
+  const match = text.match(/^[^.!?]*[.!?]/)
+  return match ? match[0] : text
+}
+
 export default function BodyClock() {
-  const { meta, introduction, organs, daily_rhythm, symptoms_guide } =
-    bodyclockData
+  const { meta, organs, daily_rhythm, symptoms_guide } = bodyclockData
 
   const initialIndex = useMemo(
     () => findOrganIndexForHour(organs, new Date().getHours()),
@@ -53,65 +56,35 @@ export default function BodyClock() {
         subtitle={meta.subtitle}
       />
 
-      <p className="text-[15px] leading-[1.82]">{meta.description}</p>
-
-      {/* Introduction */}
-      <section className="mt-10">
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          {introduction.title}
-        </h2>
-        <div className="mt-4 space-y-4">
-          {introduction.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
-      </section>
-
-      <Divider />
-
       {/* 24-hour timeline */}
-      <section>
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          The Day in Twelve Windows
-        </h2>
-        <p className="mt-2 text-[13.5px] italic leading-[1.74] text-muted">
-          Tap any window to meet its organ. The clock begins at three in the
-          morning, when the lungs rise first.
-        </p>
+      <Timeline
+        organs={organs}
+        selectedIndex={index}
+        onSelect={setIndex}
+      />
 
-        <Timeline
-          organs={organs}
-          selectedIndex={index}
-          onSelect={setIndex}
-        />
-      </section>
-
-      {/* Selected organ detail panel */}
-      <OrganDetail organ={selected} />
+      {/* Selected organ — collapsed by default */}
+      <OrganCard key={index} organ={selected} />
 
       <Divider />
 
-      {/* Tabs: rhythm / symptoms */}
-      <section>
-        <Tabs
-          tabs={[
-            { id: 'rhythm', label: 'Daily Rhythm' },
-            { id: 'symptoms', label: 'Symptoms Guide' },
-          ]}
-          active={tab}
-          onChange={setTab}
-        />
+      {/* Daily rhythm + symptoms behind tabs */}
+      <Tabs
+        tabs={[
+          { id: 'rhythm', label: 'Daily Rhythm' },
+          { id: 'symptoms', label: 'Symptoms Guide' },
+        ]}
+        active={tab}
+        onChange={setTab}
+      />
 
-        <div className="mt-8">
-          {tab === 'rhythm' ? (
-            <DailyRhythm items={daily_rhythm} />
-          ) : (
-            <SymptomsGuide items={symptoms_guide} />
-          )}
-        </div>
-      </section>
+      <div className="mt-8">
+        {tab === 'rhythm' ? (
+          <DailyRhythm items={daily_rhythm} />
+        ) : (
+          <SymptomsGuide items={symptoms_guide} />
+        )}
+      </div>
 
       <Divider />
 
@@ -124,7 +97,7 @@ export default function BodyClock() {
 
 function Timeline({ organs, selectedIndex, onSelect }) {
   return (
-    <div className="mt-6 grid grid-cols-4 gap-2 sm:grid-cols-6">
+    <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
       {organs.map((organ, i) => {
         const seasonId = SEASON_NAME_TO_ID[organ.season] || 'spring'
         const isActive = i === selectedIndex
@@ -169,86 +142,84 @@ function Timeline({ organs, selectedIndex, onSelect }) {
   )
 }
 
-function OrganDetail({ organ }) {
+function OrganCard({ organ }) {
+  const [open, setOpen] = useState(false)
+  const oneLine = firstSentence(organ.description)
+  const rest = organ.description.slice(oneLine.length).trim()
+
   return (
     <article
-      className="mt-10 rounded-sm p-6"
+      className="mt-10 rounded-sm"
       style={{
         background: 'var(--accent-light)',
         border:
           '0.5px solid color-mix(in srgb, var(--accent) 22%, transparent)',
       }}
     >
-      {/* Header row */}
-      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <p className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          {organ.time_start} — {organ.time_end}
-        </p>
-        <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted">
-          {organ.element} · {organ.season}
-        </p>
-      </div>
-
-      <h3 className="cinzel mt-2 text-[19px] font-light uppercase tracking-[0.18em] text-accent">
-        {organ.organ}
-      </h3>
-
-      <p className="mt-4 text-[14.5px] leading-[1.8]">{organ.description}</p>
-
-      {/* Signs of imbalance */}
-      {organ.signs_of_imbalance?.length > 0 && (
-        <div className="mt-5">
-          <p className="cinzel mb-1 text-[9px] font-light uppercase tracking-[0.24em] text-muted">
-            Signs of Imbalance
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full px-6 py-5 text-left"
+        aria-expanded={open}
+      >
+        <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <p className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
+            {organ.time_start} — {organ.time_end}
           </p>
-          <div>
-            {organ.signs_of_imbalance.map((s, i) => (
-              <PracticeRow key={i} description={s} />
-            ))}
-          </div>
+          <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted">
+            {organ.element} · {organ.season}
+          </p>
+        </div>
+        <h3 className="cinzel mt-2 text-[19px] font-light uppercase tracking-[0.18em] text-accent">
+          {organ.organ}
+        </h3>
+        <p className="mt-3 text-[13.5px] italic leading-[1.72] text-lead">
+          {oneLine}
+        </p>
+        <div className="mt-4 flex items-center gap-2">
+          <span className="cinzel text-[9px] font-light uppercase tracking-[0.24em] text-muted">
+            {open ? 'Hide detail' : 'Read more'}
+          </span>
+          <span
+            className="cinzel text-[12px] font-light text-muted"
+            aria-hidden="true"
+          >
+            {open ? '−' : '+'}
+          </span>
+        </div>
+      </button>
+
+      {open && (
+        <div
+          className="border-t px-6 pb-6 pt-5"
+          style={{
+            borderColor:
+              'color-mix(in srgb, var(--accent) 16%, transparent)',
+          }}
+        >
+          {rest && (
+            <p className="text-[14.5px] leading-[1.8]">{rest}</p>
+          )}
+
+          {organ.signs_of_imbalance?.length > 0 && (
+            <div className="mt-5">
+              <p className="cinzel mb-1 text-[9px] font-light uppercase tracking-[0.24em] text-muted">
+                Signs of Imbalance
+              </p>
+              <div>
+                {organ.signs_of_imbalance.map((s, i) => (
+                  <PracticeRow key={i} description={s} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {organ.practice && (
+            <InsightBlock label="Practice">{organ.practice}</InsightBlock>
+          )}
         </div>
       )}
-
-      {/* Practice tip */}
-      {organ.practice && (
-        <InsightBlock label="Practice">{organ.practice}</InsightBlock>
-      )}
     </article>
-  )
-}
-
-function Tabs({ tabs, active, onChange }) {
-  return (
-    <div
-      className="flex gap-x-7 border-b pb-2"
-      style={{
-        borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)',
-      }}
-      role="tablist"
-    >
-      {tabs.map((t) => {
-        const isActive = active === t.id
-        return (
-          <button
-            key={t.id}
-            type="button"
-            role="tab"
-            aria-selected={isActive}
-            onClick={() => onChange(t.id)}
-            className="cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors"
-            style={{
-              color: isActive ? 'var(--accent)' : '#5a6a58',
-              borderBottom: isActive
-                ? '0.5px solid var(--accent)'
-                : '0.5px solid transparent',
-              marginBottom: '-9px',
-            }}
-          >
-            {t.label}
-          </button>
-        )
-      })}
-    </div>
   )
 }
 
@@ -287,6 +258,41 @@ function SymptomsGuide({ items }) {
           <p className="mt-1.5 text-[13px] leading-[1.68]">{s.meaning}</p>
         </div>
       ))}
+    </div>
+  )
+}
+
+function Tabs({ tabs, active, onChange }) {
+  return (
+    <div
+      className="flex gap-x-7 border-b pb-2"
+      style={{
+        borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)',
+      }}
+      role="tablist"
+    >
+      {tabs.map((t) => {
+        const isActive = active === t.id
+        return (
+          <button
+            key={t.id}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            onClick={() => onChange(t.id)}
+            className="cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors"
+            style={{
+              color: isActive ? 'var(--accent)' : '#5a6a58',
+              borderBottom: isActive
+                ? '0.5px solid var(--accent)'
+                : '0.5px solid transparent',
+              marginBottom: '-9px',
+            }}
+          >
+            {t.label}
+          </button>
+        )
+      })}
     </div>
   )
 }

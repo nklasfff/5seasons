@@ -18,7 +18,6 @@ const SEASON_LABELS = {
   winter: 'Winter',
 }
 
-// TCM-ish month mapping. Matches the Recipes page.
 function getCurrentSeason() {
   const m = new Date().getMonth()
   if (m >= 2 && m <= 4) return 'spring'
@@ -35,6 +34,7 @@ export default function Pause() {
     the_pause,
     breath,
     breath_practices,
+    daily_practice,
     seasonal_practices,
   } = pauseData
 
@@ -47,10 +47,7 @@ export default function Pause() {
     [breath_practices],
   )
 
-  const [tab, setTab] = useState('foundations')
-
-  // Active season (only meaningful when Seasons tab is open). Theming wrapper
-  // tracks it so the page accent shifts when the user picks a season.
+  const [tab, setTab] = useState('mindfulness')
   const [seasonId, setSeasonId] = useState(() => getCurrentSeason())
 
   const wrapperClass = tab === 'seasons' ? seasonClass(seasonId) : 'spring'
@@ -64,26 +61,23 @@ export default function Pause() {
         subtitle={meta.subtitle}
       />
 
-      <p className="text-[15px] leading-[1.82]">{meta.description}</p>
+      <Tabs
+        tabs={[
+          { id: 'mindfulness', label: 'Mindfulness' },
+          { id: 'seasons', label: 'Seasons' },
+        ]}
+        active={tab}
+        onChange={setTab}
+      />
 
       <div className="mt-12">
-        <Tabs
-          tabs={[
-            { id: 'foundations', label: 'Mindfulness & Breath' },
-            { id: 'seasons', label: 'The Seasons' },
-          ]}
-          active={tab}
-          onChange={setTab}
-        />
-      </div>
-
-      <div className="mt-12">
-        {tab === 'foundations' ? (
-          <FoundationsTab
-            mindfulness={mindfulness}
+        {tab === 'mindfulness' ? (
+          <MindfulnessTab
             thePause={the_pause}
             breath={breath}
             practices={generalPractices}
+            dailyPractice={daily_practice}
+            mindfulness={mindfulness}
           />
         ) : (
           <SeasonsTab
@@ -105,119 +99,163 @@ export default function Pause() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Tab 1: Mindfulness & Breath                                         */
+/* Tab 1: Mindfulness — four expandable cards, one open at a time      */
 /* ------------------------------------------------------------------ */
 
-function FoundationsTab({ mindfulness, thePause, breath, practices }) {
+function MindfulnessTab({
+  thePause,
+  breath,
+  practices,
+  dailyPractice,
+  mindfulness,
+}) {
+  const [openId, setOpenId] = useState(null)
+  const toggle = (id) => setOpenId((prev) => (prev === id ? null : id))
+
+  const cards = [
+    {
+      id: 'pause',
+      title: 'The Pause',
+      oneLine: 'Rest as a radical act',
+      render: () => <PauseContent data={thePause} />,
+    },
+    {
+      id: 'breath',
+      title: 'Breath',
+      oneLine: 'The foundation of every practice',
+      render: () => <BreathContent data={breath} practices={practices} />,
+    },
+    {
+      id: 'rhythm',
+      title: 'Daily Rhythm',
+      oneLine: 'Morning and evening anchors',
+      render: () => <DailyRhythmContent data={dailyPractice} />,
+    },
+    {
+      id: 'mindfulness',
+      title: 'Mindfulness',
+      oneLine: 'Conscious presence, deliberate attention',
+      render: () => <MindfulnessContent data={mindfulness} />,
+    },
+  ]
+
+  return (
+    <div className="space-y-4">
+      {cards.map((c) => (
+        <ExpandableCard
+          key={c.id}
+          title={c.title}
+          oneLine={c.oneLine}
+          open={openId === c.id}
+          onToggle={() => toggle(c.id)}
+        >
+          {c.render()}
+        </ExpandableCard>
+      ))}
+    </div>
+  )
+}
+
+function ExpandableCard({ title, oneLine, open, onToggle, children }) {
+  return (
+    <article
+      className="rounded-sm"
+      style={{
+        background:
+          'color-mix(in srgb, var(--accent-light) 55%, transparent)',
+        border:
+          '0.5px solid color-mix(in srgb, var(--accent) 18%, transparent)',
+      }}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        className="flex w-full items-center gap-4 px-6 py-5 text-left"
+        aria-expanded={open}
+      >
+        <div className="min-w-0 flex-1">
+          <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+            {title}
+          </h3>
+          <p className="mt-1.5 text-[12.5px] italic leading-[1.6] text-muted">
+            {oneLine}
+          </p>
+        </div>
+        <span
+          className="cinzel text-[14px] font-light text-muted"
+          aria-hidden="true"
+        >
+          {open ? '−' : '+'}
+        </span>
+      </button>
+      {open && (
+        <div
+          className="border-t px-6 pb-7 pt-5"
+          style={{
+            borderColor:
+              'color-mix(in srgb, var(--accent) 16%, transparent)',
+          }}
+        >
+          {children}
+        </div>
+      )}
+    </article>
+  )
+}
+
+/* ---------- Mindfulness card content helpers ---------- */
+
+function PauseContent({ data }) {
   return (
     <>
-      {/* Mindfulness */}
-      <section>
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          {mindfulness.title}
-        </h2>
-        <p className="mt-1 text-[11px] italic text-muted">
-          {mindfulness.subtitle}
-        </p>
-        <div className="mt-4 space-y-4">
-          {mindfulness.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
+      <div className="space-y-4">
+        {data.text.map((p, i) => (
+          <p key={i} className="text-[14.5px] leading-[1.8]">
+            {p}
+          </p>
+        ))}
+      </div>
+      <h4 className="cinzel mb-2 mt-6 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
+        The Four Kinds of Pause
+      </h4>
+      <div>
+        {data.four_kinds.map((k) => (
+          <PracticeRow key={k.type} title={k.type} description={k.description} />
+        ))}
+      </div>
+    </>
+  )
+}
 
-        {mindfulness.key_insight && (
-          <InsightBlock label={mindfulness.key_insight.label}>
-            {mindfulness.key_insight.text}
-          </InsightBlock>
-        )}
-
-        {mindfulness.four_elements && (
-          <div className="mt-6">
-            <h3 className="cinzel mb-2 text-[10.5px] font-normal uppercase tracking-[0.25em] text-heading">
-              Four Elements
-            </h3>
-            {mindfulness.four_elements.map((el) => (
-              <PracticeRow
-                key={el.name}
-                title={el.name}
-                description={el.description}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      <Divider />
-
-      {/* The Pause */}
-      <section>
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          {thePause.title}
-        </h2>
-        <p className="mt-1 text-[11px] italic text-muted">
-          {thePause.subtitle}
-        </p>
-        <div className="mt-4 space-y-4">
-          {thePause.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
-
-        <h3 className="cinzel mb-2 mt-6 text-[10.5px] font-normal uppercase tracking-[0.25em] text-heading">
-          The Four Kinds of Pause
-        </h3>
-        <div>
-          {thePause.four_kinds.map((k) => (
-            <PracticeRow
-              key={k.type}
-              title={k.type}
-              description={k.description}
-            />
-          ))}
-        </div>
-      </section>
-
-      <Divider />
-
-      {/* Breath + carousel */}
-      <section>
-        <h2 className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-          {breath.title}
-        </h2>
-        <p className="mt-1 text-[11px] italic text-muted">{breath.subtitle}</p>
-        <div className="mt-4 space-y-4">
-          {breath.text.map((p, i) => (
-            <p key={i} className="text-[14.5px] leading-[1.8]">
-              {p}
-            </p>
-          ))}
-        </div>
-
-        {breath.before_you_begin && (
-          <InsightBlock label="Before You Begin">
-            {breath.before_you_begin}
-          </InsightBlock>
-        )}
-
-        <BreathCarousel practices={practices} />
-      </section>
+function BreathContent({ data, practices }) {
+  return (
+    <>
+      <div className="space-y-4">
+        {data.text.map((p, i) => (
+          <p key={i} className="text-[14.5px] leading-[1.8]">
+            {p}
+          </p>
+        ))}
+      </div>
+      {data.before_you_begin && (
+        <InsightBlock label="Before You Begin">
+          {data.before_you_begin}
+        </InsightBlock>
+      )}
+      <BreathCarousel practices={practices} />
     </>
   )
 }
 
 function BreathCarousel({ practices }) {
   const [i, setI] = useState(0)
-  if (!practices || practices.length === 0) return null
+  if (!practices?.length) return null
   const current = practices[i]
   const atStart = i === 0
   const atEnd = i === practices.length - 1
 
   return (
-    <div className="mt-8">
+    <div className="mt-6">
       <div
         className="flex items-baseline justify-between border-b pb-3"
         style={{
@@ -225,7 +263,7 @@ function BreathCarousel({ practices }) {
         }}
       >
         <p className="cinzel text-[10px] font-light uppercase tracking-[0.26em] text-accent">
-          Practice {String(i + 1).padStart(2, '0')} ·{' '}
+          Practice {String(i + 1).padStart(2, '0')}{' '}
           <span className="text-muted">
             of {String(practices.length).padStart(2, '0')}
           </span>
@@ -242,7 +280,9 @@ function BreathCarousel({ practices }) {
           </button>
           <button
             type="button"
-            onClick={() => setI((idx) => Math.min(practices.length - 1, idx + 1))}
+            onClick={() =>
+              setI((idx) => Math.min(practices.length - 1, idx + 1))
+            }
             disabled={atEnd}
             className="cinzel text-[10px] uppercase tracking-[0.22em] transition-colors disabled:cursor-not-allowed disabled:opacity-30"
             style={{ color: atEnd ? '#5a6a58' : 'var(--accent)' }}
@@ -251,7 +291,6 @@ function BreathCarousel({ practices }) {
           </button>
         </div>
       </div>
-
       <BreathExercise
         key={current.id}
         title={current.name}
@@ -263,8 +302,81 @@ function BreathCarousel({ practices }) {
   )
 }
 
+function DailyRhythmContent({ data }) {
+  return (
+    <>
+      <h4 className="cinzel mb-2 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
+        Morning
+      </h4>
+      <div>
+        {data.morning.map((r, i) => (
+          <PracticeRow
+            key={i}
+            title={r.practice}
+            description={r.description}
+          />
+        ))}
+      </div>
+
+      <h4 className="cinzel mb-2 mt-6 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
+        Evening
+      </h4>
+      <div>
+        {data.evening.map((r, i) => (
+          <PracticeRow
+            key={i}
+            title={r.practice}
+            description={r.description}
+          />
+        ))}
+      </div>
+
+      {data.building_practice_note && (
+        <InsightBlock label="Building the Practice">
+          {data.building_practice_note}
+        </InsightBlock>
+      )}
+    </>
+  )
+}
+
+function MindfulnessContent({ data }) {
+  return (
+    <>
+      <div className="space-y-4">
+        {data.text.map((p, i) => (
+          <p key={i} className="text-[14.5px] leading-[1.8]">
+            {p}
+          </p>
+        ))}
+      </div>
+      {data.key_insight && (
+        <InsightBlock label={data.key_insight.label}>
+          {data.key_insight.text}
+        </InsightBlock>
+      )}
+      {data.four_elements && (
+        <>
+          <h4 className="cinzel mb-2 mt-6 text-[10px] font-normal uppercase tracking-[0.25em] text-heading">
+            Four Elements
+          </h4>
+          <div>
+            {data.four_elements.map((el) => (
+              <PracticeRow
+                key={el.name}
+                title={el.name}
+                description={el.description}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </>
+  )
+}
+
 /* ------------------------------------------------------------------ */
-/* Tab 2: The Seasons                                                  */
+/* Tab 2: Seasons — one season at a time                               */
 /* ------------------------------------------------------------------ */
 
 function SeasonsTab({ seasonalPractices, practicesById, selected, onSelect }) {
@@ -322,22 +434,8 @@ function SeasonalPractice({ practice, breath }) {
       <h2 className="cinzel mt-1 text-[19px] font-light uppercase tracking-[0.18em] text-accent">
         {practice.season_name}
       </h2>
-      <p
-        className="mt-1 text-[11px] italic"
-        style={{
-          color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
-        }}
-      >
-        {practice.organs} · {practice.direction}
-      </p>
 
       <InsightBlock label="Invitation">{practice.invitation}</InsightBlock>
-
-      {practice.inner_practice && (
-        <p className="mt-4 text-[14.5px] leading-[1.8]">
-          {practice.inner_practice}
-        </p>
-      )}
 
       {breath && (
         <div className="mt-8">
@@ -350,11 +448,6 @@ function SeasonalPractice({ practice, breath }) {
             steps={breath.steps}
             note={breath.note}
           />
-          {practice.breath_note && (
-            <p className="mt-2 text-[13px] italic leading-[1.7] text-muted">
-              {practice.breath_note}
-            </p>
-          )}
         </div>
       )}
 
