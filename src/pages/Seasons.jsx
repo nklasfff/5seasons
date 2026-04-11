@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import seasonsData from '../data/seasons.json'
 import Hero from '../components/ui/Hero.jsx'
+import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import Divider from '../components/ui/Divider.jsx'
 import heroImage from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
@@ -17,6 +18,7 @@ export default function Seasons() {
         title={meta.title}
         subtitle={meta.subtitle}
       />
+      <HorizontalNav />
 
       <p className="text-[15px] leading-[1.82]">{meta.description}</p>
 

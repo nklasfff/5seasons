@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import recipesData from '../data/recipes.json'
 import Hero from '../components/ui/Hero.jsx'
+import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import heroImage from '../assets/images/hero-recipes.jpg'
 import cardSpring from '../assets/images/card-spring.png'
 import cardSummer from '../assets/images/card-summer.png'
@@ -26,6 +27,7 @@ export default function Recipes() {
     <div className="spring">
       {/* Hero image - no text overlay */}
       <Hero image={heroImage} />
+      <HorizontalNav />
 
       {/* Title section */}
       <div className="mb-10">

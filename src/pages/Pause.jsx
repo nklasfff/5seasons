@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import pauseData from '../data/pause_presence.json'
 import Hero from '../components/ui/Hero.jsx'
+import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import heroImage from '../assets/images/hero-pause.jpg'
@@ -44,6 +45,7 @@ export default function Pause() {
     <div className="spring">
       {/* Hero image - no text overlay */}
       <Hero image={heroImage} />
+      <HorizontalNav />
 
       {/* Title section */}
       <div className="mb-10">

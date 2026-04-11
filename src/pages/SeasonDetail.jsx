@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import seasonsData from '../data/seasons.json'
 import Hero from '../components/ui/Hero.jsx'
+import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import StickyNav from '../components/ui/StickyNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import heroImage from '../assets/images/hero-seasons.jpg'
@@ -44,6 +45,7 @@ export default function SeasonDetail() {
 
       {/* Hero image - no text overlay */}
       <Hero image={heroImage} />
+      <HorizontalNav />
 
       {/* Welcome section - always visible */}
       <div className="mb-10">

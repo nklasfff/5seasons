@@ -3,6 +3,7 @@ import coverImage from '../assets/images/cover-seasons-poster.jpg'
 import seasonsData from '../data/seasons.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
 import RightNow from '../components/ui/RightNow.jsx'
+import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import cardSpring from '../assets/images/card-spring.png'
 import cardSummer from '../assets/images/card-summer.png'
 import cardLateSummer from '../assets/images/card-latesummer.png'
@@ -67,6 +68,7 @@ export default function Home() {
   return (
     <div className="spring">
       <Hero />
+      <HorizontalNav />
 
       {/* RIGHT NOW section */}
       <section className="mt-14">

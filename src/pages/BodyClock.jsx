@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import bodyclockData from '../data/bodyclock.json'
 import Hero from '../components/ui/Hero.jsx'
+import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import StickyNav from '../components/ui/StickyNav.jsx'
@@ -96,6 +97,7 @@ export default function BodyClock() {
 
       {/* Hero image - no text overlay */}
       <Hero image={heroImage} />
+      <HorizontalNav />
 
       {/* Title section */}
       <div className="mb-10">
