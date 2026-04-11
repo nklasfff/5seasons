@@ -1,12 +1,4 @@
-// Glob-import so cover-poppy.{jpg,jpeg,png,webp} is picked up automatically
-// whenever it is dropped into src/assets/images/. If the file is missing, the
-// hero falls back to a deep-forest gradient instead of failing the build.
-const coverModules = import.meta.glob('../assets/images/cover-poppy.*', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-})
-const coverImage = Object.values(coverModules)[0]
+import coverImage from '../assets/images/cover-seasons-poster.jpg'
 
 export default function Home() {
   return (
@@ -15,22 +7,11 @@ export default function Home() {
     >
       {/* Image area (top ~75%) */}
       <div className="relative flex-1 bg-[#1a2820]">
-        {coverImage ? (
-          <img
-            src={coverImage}
-            alt=""
-            className="h-full w-full object-cover object-top opacity-[0.88]"
-          />
-        ) : (
-          <div
-            className="h-full w-full"
-            style={{
-              background:
-                'radial-gradient(ellipse at 50% 30%, #2a4028 0%, #1a2820 55%, #0e160e 100%)',
-            }}
-            aria-hidden="true"
-          />
-        )}
+        <img
+          src={coverImage}
+          alt=""
+          className="h-full w-full object-cover object-top opacity-[0.88]"
+        />
         {/* Soft gradient fade into the dark bottom section */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[#1a2820]" />
       </div>
