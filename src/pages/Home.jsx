@@ -3,6 +3,7 @@ import coverImage from '../assets/images/cover-seasons-poster.jpg'
 import seasonsData from '../data/seasons.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
 import Divider from '../components/ui/Divider.jsx'
+import RightNow from '../components/ui/RightNow.jsx'
 import { seasonClass } from '../lib/seasonClass.js'
 import { seasonCardImages } from '../lib/seasonImage.js'
 
@@ -36,8 +37,22 @@ export default function Home() {
     <div className="spring">
       <Hero />
 
-      {/* Intro */}
+      {/* Right Now — centerpiece */}
       <section className="mt-14">
+        <PageHeader label="Right Now" />
+        <p className="mt-1 text-[13.5px] italic leading-[1.74] text-muted">
+          The twelve organ windows of the day. Where you are — and what is
+          coming.
+        </p>
+        <div className="mt-8">
+          <RightNow />
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* Intro */}
+      <section>
         <PageHeader label="The Guide" />
         <p className="lead">{meta.description}</p>
       </section>
