@@ -11,15 +11,13 @@ const SEASON_NAME_TO_ID = {
   Winter: 'winter',
 }
 
-// Bright element palette used inside the SVG clock + on the wisdom card.
-// These are intentionally more saturated than the CLAUDE.md season accents so
-// they read on the deep-forest center hub.
+// Element palette as specified in CLAUDE.md
 const ELEMENT_COLOUR = {
-  Wood: '#5cc98e',
-  Fire: '#e88585',
-  Earth: '#deb87a',
-  Metal: '#a8c4d6',
-  Water: '#7ba4da',
+  Wood: '#4a8050',
+  Fire: '#903040',
+  Earth: '#8a6820',
+  Metal: '#686870',
+  Water: '#3a5080',
 }
 
 const hourOf = (t) => parseInt(t.split(':')[0], 10)
@@ -103,11 +101,10 @@ export default function RightNow() {
 /* SVG clock                                                           */
 /* ------------------------------------------------------------------ */
 
-const CX = 200
-const CY = 200
-const INNER_R = 102
-const OUTER_R = 152
-const ACTIVE_OUTER_R = 162
+const CX = 170
+const CY = 170
+const INNER_R = 68
+const OUTER_R = 162
 const SEGMENT_GAP_DEG = 0.6
 
 function polar(cx, cy, r, deg) {
@@ -144,7 +141,7 @@ function Clock({
   return (
     <div className="mx-auto w-full max-w-[360px]">
       <svg
-        viewBox="0 0 400 400"
+        viewBox="0 0 340 340"
         className="block h-auto w-full"
         role="img"
         aria-label="Organ clock"
@@ -157,76 +154,100 @@ function Clock({
           const startDeg = timeToDeg(startH) + SEGMENT_GAP_DEG / 2
           const endDeg = timeToDeg(adjustedEnd) - SEGMENT_GAP_DEG / 2
           const isActive = i === activeIndex
-          const rOuter = isActive ? ACTIVE_OUTER_R : OUTER_R
-          const d = ringSegmentPath(CX, CY, INNER_R, rOuter, startDeg, endDeg)
-          const colour = ELEMENT_COLOUR[organ.element] || '#a8c4d6'
+          const d = ringSegmentPath(CX, CY, INNER_R, OUTER_R, startDeg, endDeg)
+          const colour = ELEMENT_COLOUR[organ.element] || '#686870'
           return (
             <path
               key={i}
               d={d}
               fill={colour}
               stroke={colour}
-              strokeWidth={isActive ? 1.4 : 0.6}
+              strokeWidth={isActive ? 1.5 : 0.5}
               style={{
-                fillOpacity: isActive ? 0.55 : 0.2,
-                strokeOpacity: isActive ? 0.95 : 0.42,
-                filter: isActive
-                  ? `drop-shadow(0 0 14px ${colour})`
-                  : undefined,
+                fillOpacity: isActive ? 0.65 : 0.22,
+                strokeOpacity: isActive ? 1.0 : 0.4,
                 cursor: 'pointer',
                 transition:
                   'fill-opacity 320ms ease, stroke-opacity 320ms ease',
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.fillOpacity = '0.40'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.fillOpacity = '0.22'
+                }
               }}
               onClick={() => onSelect(i)}
             />
           )
         })}
 
-        {/* Dark center hub */}
+        {/* Dark center circle - 68px radius as per CLAUDE.md */}
         <circle
           cx={CX}
           cy={CY}
-          r={INNER_R - 8}
+          r={INNER_R}
           style={{
-            fill: '#0a0a0f',
+            fill: '#0e1410',
             stroke: 'rgba(255,255,255,0.08)',
           }}
-          strokeWidth={0.75}
+          strokeWidth={0.5}
         />
 
-        {/* Current time */}
+        {/* Line 1: Current time — Cinzel 11px, muted */}
         <text
           x={CX}
-          y={CY - 8}
+          y={CY - 18}
           textAnchor="middle"
           dominantBaseline="middle"
           className="cinzel"
-          fontSize="24"
+          fontSize="11"
           style={{
-            fill: '#e8f0e8',
-            letterSpacing: '0.16em',
+            fill: '#7a8a78',
+            letterSpacing: '0.1em',
             fontWeight: 300,
           }}
         >
           {formatClockTime(now)}
         </text>
 
-        {/* Active organ name — in its element colour */}
+        {/* Line 2: Active organ name — Cinzel 14px, accent colour */}
         <text
           x={CX}
-          y={CY + 22}
+          y={CY + 2}
           textAnchor="middle"
           dominantBaseline="middle"
           className="cinzel"
-          fontSize="11"
+          fontSize="14"
           style={{
             fill: selectedColour,
-            letterSpacing: '0.28em',
+            letterSpacing: '0.12em',
             fontWeight: 300,
             textTransform: 'uppercase',
           }}
         >
           {selectedOrgan.organ}
+        </text>
+
+        {/* Line 3: "active now" — Cinzel 8px, very muted */}
+        <text
+          x={CX}
+          y={CY + 18}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          className="cinzel"
+          fontSize="8"
+          style={{
+            fill: 'rgba(122,138,120,0.5)',
+            letterSpacing: '0.2em',
+            fontWeight: 300,
+            textTransform: 'lowercase',
+          }}
+        >
+          active now
         </text>
       </svg>
     </div>
@@ -242,7 +263,7 @@ function WisdomCard({ organ, colour }) {
     <div
       className="mt-10 rounded-sm p-7 md:p-8"
       style={{
-        background: '#0f1410',
+        background: '#0e1410',
         border: '0.5px solid rgba(255,255,255,0.08)',
         color: '#d4cfc8',
       }}

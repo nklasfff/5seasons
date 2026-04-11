@@ -31,11 +31,11 @@
      attribute on <html> opts a user out if they prefer light on a dark OS. */
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme='light']) {
-      --bg: #0f1410;
+      --bg: #0e1410;
       --surface: #161c17;
       --text: #d4cfc8;
       --heading: #e8f0e8;
-      --lead: #c4d2b4;
+      --lead: #a8c4a0;
       --muted: #7a8a78;
       --border: rgba(255, 255, 255, 0.07);
 
@@ -50,11 +50,11 @@
 
   /* Dark mode — manual override via [data-theme='dark'] on <html> */
   :root[data-theme='dark'] {
-    --bg: #0f1410;
+    --bg: #0e1410;
     --surface: #161c17;
     --text: #d4cfc8;
     --heading: #e8f0e8;
-    --lead: #c4d2b4;
+    --lead: #a8c4a0;
     --muted: #7a8a78;
     --border: rgba(255, 255, 255, 0.07);
 
