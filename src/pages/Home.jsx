@@ -156,7 +156,7 @@ export default function Home() {
 
 function Hero() {
   return (
-    <div className="-mx-6 -mt-7 flex min-h-[calc(100svh-60px)] flex-col overflow-hidden bg-[#1a2820] md:-mx-16 lg:mx-0 lg:mt-12 lg:min-h-[70vh] lg:rounded">
+    <div className="-mx-6 -mt-7 flex min-h-[calc(100svh-60px)] flex-col overflow-hidden bg-[#1a2820] md:-mx-16 lg:mt-12 lg:min-h-[70vh]">
       {/* Image area (top ~75%) */}
       <div className="relative flex-1 bg-[#1a2820]">
         <img

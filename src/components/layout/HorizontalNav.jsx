@@ -16,7 +16,7 @@ export default function HorizontalNav() {
   }
 
   return (
-    <nav className="hidden py-6 lg:block">
+    <nav className="hidden mb-6 py-6 lg:block" style={{ borderBottom: '0.5px solid rgba(100, 160, 110, 0.2)' }}>
       <div className="flex items-center justify-center gap-3">
         {navItems.map((item, index) => (
           <div key={item.to} className="flex items-center gap-3">
