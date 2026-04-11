@@ -187,4 +187,10 @@
   .collapse-inner {
     overflow: hidden;
   }
+
+  /* Organ clock center circle - switches between light and dark mode */
+  .clock-center {
+    fill: var(--bg);
+    stroke: var(--border);
+  }
 }

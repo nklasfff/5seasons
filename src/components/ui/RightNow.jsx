@@ -185,15 +185,12 @@ function Clock({
           )
         })}
 
-        {/* Dark center circle - 68px radius as per CLAUDE.md */}
+        {/* Center circle - 68px radius as per CLAUDE.md */}
         <circle
           cx={CX}
           cy={CY}
           r={INNER_R}
-          style={{
-            fill: '#0e1410',
-            stroke: 'rgba(255,255,255,0.08)',
-          }}
+          className="clock-center"
           strokeWidth={0.5}
         />
 
@@ -255,59 +252,31 @@ function Clock({
 }
 
 /* ------------------------------------------------------------------ */
-/* Wisdom / description box — dark card below the clock                */
+/* Info panel below clock — sits directly on page background          */
 /* ------------------------------------------------------------------ */
 
 function WisdomCard({ organ, colour }) {
   return (
-    <div
-      className="mt-10 rounded-sm p-7 md:p-8"
-      style={{
-        background: '#0e1410',
-        border: '0.5px solid rgba(255,255,255,0.08)',
-        color: '#d4cfc8',
-      }}
-    >
-      <p
-        className="cinzel text-[9px] font-light uppercase tracking-[0.3em]"
-        style={{ color: 'rgba(232,240,232,0.45)' }}
-      >
-        {organ.time_start} — {organ.time_end} · {organ.element} ·{' '}
-        {organ.season}
+    <div className="mt-6 px-1">
+      <p className="cinzel mb-1 text-[10px] uppercase tracking-[0.3em] text-accent">
+        {organ.organ} · {organ.time_start}—{organ.time_end}
       </p>
 
-      <h3
-        className="cinzel mt-3 text-[22px] font-light uppercase leading-[1.2] tracking-[0.18em] md:text-[24px]"
-        style={{ color: colour }}
-      >
-        {organ.organ}
-      </h3>
+      <p className="cinzel mb-3 text-[18px] font-light tracking-[0.12em] text-heading">
+        {organ.element} · {organ.season}
+      </p>
 
-      <p
-        className="mt-5 text-[14.5px] italic leading-[1.82]"
-        style={{ color: '#e8f0e8' }}
-      >
+      <p className="mb-4 text-[14px] italic leading-[1.82]">
         {organ.description}
       </p>
 
       {organ.practice && (
-        <div
-          className="mt-6 pt-5"
-          style={{ borderTop: '0.5px solid rgba(255,255,255,0.08)' }}
-        >
-          <p
-            className="cinzel text-[9px] font-light uppercase tracking-[0.28em]"
-            style={{ color: colour }}
-          >
+        <>
+          <p className="cinzel mb-2 text-[9px] uppercase tracking-[0.22em] text-accent/70">
             Practice
           </p>
-          <p
-            className="mt-2 text-[13.5px] leading-[1.78]"
-            style={{ color: '#d4cfc8' }}
-          >
-            {organ.practice}
-          </p>
-        </div>
+          <p className="text-[13.5px] leading-[1.74]">{organ.practice}</p>
+        </>
       )}
     </div>
   )
