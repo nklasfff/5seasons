@@ -17,7 +17,7 @@ const SEASON_LABELS = {
 
 export default function SeasonDetail() {
   const { id } = useParams()
-  const [activeSection, setActiveSection] = useState('invitation')
+  const [activeSection, setActiveSection] = useState(null)
 
   const season = seasonsData.seasons.find((s) => s.id === id)
   if (!season) return <Navigate to="/seasons" replace />
@@ -30,44 +30,47 @@ export default function SeasonDetail() {
 
   return (
     <div className={seasonClass(season.id)}>
-      <Hero
-        image={heroImage}
-        label={season.element}
-        title={season.name}
-        subtitle={season.core_emotion_balanced}
-      />
+      {/* Hero image - no text overlay */}
+      <Hero image={heroImage} />
 
-      {/* Four navigation buttons */}
-      <div className="mt-8 flex gap-x-7 border-b pb-2" style={{ borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)' }}>
-        <NavButton
-          label="Invitation"
-          active={activeSection === 'invitation'}
-          onClick={() => setActiveSection('invitation')}
-        />
+      {/* Welcome section - always visible */}
+      <div className="mb-10">
+        <h1 className="cinzel text-[22px] font-light uppercase tracking-[0.12em] text-accent md:text-[24px]">
+          {season.name}
+        </h1>
+        <p className="cinzel mt-1 text-[9px] uppercase tracking-[0.3em] text-muted">
+          {season.element}
+        </p>
+        <p className="lead mt-6">{season.invitation}</p>
+      </div>
+
+      {/* Three navigation buttons */}
+      <div className="flex gap-x-7 border-b pb-2" style={{ borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)' }}>
         <NavButton
           label="Organs"
           active={activeSection === 'organs'}
-          onClick={() => setActiveSection('organs')}
+          onClick={() => setActiveSection(activeSection === 'organs' ? null : 'organs')}
         />
         <NavButton
           label="Advice"
           active={activeSection === 'advice'}
-          onClick={() => setActiveSection('advice')}
+          onClick={() => setActiveSection(activeSection === 'advice' ? null : 'advice')}
         />
         <NavButton
           label="Themes"
           active={activeSection === 'themes'}
-          onClick={() => setActiveSection('themes')}
+          onClick={() => setActiveSection(activeSection === 'themes' ? null : 'themes')}
         />
       </div>
 
-      {/* Content area */}
-      <div className="mt-10 mb-16">
-        {activeSection === 'invitation' && <InvitationContent season={season} />}
-        {activeSection === 'organs' && <OrgansContent season={season} />}
-        {activeSection === 'advice' && <AdviceContent season={season} />}
-        {activeSection === 'themes' && <ThemesContent season={season} />}
-      </div>
+      {/* Content area - empty by default */}
+      {activeSection && (
+        <div className="mt-10 mb-16">
+          {activeSection === 'organs' && <OrgansContent season={season} />}
+          {activeSection === 'advice' && <AdviceContent season={season} />}
+          {activeSection === 'themes' && <ThemesContent season={season} />}
+        </div>
+      )}
 
       {/* Season navigation */}
       <div className="mb-6 flex items-center justify-center gap-8">
@@ -112,29 +115,6 @@ function NavButton({ label, active, onClick }) {
     >
       {label}
     </button>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* INVITATION Content                                                 */
-/* ------------------------------------------------------------------ */
-
-function InvitationContent({ season }) {
-  // Split description into paragraphs (assuming it's one block of text)
-  const paragraphs = season.description.split('\n\n').filter(Boolean)
-
-  return (
-    <div>
-      {paragraphs.map((para, i) => (
-        <p key={i} className="mb-5 text-[14.5px] leading-[1.8]">
-          {para}
-        </p>
-      ))}
-
-      <p className="mt-8 text-[15px] italic leading-[1.86] text-lead">
-        {season.invitation}
-      </p>
-    </div>
   )
 }
 
