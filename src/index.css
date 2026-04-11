@@ -194,3 +194,33 @@
     stroke: var(--border);
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Desktop Frame — centered 430px column on large screens            */
+/* ------------------------------------------------------------------ */
+
+@media (min-width: 768px) {
+  #root {
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  body {
+    background-color: #e8e4de;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) body {
+      background-color: #080d09;
+    }
+  }
+
+  :root[data-theme='dark'] body {
+    background-color: #080d09;
+  }
+
+  /* Keep theme toggle inside the 430px frame on desktop */
+  .theme-toggle {
+    right: calc(50% - 203px);
+  }
+}
