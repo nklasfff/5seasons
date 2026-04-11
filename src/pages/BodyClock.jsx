@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import bodyclockData from '../data/bodyclock.json'
 import Hero from '../components/ui/Hero.jsx'
+import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import heroImage from '../assets/images/hero-body-clock.jpg'
+import { seasonClass } from '../lib/seasonClass.js'
 
 const SEASON_NAME_TO_ID = {
   Spring: 'spring',
@@ -12,13 +14,68 @@ const SEASON_NAME_TO_ID = {
   Winter: 'winter',
 }
 
+// Six time periods grouping the 12 organs
+const TIME_PERIODS = [
+  {
+    id: 'quiet',
+    name: 'The Quiet Hours',
+    time: '03–07',
+    organs: ['Lungs', 'Large Intestine'],
+  },
+  {
+    id: 'morning',
+    name: 'Morning Energy',
+    time: '07–11',
+    organs: ['Stomach', 'Spleen'],
+  },
+  {
+    id: 'heart',
+    name: 'The Heart of the Day',
+    time: '11–15',
+    organs: ['Heart', 'Small Intestine'],
+  },
+  {
+    id: 'descent',
+    name: 'Descent into Evening',
+    time: '15–19',
+    organs: ['Bladder', 'Kidneys'],
+  },
+  {
+    id: 'winddown',
+    name: 'The Evening Wind-Down',
+    time: '19–23',
+    organs: ['Pericardium', 'Triple Warmer'],
+  },
+  {
+    id: 'healing',
+    name: 'The Healing Hours',
+    time: '23–03',
+    organs: ['Gallbladder', 'Liver'],
+  },
+]
+
+function findActivePeriodIndex() {
+  const hour = new Date().getHours()
+  if (hour >= 3 && hour < 7) return 0 // Quiet
+  if (hour >= 7 && hour < 11) return 1 // Morning
+  if (hour >= 11 && hour < 15) return 2 // Heart
+  if (hour >= 15 && hour < 19) return 3 // Descent
+  if (hour >= 19 && hour < 23) return 4 // Wind-down
+  return 5 // Healing (23–03)
+}
+
 export default function BodyClock() {
-  const { meta, introduction, organs, daily_rhythm, symptoms_guide, emotion_and_organs } =
-    bodyclockData
+  const { meta, introduction, organs, daily_rhythm, symptoms_guide } = bodyclockData
+
+  const organsByName = useMemo(
+    () => Object.fromEntries(organs.map((o) => [o.organ, o])),
+    [organs],
+  )
+
+  const activePeriodIndex = useMemo(() => findActivePeriodIndex(), [])
 
   const [activeSection, setActiveSection] = useState('clock')
-  const [selectedOrganIndex, setSelectedOrganIndex] = useState(null)
-  const [activeSubButton, setActiveSubButton] = useState(null)
+  const [selectedPeriodIndex, setSelectedPeriodIndex] = useState(null)
 
   return (
     <div className="spring">
@@ -30,9 +87,6 @@ export default function BodyClock() {
         <h1 className="cinzel text-[22px] font-light uppercase tracking-[0.12em] text-heading md:text-[24px]">
           {meta.title}
         </h1>
-        <p className="cinzel mt-1 text-[9px] uppercase tracking-[0.3em] text-muted">
-          Twelve organs. Twenty-four hours.
-        </p>
         <p className="lead mt-8">
           {introduction.text[0]} {introduction.text[3]}
         </p>
@@ -45,8 +99,7 @@ export default function BodyClock() {
           active={activeSection === 'clock'}
           onClick={() => {
             setActiveSection('clock')
-            setSelectedOrganIndex(null)
-            setActiveSubButton(null)
+            setSelectedPeriodIndex(null)
           }}
         />
         <NavButton
@@ -54,8 +107,7 @@ export default function BodyClock() {
           active={activeSection === 'rhythm'}
           onClick={() => {
             setActiveSection('rhythm')
-            setSelectedOrganIndex(null)
-            setActiveSubButton(null)
+            setSelectedPeriodIndex(null)
           }}
         />
         <NavButton
@@ -63,8 +115,7 @@ export default function BodyClock() {
           active={activeSection === 'symptoms'}
           onClick={() => {
             setActiveSection('symptoms')
-            setSelectedOrganIndex(null)
-            setActiveSubButton(null)
+            setSelectedPeriodIndex(null)
           }}
         />
       </div>
@@ -73,12 +124,11 @@ export default function BodyClock() {
       <div className="mt-10 mb-16">
         {activeSection === 'clock' && (
           <TheClockSection
-            organs={organs}
-            emotionData={emotion_and_organs}
-            selectedOrganIndex={selectedOrganIndex}
-            setSelectedOrganIndex={setSelectedOrganIndex}
-            activeSubButton={activeSubButton}
-            setActiveSubButton={setActiveSubButton}
+            periods={TIME_PERIODS}
+            organsByName={organsByName}
+            activePeriodIndex={activePeriodIndex}
+            selectedPeriodIndex={selectedPeriodIndex}
+            setSelectedPeriodIndex={setSelectedPeriodIndex}
           />
         )}
         {activeSection === 'rhythm' && <TodaysRhythmSection items={daily_rhythm} />}
@@ -120,148 +170,99 @@ function NavButton({ label, active, onClick }) {
 /* ------------------------------------------------------------------ */
 
 function TheClockSection({
-  organs,
-  emotionData,
-  selectedOrganIndex,
-  setSelectedOrganIndex,
-  activeSubButton,
-  setActiveSubButton,
+  periods,
+  organsByName,
+  activePeriodIndex,
+  selectedPeriodIndex,
+  setSelectedPeriodIndex,
 }) {
-  const selectedOrgan = selectedOrganIndex !== null ? organs[selectedOrganIndex] : null
-  const organEmotion = selectedOrgan
-    ? emotionData.find((e) => e.organ === selectedOrgan.organ)
-    : null
+  // If a period is selected, show its content
+  if (selectedPeriodIndex !== null) {
+    const period = periods[selectedPeriodIndex]
+    const periodOrgans = period.organs.map((name) => organsByName[name])
+    const firstOrgan = periodOrgans[0]
+    const seasonId = SEASON_NAME_TO_ID[firstOrgan.season] || 'spring'
 
-  return (
-    <div>
-      {/* Organ list */}
-      <div className="space-y-4">
-        {organs.map((organ, i) => {
-          const firstSentence = organ.description.split(/[.!?]/)[0] + '.'
-          const seasonId = SEASON_NAME_TO_ID[organ.season] || 'spring'
-          const isSelected = selectedOrganIndex === i
+    const prevIndex = selectedPeriodIndex === 0 ? periods.length - 1 : selectedPeriodIndex - 1
+    const nextIndex = selectedPeriodIndex === periods.length - 1 ? 0 : selectedPeriodIndex + 1
 
-          return (
-            <button
-              key={i}
-              type="button"
-              onClick={() => {
-                if (isSelected) {
-                  setSelectedOrganIndex(null)
-                  setActiveSubButton(null)
-                } else {
-                  setSelectedOrganIndex(i)
-                  setActiveSubButton(null)
-                }
-              }}
-              className={`w-full text-left transition-opacity hover:opacity-75 ${isSelected ? 'opacity-100' : 'opacity-100'}`}
-            >
-              <p className="cinzel text-[10px] uppercase tracking-[0.26em] text-accent">
-                {organ.time_start}–{organ.time_end}
-              </p>
-              <p className="cinzel mt-1 text-[13px] font-light uppercase tracking-[0.24em] text-heading">
-                {organ.organ}
-              </p>
-              <p className="mt-2 text-[13.5px] leading-[1.7] text-muted">
-                {firstSentence}
-              </p>
-            </button>
-          )
-        })}
-      </div>
-
-      {/* Organ detail panel */}
-      {selectedOrgan && (
-        <div className="mt-12 space-y-8">
-          <div>
-            <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
-              {selectedOrgan.organ}
-            </h2>
-            <p className="cinzel mt-1 text-[9px] uppercase tracking-[0.3em] text-muted">
-              {selectedOrgan.element} · {selectedOrgan.season}
-            </p>
-            <p className="lead mt-6">{selectedOrgan.description}</p>
-          </div>
-
-          {/* Three sub-buttons */}
-          <div className="flex gap-x-7 border-b pb-2" style={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}>
-            <SubButton
-              label="Practice"
-              active={activeSubButton === 'practice'}
-              onClick={() => setActiveSubButton(activeSubButton === 'practice' ? null : 'practice')}
-            />
-            <SubButton
-              label="Imbalance"
-              active={activeSubButton === 'imbalance'}
-              onClick={() => setActiveSubButton(activeSubButton === 'imbalance' ? null : 'imbalance')}
-            />
-            <SubButton
-              label="Emotion"
-              active={activeSubButton === 'emotion'}
-              onClick={() => setActiveSubButton(activeSubButton === 'emotion' ? null : 'emotion')}
-            />
-          </div>
-
-          {/* Sub-button content */}
-          {activeSubButton === 'practice' && selectedOrgan.practice && (
-            <div className="mt-6">
-              <p className="text-[14.5px] leading-[1.8]">{selectedOrgan.practice}</p>
-            </div>
-          )}
-
-          {activeSubButton === 'imbalance' && selectedOrgan.signs_of_imbalance && (
-            <div className="mt-6 space-y-2">
-              {selectedOrgan.signs_of_imbalance.map((sign, i) => (
-                <p key={i} className="text-[13.5px] leading-[1.75] text-muted">
-                  · {sign}
-                </p>
-              ))}
-            </div>
-          )}
-
-          {activeSubButton === 'emotion' && organEmotion && (
-            <div className="mt-6 space-y-4">
-              <div>
-                <p className="cinzel text-[10px] uppercase tracking-[0.24em] text-accent">
-                  {organEmotion.emotion}
-                </p>
-                <p className="mt-2 text-[14px] leading-[1.8]">
-                  <strong className="font-medium text-heading">Balanced.</strong>{' '}
-                  {organEmotion.balanced}
-                </p>
-              </div>
-              <div>
-                <p className="text-[14px] leading-[1.8]">
-                  <strong className="font-medium text-heading">Imbalanced.</strong>{' '}
-                  {organEmotion.imbalanced}
-                </p>
-              </div>
-            </div>
-          )}
+    return (
+      <div className={seasonClass(seasonId)}>
+        <div>
+          <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
+            {period.name}
+          </h2>
+          <p className="cinzel mt-1 text-[9px] uppercase tracking-[0.3em] text-muted">
+            {period.time}
+          </p>
         </div>
-      )}
-    </div>
-  )
-}
 
-/* ------------------------------------------------------------------ */
-/* Sub-Button                                                         */
-/* ------------------------------------------------------------------ */
+        <div className="mt-10 space-y-8">
+          {periodOrgans.map((organ) => (
+            <div key={organ.organ}>
+              <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+                {organ.organ}
+              </h3>
+              <p className="lead mt-4">{organ.description}</p>
+              {organ.practice && (
+                <InsightBlock label="Practice">{organ.practice}</InsightBlock>
+              )}
+            </div>
+          ))}
+        </div>
 
-function SubButton({ label, active, onClick }) {
+        {/* Period navigation */}
+        <div className="mt-12 flex items-center justify-center gap-8">
+          <button
+            type="button"
+            onClick={() => setSelectedPeriodIndex(prevIndex)}
+            className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
+          >
+            ← {periods[prevIndex].name}
+          </button>
+          <button
+            type="button"
+            onClick={() => setSelectedPeriodIndex(nextIndex)}
+            className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
+          >
+            {periods[nextIndex].name} →
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // Otherwise, show the list of periods to choose from
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors"
-      style={{
-        color: active ? 'var(--accent)' : 'var(--muted)',
-        borderBottom: active ? '0.5px solid var(--accent)' : '0.5px solid transparent',
-        marginBottom: '-9px',
-      }}
-    >
-      {label}
-    </button>
+    <div className="space-y-4">
+      {periods.map((period, i) => {
+        const periodOrgans = period.organs.map((name) => organsByName[name])
+        const firstOrgan = periodOrgans[0]
+        const seasonId = SEASON_NAME_TO_ID[firstOrgan.season] || 'spring'
+        const isActive = i === activePeriodIndex
+
+        return (
+          <button
+            key={period.id}
+            type="button"
+            onClick={() => setSelectedPeriodIndex(i)}
+            className={`${seasonClass(seasonId)} w-full text-left transition-opacity hover:opacity-75`}
+          >
+            <p
+              className="cinzel text-[13px] font-light uppercase tracking-[0.24em]"
+              style={{
+                color: isActive ? 'var(--accent)' : 'var(--heading)',
+              }}
+            >
+              {period.name} · {period.time}
+            </p>
+            <p className="mt-1 text-[12px] italic text-muted">
+              {period.organs.join(' · ')}
+            </p>
+          </button>
+        )
+      })}
+    </div>
   )
 }
 
