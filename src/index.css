@@ -3,9 +3,67 @@
 @tailwind utilities;
 
 @layer base {
+  /* ---------- Theme tokens ---------- */
   :root {
+    /* Light mode (default) */
+    --bg: #faf8f5;
+    --surface: #faf8f5;
+    --text: #222222;
+    --heading: #182818;
+    --lead: #264028;
+    --muted: #5a6a58;
+    --border: rgba(0, 0, 0, 0.08);
+
+    /* Default accent — overridden by the per-season wrapper classes below */
     --accent: #3a7040;
     --accent-light: #e8f2e0;
+
+    /* Organ clock segment opacities (RightNow) */
+    --seg-inactive-fill: 0.2;
+    --seg-inactive-stroke: 0.28;
+    --seg-selected-fill: 0.52;
+    --seg-selected-stroke: 0.55;
+    --seg-active-fill: 0.82;
+    --seg-active-stroke: 0.95;
+  }
+
+  /* Dark mode — automatic via OS setting. A manual [data-theme='light']
+     attribute on <html> opts a user out if they prefer light on a dark OS. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      --bg: #0f1410;
+      --surface: #161c17;
+      --text: #d4cfc8;
+      --heading: #e8f0e8;
+      --lead: #c4d2b4;
+      --muted: #7a8a78;
+      --border: rgba(255, 255, 255, 0.07);
+
+      --seg-inactive-fill: 0.32;
+      --seg-inactive-stroke: 0.42;
+      --seg-selected-fill: 0.65;
+      --seg-selected-stroke: 0.75;
+      --seg-active-fill: 0.92;
+      --seg-active-stroke: 1;
+    }
+  }
+
+  /* Dark mode — manual override via [data-theme='dark'] on <html> */
+  :root[data-theme='dark'] {
+    --bg: #0f1410;
+    --surface: #161c17;
+    --text: #d4cfc8;
+    --heading: #e8f0e8;
+    --lead: #c4d2b4;
+    --muted: #7a8a78;
+    --border: rgba(255, 255, 255, 0.07);
+
+    --seg-inactive-fill: 0.32;
+    --seg-inactive-stroke: 0.42;
+    --seg-selected-fill: 0.65;
+    --seg-selected-stroke: 0.75;
+    --seg-active-fill: 0.92;
+    --seg-active-stroke: 1;
   }
 
   html,
@@ -19,17 +77,18 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 1.82;
-    color: #222222;
-    background: #faf8f5;
+    color: var(--text);
+    background: var(--bg);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 240ms ease, color 240ms ease;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    color: #182818;
+    color: var(--heading);
     font-family: 'Cinzel', serif;
     font-weight: 300;
   }
@@ -41,14 +100,14 @@
   }
 
   .lead {
-    color: #264028;
+    color: var(--lead);
     font-style: italic;
     font-weight: 300;
     font-size: 17.5px;
     line-height: 1.88;
   }
 
-  /* Season accent theming via a single wrapper class */
+  /* Season accent wrappers — set per-season accent / accent-light tokens */
   .spring {
     --accent: #3a7040;
     --accent-light: #e8f2e0;
@@ -68,6 +127,41 @@
   .winter {
     --accent: #2a4a80;
     --accent-light: #eef2f8;
+  }
+
+  /* Dark-mode accent-light: tint the surface colour with a touch of accent
+     rather than use the pale light-mode washes (which burn out on dark). */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .spring {
+      --accent-light: color-mix(in srgb, #3a7040 18%, #161c17);
+    }
+    :root:not([data-theme='light']) .summer {
+      --accent-light: color-mix(in srgb, #8a2030 20%, #161c17);
+    }
+    :root:not([data-theme='light']) .lsummer {
+      --accent-light: color-mix(in srgb, #7a6010 22%, #161c17);
+    }
+    :root:not([data-theme='light']) .autumn {
+      --accent-light: color-mix(in srgb, #7a7a82 22%, #161c17);
+    }
+    :root:not([data-theme='light']) .winter {
+      --accent-light: color-mix(in srgb, #2a4a80 24%, #161c17);
+    }
+  }
+  :root[data-theme='dark'] .spring {
+    --accent-light: color-mix(in srgb, #3a7040 18%, #161c17);
+  }
+  :root[data-theme='dark'] .summer {
+    --accent-light: color-mix(in srgb, #8a2030 20%, #161c17);
+  }
+  :root[data-theme='dark'] .lsummer {
+    --accent-light: color-mix(in srgb, #7a6010 22%, #161c17);
+  }
+  :root[data-theme='dark'] .autumn {
+    --accent-light: color-mix(in srgb, #7a7a82 22%, #161c17);
+  }
+  :root[data-theme='dark'] .winter {
+    --accent-light: color-mix(in srgb, #2a4a80 24%, #161c17);
   }
 
   .text-accent {

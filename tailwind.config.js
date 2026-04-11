@@ -8,10 +8,14 @@ export default {
         display: ['Cinzel', 'serif'],
       },
       colors: {
-        'off-white': '#faf8f5',
-        heading: '#182818',
-        lead: '#264028',
-        muted: '#5a6a58',
+        // Theme tokens — driven by CSS vars so they swap in dark mode
+        'off-white': 'var(--bg)',
+        surface: 'var(--surface)',
+        body: 'var(--text)',
+        heading: 'var(--heading)',
+        lead: 'var(--lead)',
+        muted: 'var(--muted)',
+        // Season accents (stay the same in dark mode)
         spring: '#3a7040',
         summer: '#8a2030',
         latesummer: '#7a6010',

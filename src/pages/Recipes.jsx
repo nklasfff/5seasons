@@ -91,7 +91,7 @@ function SeasonFilter({ selected, onSelect }) {
             onClick={() => onSelect(id)}
             className={`${seasonClass(id)} cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors`}
             style={{
-              color: isActive ? 'var(--accent)' : '#5a6a58',
+              color: isActive ? 'var(--accent)' : 'var(--muted)',
               borderBottom: isActive
                 ? '0.5px solid var(--accent)'
                 : '0.5px solid transparent',
@@ -114,7 +114,7 @@ function SeasonPrinciple({ season }) {
       <p
         className="mt-1 text-[11.5px] italic"
         style={{
-          color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
+          color: 'color-mix(in srgb, var(--accent) 80%, var(--muted))',
         }}
       >
         {season.organs}
@@ -204,7 +204,7 @@ function RecipeCard({ recipe }) {
           <span
             className="cinzel text-[9px] uppercase tracking-[0.24em]"
             style={{
-              color: 'color-mix(in srgb, var(--accent) 55%, #5a6a58)',
+              color: 'color-mix(in srgb, var(--accent) 55%, var(--muted))',
             }}
           >
             {recipe.ingredients.length} ingredients

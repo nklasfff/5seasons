@@ -59,12 +59,12 @@ function SeasonRow({ season }) {
           <p
             className="mt-1 text-[11px] italic"
             style={{
-              color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
+              color: 'color-mix(in srgb, var(--accent) 80%, var(--muted))',
             }}
           >
             {season.organs.join(' · ')}
           </p>
-          <p className="mt-3 line-clamp-3 text-[13.5px] leading-[1.7] text-[#333]">
+          <p className="mt-3 line-clamp-3 text-[13.5px] leading-[1.7] text-body">
             {season.description}
           </p>
           <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">

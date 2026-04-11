@@ -266,7 +266,7 @@ function Tabs({ tabs, active, onChange }) {
             onClick={() => onChange(t.id)}
             className="cinzel pb-1 text-[11px] font-light uppercase tracking-[0.26em] transition-colors"
             style={{
-              color: isActive ? 'var(--accent)' : '#5a6a58',
+              color: isActive ? 'var(--accent)' : 'var(--muted)',
               borderBottom: isActive
                 ? '0.5px solid var(--accent)'
                 : '0.5px solid transparent',

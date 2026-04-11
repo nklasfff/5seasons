@@ -452,7 +452,7 @@ function SeasonSelector({ selected, onSelect }) {
             onClick={() => onSelect(id)}
             className={`${seasonClass(id)} cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors`}
             style={{
-              color: isActive ? 'var(--accent)' : '#5a6a58',
+              color: isActive ? 'var(--accent)' : 'var(--muted)',
               borderBottom: isActive
                 ? '0.5px solid var(--accent)'
                 : '0.5px solid transparent',
@@ -479,7 +479,7 @@ function SeasonalPractice({ practice, breath }) {
       <p
         className="mt-1 text-[11px] italic"
         style={{
-          color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
+          color: 'color-mix(in srgb, var(--accent) 80%, var(--muted))',
         }}
       >
         {practice.organs} · {practice.direction}
@@ -666,7 +666,7 @@ function Tabs({ tabs, active, onChange }) {
             onClick={() => onChange(t.id)}
             className="cinzel pb-1 text-[11px] font-light uppercase tracking-[0.26em] transition-colors"
             style={{
-              color: isActive ? 'var(--accent)' : '#5a6a58',
+              color: isActive ? 'var(--accent)' : 'var(--muted)',
               borderBottom: isActive
                 ? '0.5px solid var(--accent)'
                 : '0.5px solid transparent',

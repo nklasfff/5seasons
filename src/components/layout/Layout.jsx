@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import BottomNav from './BottomNav.jsx'
 import Sidebar from './Sidebar.jsx'
+import ThemeToggle from '../ui/ThemeToggle.jsx'
 
 export default function Layout() {
   return (
@@ -10,6 +11,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <BottomNav />
+      <ThemeToggle />
     </div>
   )
 }

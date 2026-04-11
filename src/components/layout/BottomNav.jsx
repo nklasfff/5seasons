@@ -5,7 +5,7 @@ export default function BottomNav() {
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-30 flex h-[60px] items-center justify-around bg-off-white md:hidden"
-      style={{ borderTop: '0.5px solid rgba(0,0,0,0.08)' }}
+      style={{ borderTop: '0.5px solid var(--border)' }}
     >
       {navItems.map((item) => (
         <NavLink
@@ -14,7 +14,7 @@ export default function BottomNav() {
           end={item.to === '/'}
           className={({ isActive }) =>
             `cinzel text-[7.5px] font-light uppercase tracking-[0.15em] ${
-              isActive ? 'text-accent' : 'text-[#888]'
+              isActive ? 'text-accent' : 'text-muted'
             }`
           }
         >

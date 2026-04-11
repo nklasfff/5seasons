@@ -183,16 +183,27 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
           const rOuter = isActive ? ACTIVE_OUTER_R : OUTER_R
           const d = ringSegmentPath(CX, CY, INNER_R, rOuter, startDeg, endDeg)
           const colour = organ.element_colour
+          // Opacity tokens adjust in dark mode via index.css theme vars.
+          const fillOpacity = isActive
+            ? 'var(--seg-active-fill)'
+            : isSelected
+              ? 'var(--seg-selected-fill)'
+              : 'var(--seg-inactive-fill)'
+          const strokeOpacity = isActive
+            ? 'var(--seg-active-stroke)'
+            : isSelected
+              ? 'var(--seg-selected-stroke)'
+              : 'var(--seg-inactive-stroke)'
           return (
             <path
               key={i}
               d={d}
               fill={colour}
-              fillOpacity={isActive ? 0.82 : isSelected ? 0.52 : 0.2}
               stroke={colour}
-              strokeOpacity={isActive ? 0.95 : isSelected ? 0.55 : 0.28}
               strokeWidth={isActive ? 1.1 : 0.6}
               style={{
+                fillOpacity,
+                strokeOpacity,
                 filter: isActive ? `drop-shadow(0 0 10px ${colour})` : undefined,
                 cursor: 'pointer',
                 transition:
@@ -216,8 +227,11 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
               dominantBaseline="middle"
               className="cinzel"
               fontSize="10"
-              fill="#5a6a58"
-              style={{ letterSpacing: '0.22em', fontWeight: 300 }}
+              style={{
+                fill: 'var(--muted)',
+                letterSpacing: '0.22em',
+                fontWeight: 300,
+              }}
             >
               {label}
             </text>
@@ -229,10 +243,12 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
           cx={CX}
           cy={CY}
           r={INNER_R - 8}
-          fill="#faf8f5"
-          stroke="#182818"
-          strokeOpacity={0.06}
           strokeWidth={0.75}
+          style={{
+            fill: 'var(--surface)',
+            stroke: 'var(--heading)',
+            strokeOpacity: 0.06,
+          }}
         />
 
         {/* Current time in the hub */}
@@ -243,8 +259,11 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
           dominantBaseline="middle"
           className="cinzel"
           fontSize="17"
-          fill="#182818"
-          style={{ letterSpacing: '0.18em', fontWeight: 300 }}
+          style={{
+            fill: 'var(--heading)',
+            letterSpacing: '0.18em',
+            fontWeight: 300,
+          }}
         >
           {formatClockTime(now)}
         </text>
@@ -255,8 +274,11 @@ function Clock({ organs, activeIndex, selectedIndex, now, onSelect }) {
           dominantBaseline="middle"
           className="cinzel"
           fontSize="8.5"
-          fill="#5a6a58"
-          style={{ letterSpacing: '0.32em', fontWeight: 300 }}
+          style={{
+            fill: 'var(--muted)',
+            letterSpacing: '0.32em',
+            fontWeight: 300,
+          }}
         >
           RIGHT NOW
         </text>
@@ -296,7 +318,7 @@ function TodayRhythmCard({ organs, activeIndex }) {
               <span
                 className="cinzel flex-1 text-[11px] font-light uppercase tracking-[0.18em]"
                 style={{
-                  color: isNow ? 'var(--accent)' : '#182818',
+                  color: isNow ? 'var(--accent)' : 'var(--heading)',
                 }}
               >
                 {organ.organ}
