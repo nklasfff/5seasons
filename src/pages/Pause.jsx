@@ -8,6 +8,7 @@ import BreathExercise from '../components/ui/BreathExercise.jsx'
 import JournalQuestion from '../components/ui/JournalQuestion.jsx'
 import heroImage from '../assets/images/hero-pause.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
+import { clearAll, getAllEntries } from '../lib/journal.js'
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 const SEASON_LABELS = {
@@ -52,6 +53,13 @@ export default function Pause() {
   const [seasonId, setSeasonId] = useState(() => getCurrentSeason())
 
   const wrapperClass = tab === 'seasons' ? seasonClass(seasonId) : 'spring'
+  const journalQuestionsBySeason = useMemo(
+    () =>
+      Object.fromEntries(
+        seasonal_practices.map((sp) => [sp.season, sp.journal_questions || []]),
+      ),
+    [seasonal_practices],
+  )
 
   return (
     <div className={wrapperClass}>
@@ -74,13 +82,14 @@ export default function Pause() {
         tabs={[
           { id: 'foundations', label: 'Mindfulness & Breath' },
           { id: 'seasons', label: 'The Seasons' },
+          { id: 'journal', label: 'My Journal' },
         ]}
         active={tab}
         onChange={setTab}
       />
 
       <div className="mt-12">
-        {tab === 'foundations' ? (
+        {tab === 'foundations' && (
           <FoundationsTab
             intro={introduction.text[2]}
             thePause={the_pause}
@@ -89,7 +98,8 @@ export default function Pause() {
             dailyPractice={daily_practice}
             mindfulness={mindfulness}
           />
-        ) : (
+        )}
+        {tab === 'seasons' && (
           <SeasonsTab
             intro={introduction.text[3]}
             seasonalPractices={seasonal_practices}
@@ -97,6 +107,9 @@ export default function Pause() {
             selected={seasonId}
             onSelect={setSeasonId}
           />
+        )}
+        {tab === 'journal' && (
+          <MyJournalTab questionsBySeason={journalQuestionsBySeason} />
         )}
       </div>
 
@@ -506,12 +519,126 @@ function SeasonalPractice({ practice, breath }) {
           </h3>
           <div>
             {practice.journal_questions.map((q, i) => (
-              <JournalQuestion key={i} number={i + 1} question={q} />
+              <JournalQuestion
+                key={`${practice.season}-${i}`}
+                seasonId={practice.season}
+                number={i + 1}
+                question={q}
+              />
             ))}
           </div>
         </div>
       )}
     </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Tab 3: My Journal                                                   */
+/* ------------------------------------------------------------------ */
+
+function MyJournalTab({ questionsBySeason }) {
+  const [entries, setEntries] = useState(() => getAllEntries())
+  const [confirming, setConfirming] = useState(false)
+
+  const seasonsWithEntries = SEASON_ORDER.map((id) => {
+    const byNumber = entries[id] || {}
+    const ordered = Object.entries(byNumber)
+      .map(([n, text]) => ({ number: Number(n), text }))
+      .filter((e) => e.text && e.text.trim().length > 0)
+      .sort((a, b) => a.number - b.number)
+    return {
+      id,
+      label: SEASON_LABELS[id],
+      questions: questionsBySeason[id] || [],
+      entries: ordered,
+    }
+  }).filter((s) => s.entries.length > 0)
+
+  const handleClearAll = () => {
+    if (!confirming) {
+      setConfirming(true)
+      setTimeout(() => setConfirming(false), 3000)
+      return
+    }
+    clearAll()
+    setEntries({})
+    setConfirming(false)
+  }
+
+  if (seasonsWithEntries.length === 0) {
+    return (
+      <div>
+        <p className="text-[14px] italic leading-[1.8] text-muted">
+          Nothing here yet. Choose a season, open its questions, and begin
+          writing — your words will be held here for whenever you return.
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <p className="text-[14px] italic leading-[1.8] text-lead">
+        What you have written, held season by season. These words live only
+        on this device.
+      </p>
+
+      <div className="mt-10 space-y-14">
+        {seasonsWithEntries.map((s) => (
+          <section key={s.id} className={seasonClass(s.id)}>
+            <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+              {s.label}
+            </h3>
+            <div className="mt-4">
+              {s.entries.map((e) => (
+                <SavedEntry
+                  key={e.number}
+                  number={e.number}
+                  question={s.questions[e.number - 1]}
+                  text={e.text}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <Divider />
+
+      <div className="text-center">
+        <button
+          type="button"
+          onClick={handleClearAll}
+          className="cinzel text-[9px] font-light uppercase tracking-[0.28em] text-muted transition-colors hover:text-accent"
+        >
+          {confirming ? 'Tap again to confirm' : 'Clear all journal entries'}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+function SavedEntry({ number, question, text }) {
+  return (
+    <div
+      className="border-b py-5 last:border-0"
+      style={{
+        borderColor: 'color-mix(in srgb, var(--accent) 10%, transparent)',
+      }}
+    >
+      <p className="cinzel mb-1 text-[9px] font-light tracking-[0.22em] text-accent">
+        {String(number).padStart(2, '0')}
+      </p>
+      {question && (
+        <p className="text-[14px] italic leading-[1.72] text-heading">
+          {question}
+        </p>
+      )}
+      <p className="mt-3 whitespace-pre-wrap text-[14.5px] italic leading-[1.82] text-lead">
+        {text}
+      </p>
+    </div>
   )
 }
 
