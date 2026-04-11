@@ -21,12 +21,22 @@ const MEAL_SECTIONS = [
   { key: 'dinner', label: 'Dinner' },
 ]
 
+// TCM-ish month mapping. Late Summer sits in August as a short transition.
+function getCurrentSeason() {
+  const m = new Date().getMonth() // 0 = Jan
+  if (m >= 2 && m <= 4) return 'spring' // Mar–May
+  if (m === 5 || m === 6) return 'summer' // Jun–Jul
+  if (m === 7) return 'late_summer' // Aug
+  if (m >= 8 && m <= 10) return 'autumn' // Sep–Nov
+  return 'winter' // Dec–Feb
+}
+
 export default function Recipes() {
   const { meta, seasons, recipes } = recipesData
-  const [selected, setSelected] = useState('all')
+  const [selected, setSelected] = useState(() => getCurrentSeason())
 
   const filtered = useMemo(
-    () => (selected === 'all' ? recipes : recipes.filter((r) => r.season === selected)),
+    () => recipes.filter((r) => r.season === selected),
     [recipes, selected],
   )
 
@@ -38,59 +48,49 @@ export default function Recipes() {
     return map
   }, [filtered])
 
-  const activeSeason = selected !== 'all' ? seasons[selected] : null
-  const wrapperClass = selected === 'all' ? 'spring' : seasonClass(selected)
+  const activeSeason = seasons[selected]
 
   return (
-    <div className={wrapperClass}>
+    <div className={seasonClass(selected)}>
       <PageHeader label="Recipes" />
 
       <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
         {meta.title}
       </h1>
-      <p className="lead mb-2">{meta.subtitle}</p>
+      <p className="lead">{meta.subtitle}</p>
 
       <Divider />
 
       <SeasonFilter selected={selected} onSelect={setSelected} />
 
-      {activeSeason && (
-        <div className="mt-6">
-          <SeasonPrinciple season={activeSeason} />
-        </div>
-      )}
-
-      <div className="mt-10 space-y-12">
-        {MEAL_SECTIONS.map(({ key, label }) => (
-          <MealSection key={key} label={label} recipes={byMeal[key]} />
-        ))}
+      <div className="mt-10">
+        <SeasonPrinciple season={activeSeason} />
       </div>
 
-      <Divider />
-
-      <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
-        {filtered.length} {filtered.length === 1 ? 'Recipe' : 'Recipes'}
-      </p>
+      <div className="mt-16 space-y-12">
+        {MEAL_SECTIONS.map(({ key, label }) => (
+          <CollapsibleMealSection
+            key={`${selected}-${key}`}
+            label={label}
+            recipes={byMeal[key]}
+          />
+        ))}
+      </div>
     </div>
   )
 }
 
 function SeasonFilter({ selected, onSelect }) {
-  const options = [{ id: 'all', label: 'All' }].concat(
-    SEASON_ORDER.map((id) => ({ id, label: SEASON_LABELS[id] })),
-  )
-
   return (
-    <div className="flex flex-wrap gap-x-5 gap-y-2">
-      {options.map(({ id, label }) => {
+    <div className="flex flex-wrap gap-x-7 gap-y-3">
+      {SEASON_ORDER.map((id) => {
         const isActive = selected === id
-        const wrap = id === 'all' ? '' : seasonClass(id)
         return (
           <button
             key={id}
             type="button"
             onClick={() => onSelect(id)}
-            className={`${wrap} cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors`}
+            className={`${seasonClass(id)} cinzel pb-1 text-[10px] font-light uppercase tracking-[0.26em] transition-colors`}
             style={{
               color: isActive ? 'var(--accent)' : '#5a6a58',
               borderBottom: isActive
@@ -98,7 +98,7 @@ function SeasonFilter({ selected, onSelect }) {
                 : '0.5px solid transparent',
             }}
           >
-            {label}
+            {SEASON_LABELS[id]}
           </button>
         )
       })}
@@ -109,98 +109,109 @@ function SeasonFilter({ selected, onSelect }) {
 function SeasonPrinciple({ season }) {
   return (
     <div>
-      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-        <p className="cinzel text-[11px] uppercase tracking-[0.26em] text-accent">
-          {season.element} · {season.flavour}
+      <p className="cinzel text-[11px] uppercase tracking-[0.26em] text-accent">
+        {season.element} · {season.flavour}
+      </p>
+      <p
+        className="mt-1 text-[11.5px] italic"
+        style={{
+          color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
+        }}
+      >
+        {season.organs}
+      </p>
+
+      <div className="mt-5 space-y-3">
+        <p className="text-[13.5px] leading-[1.74]">
+          <span className="cinzel mr-2 text-[8.5px] uppercase tracking-[0.2em] text-muted">
+            Nourish with
+          </span>
+          <span className="italic text-lead">{season.foods.join(', ')}</span>
         </p>
-        <p
-          className="text-[11px] italic"
-          style={{
-            color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
-          }}
-        >
-          {season.organs}
+        <p className="text-[13.5px] leading-[1.74]">
+          <span className="cinzel mr-2 text-[8.5px] uppercase tracking-[0.2em] text-muted">
+            Reduce
+          </span>
+          <span className="italic text-muted">{season.reduce.join(', ')}</span>
         </p>
       </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-0">
-        <MetaCell label="Nourish with" items={season.foods} />
-        <MetaCell label="Reduce" items={season.reduce} />
-      </div>
-
-      <div className="mt-4">
+      <div className="mt-5">
         <InsightBlock label="Principle">{season.principle}</InsightBlock>
       </div>
     </div>
   )
 }
 
-function MetaCell({ label, items }) {
-  return (
-    <div
-      className="border-b border-r p-3 last:border-r-0"
-      style={{
-        borderColor: 'color-mix(in srgb, var(--accent) 12%, transparent)',
-      }}
-    >
-      <p className="cinzel mb-1 text-[8.5px] uppercase tracking-[0.18em] text-muted">
-        {label}
-      </p>
-      <p className="text-[12.5px] italic leading-[1.58]">{items.join(', ')}</p>
-    </div>
-  )
-}
-
-function MealSection({ label, recipes }) {
+function CollapsibleMealSection({ label, recipes }) {
+  const [open, setOpen] = useState(true)
   if (!recipes || recipes.length === 0) return null
+
   return (
     <section>
-      <h2 className="cinzel mb-4 text-[11px] font-light uppercase tracking-[0.26em] text-accent">
-        {label}
-      </h2>
-      <div>
-        {recipes.map((r) => (
-          <RecipeRow key={r.id} recipe={r} />
-        ))}
-      </div>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-baseline gap-4 border-b pb-3 text-left transition-colors"
+        style={{
+          borderColor: 'color-mix(in srgb, var(--accent) 20%, transparent)',
+        }}
+        aria-expanded={open}
+      >
+        <span className="cinzel text-[11px] font-light uppercase tracking-[0.26em] text-accent">
+          {label}
+        </span>
+        <span className="cinzel text-[9px] uppercase tracking-[0.24em] text-muted">
+          {recipes.length} {recipes.length === 1 ? 'recipe' : 'recipes'}
+        </span>
+        <span
+          className="cinzel ml-auto text-[13px] font-light text-muted"
+          aria-hidden="true"
+        >
+          {open ? '−' : '+'}
+        </span>
+      </button>
+
+      {open && (
+        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
+          {recipes.map((r) => (
+            <RecipeCard key={r.id} recipe={r} />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
 
-function RecipeRow({ recipe }) {
+function RecipeCard({ recipe }) {
   return (
-    <Link
-      to={`/recipes/${recipe.id}`}
-      className={`${seasonClass(recipe.season)} group block`}
-    >
-      <div
-        className="flex items-start gap-4 border-b py-4 last:border-0"
+    <Link to={`/recipes/${recipe.id}`} className="group block">
+      <article
+        className="h-full rounded-sm p-6 transition-colors"
         style={{
-          borderColor:
-            'color-mix(in srgb, var(--accent) 14%, transparent)',
+          background:
+            'color-mix(in srgb, var(--accent-light) 55%, transparent)',
+          border:
+            '0.5px solid color-mix(in srgb, var(--accent) 18%, transparent)',
         }}
       >
-        <div
-          className="mt-[9px] h-[6px] w-[6px] min-w-[6px] rounded-full"
-          style={{ background: 'var(--accent)' }}
-        />
-        <div className="min-w-0 flex-1">
-          <h3 className="text-[15px] font-medium leading-[1.45] text-heading group-hover:text-lead">
-            {recipe.title}
-          </h3>
-          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
-            <span className="cinzel text-[8.5px] uppercase tracking-[0.22em] text-accent">
-              {SEASON_LABELS[recipe.season]}
-            </span>
-            <span className="cinzel text-[8.5px] uppercase tracking-[0.22em] text-muted">
-              Serves {recipe.serves}
-            </span>
-            <span className="cinzel text-[8.5px] uppercase tracking-[0.22em] text-muted">
-              {recipe.ingredients.length} ingredients
-            </span>
-          </div>
+        <h3 className="text-[16px] font-medium leading-[1.42] text-heading transition-colors group-hover:text-lead">
+          {recipe.title}
+        </h3>
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1">
+          <span className="cinzel text-[9px] uppercase tracking-[0.24em] text-accent">
+            Serves {recipe.serves}
+          </span>
+          <span
+            className="cinzel text-[9px] uppercase tracking-[0.24em]"
+            style={{
+              color: 'color-mix(in srgb, var(--accent) 55%, #5a6a58)',
+            }}
+          >
+            {recipe.ingredients.length} ingredients
+          </span>
         </div>
-      </div>
+      </article>
     </Link>
   )
 }
