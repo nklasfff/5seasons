@@ -335,12 +335,13 @@ function SeasonsSection({ seasonalPractices }) {
             className={`${seasonClass(seasonId)} block transition-opacity hover:opacity-75`}
             style={{ background: 'transparent' }}
           >
-            <img
-              src={SEASON_CARDS[seasonId]}
-              alt={practice.season_name}
-              className="mx-auto mb-4 w-[180px]"
-              style={{ background: 'transparent' }}
-            />
+            <div className="mx-auto mb-4 h-[180px] w-[180px]" style={{ background: '#faf8f5' }}>
+              <img
+                src={SEASON_CARDS[seasonId]}
+                alt={practice.season_name}
+                className="h-full w-full object-contain"
+              />
+            </div>
             <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
               {practice.season_name}
             </h3>

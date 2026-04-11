@@ -47,12 +47,13 @@ function SeasonRow({ season }) {
           background: 'transparent',
         }}
       >
-        <img
-          src={seasonCardImages[season.id]}
-          alt=""
-          className="h-[124px] w-[124px] flex-shrink-0 object-contain"
-          style={{ background: 'transparent' }}
-        />
+        <div className="h-[124px] w-[124px] flex-shrink-0" style={{ background: '#faf8f5' }}>
+          <img
+            src={seasonCardImages[season.id]}
+            alt=""
+            className="h-full w-full object-contain"
+          />
+        </div>
         <div className="min-w-0 flex-1">
           <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
             {season.element}
