@@ -10,8 +10,20 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cinzel:wght@300;400&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/5seasons/assets/index-BYejD_Nr.js"></script>
-    <link rel="stylesheet" crossorigin href="/5seasons/assets/index-DgawWgHb.css">
+    <script>
+      // Apply stored theme before CSS loads to prevent a flash of the
+      // wrong colour scheme.
+      (function () {
+        try {
+          var t = localStorage.getItem('fiveseasons:theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" crossorigin src="/5seasons/assets/index-D8gPpkpi.js"></script>
+    <link rel="stylesheet" crossorigin href="/5seasons/assets/index-08yqTCj4.css">
   </head>
   <body>
     <div id="root"></div>
