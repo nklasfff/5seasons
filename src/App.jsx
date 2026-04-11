@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/layout/Layout.jsx'
+import Home from './pages/Home.jsx'
 import Seasons from './pages/Seasons.jsx'
 import SeasonDetail from './pages/SeasonDetail.jsx'
 import Recipes from './pages/Recipes.jsx'
@@ -10,16 +11,7 @@ export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route
-          index
-          element={
-            <Stub
-              label="Home"
-              title="The Energy of the 5 Seasons"
-              note="A companion to Isabelle Evita Søndergaard's work."
-            />
-          }
-        />
+        <Route index element={<Home />} />
         <Route path="seasons" element={<Seasons />} />
         <Route path="seasons/:id" element={<SeasonDetail />} />
         <Route
