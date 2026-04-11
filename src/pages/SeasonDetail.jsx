@@ -41,7 +41,9 @@ export default function SeasonDetail() {
         <p className="cinzel mt-1 text-[9px] uppercase tracking-[0.3em] text-muted">
           {season.element}
         </p>
-        <p className="lead mt-6">{season.invitation}</p>
+        <p className="lead mt-8">
+          {season.description.split(/[.!?]/).slice(0, 2).join('. ').trim()}.
+        </p>
       </div>
 
       {/* Three navigation buttons */}
@@ -73,7 +75,7 @@ export default function SeasonDetail() {
       )}
 
       {/* Season navigation */}
-      <div className="mb-6 flex items-center justify-center gap-8">
+      <div className="mt-8 mb-6 flex items-center justify-center gap-8">
         <Link
           to={`/seasons/${prevSeason}`}
           className="cinzel text-[10px] uppercase tracking-[0.26em] text-muted transition-colors hover:text-accent"
