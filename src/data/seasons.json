@@ -1,0 +1,535 @@
+{
+  "meta": {
+    "title": "The Energy of the 5 Seasons",
+    "subtitle": "A Guide to Living in Harmony with the Year",
+    "author": "Isabelle Evita Søndergaard",
+    "description": "Every season has its own energy, its own organs, and its own invitation. When we align with the natural rhythm of the year, we stop working against ourselves — and start working with the intelligence that is already in us."
+  },
+  "philosophy": {
+    "title": "The Foundation",
+    "sections": [
+      {
+        "id": "the_cycle",
+        "title": "The Year as a Cycle",
+        "text": "Everything around us is cyclical and ever-changing. Life has a cycle. The body has a cycle. Each season carries its own energy and vitality. Some seasons are more perceptible than others — but all are equally important. Every element depends on the others. An imbalance in one organ will influence the rest."
+      },
+      {
+        "id": "tcm",
+        "title": "Traditional Chinese Medicine",
+        "text": "Traditional Chinese Medicine is one of the world's oldest diagnostic and treatment systems, traceable 4–5,000 years back. It forms the basis for acupuncture, Qi Gong, gua sha, cupping, and Chinese nutritional therapy. At its core is the theory of the five elements — the foundation of everything in this guide."
+      },
+      {
+        "id": "yin_yang",
+        "title": "Yin & Yang",
+        "text": "TCM is rooted in Taoism. Yin and yang are opposites that complement each other — in an eternal dance of attraction and repulsion, each defining and giving meaning to the other. They represent the dualities of life: day and night, warmth and cold, activity and rest, inhalation and exhalation. Nothing is absolute yin or yang — everything is defined in relation to something else. Balance is the key. When one energy dominates, imbalance naturally results.",
+        "key_terms": [
+          {
+            "term": "Xu",
+            "meaning": "Deficiency — when an element or organ has insufficient energy"
+          },
+          {
+            "term": "Shi",
+            "meaning": "Excess — when an element or organ has too much energy"
+          },
+          {
+            "term": "Stagnation",
+            "meaning": "When energy cannot flow freely — often the root of tension, pain, and illness"
+          }
+        ]
+      },
+      {
+        "id": "jing_qi_shen",
+        "title": "Jing, Qi & Shen",
+        "text": "In TCM, we consist of three fundamental energies essential to our existence.",
+        "three_treasures": [
+          {
+            "name": "Jing",
+            "meaning": "Life Essence",
+            "description": "Our inherited vitality — connected to physical growth, development, and reproduction. The constitutional energy we are born with, comparable to what modern science calls genetics."
+          },
+          {
+            "name": "Qi",
+            "meaning": "Life Energy",
+            "description": "Our vital life force — the energy that drives all the body's processes. Qi flows through the meridian pathways, keeping blood, nutrients, and fluids moving freely. It also governs our breath, so that the spirit can breathe."
+          },
+          {
+            "name": "Shen",
+            "meaning": "Spirit / Soul",
+            "description": "Connected to what we would call the soul or consciousness. Shen links thoughts, feelings, and cognitive processes with the deeper self. It is housed in the heart."
+          }
+        ]
+      },
+      {
+        "id": "five_elements",
+        "title": "The Five Elements",
+        "text": "The five elements — Wu Xing — are considered the fundamental building blocks of nature and of us. They are Metal, Earth, Fire, Water, and Wood. Each element has its own energy, function, and organ pair. They influence each other through the Sheng-Ko cycle — nourishing, controlling, and depending on one another.",
+        "sheng_cycle": {
+          "title": "The Sheng Cycle (Nourishing)",
+          "description": "Like the relationship between mother and child — one element nourishes the next.",
+          "flow": [
+            "Metal carries Water",
+            "Water nourishes Wood",
+            "Wood feeds Fire",
+            "Fire enriches Earth",
+            "Earth houses Metal"
+          ]
+        },
+        "ko_cycle": {
+          "title": "The Ko Cycle (Controlling)",
+          "description": "One element controls another — keeping the system in balance, preventing any single element from becoming dominant.",
+          "flow": [
+            "Metal cuts Wood",
+            "Wood absorbs nourishment from Earth",
+            "Earth absorbs Water",
+            "Water extinguishes Fire",
+            "Fire melts Metal"
+          ]
+        }
+      },
+      {
+        "id": "yin_yoga",
+        "title": "Yin Yoga & the Meridians",
+        "text": "Yin yoga is rooted in Traditional Chinese Medicine. It is a slow, meditative practice with long passive stretches of 3–5 minutes, working deep into connective tissue and the meridian pathways. Through these long, gentle holds, stagnant energy in the meridians is released — allowing Qi to flow more freely. Emotions and experiences stored in the body can surface and dissolve through this practice. The body remembers everything. Feelings and experiences — especially those we have held inside or suppressed — are stored in the tissues. The more they accumulate, the greater the risk they develop into tension, injury, or illness.",
+        "key_principle": "Forget how it looks — feel how it feels."
+      },
+      {
+        "id": "meridians",
+        "title": "The Meridian Pathways",
+        "text": "The meridians are the body's energy channels — an invisible network of energy pathways functioning as the body's energetic infrastructure. Like rivers nourishing a landscape, the meridians are essential for nourishing and maintaining all the body's functions. We work with six central pairs — twelve channels in total.",
+        "pairs": [
+          {
+            "yin": "Lungs",
+            "yang": "Large Intestine",
+            "element": "Metal"
+          },
+          {
+            "yin": "Spleen",
+            "yang": "Stomach",
+            "element": "Earth"
+          },
+          {
+            "yin": "Heart",
+            "yang": "Small Intestine",
+            "element": "Fire"
+          },
+          {
+            "yin": "Kidneys",
+            "yang": "Bladder",
+            "element": "Water"
+          },
+          {
+            "yin": "Liver",
+            "yang": "Gallbladder",
+            "element": "Wood"
+          },
+          {
+            "yin": "Pericardium",
+            "yang": "Triple Warmer",
+            "element": "Fire (Secondary)"
+          }
+        ],
+        "emotion_connections": [
+          {
+            "meridian": "Lungs · Large Intestine",
+            "emotions": "Sadness, melancholy, depression"
+          },
+          {
+            "meridian": "Stomach · Spleen",
+            "emotions": "Worry, overthinking, stress"
+          },
+          {
+            "meridian": "Heart · Small Intestine",
+            "emotions": "Joy, attraction-repulsion, aversion"
+          },
+          {
+            "meridian": "Bladder · Kidneys",
+            "emotions": "Fear, anxiety, insecurity"
+          },
+          {
+            "meridian": "Gallbladder · Liver",
+            "emotions": "Anger, irritation, bitterness, frustration"
+          }
+        ]
+      },
+      {
+        "id": "seasons_shifting",
+        "title": "How the Seasons Shift",
+        "text": "There are not four seasons but five — and the transitions between them are fluid, not fixed. No two years are identical in temperature, moisture, or climate. The best guidance is to observe nature and listen inward. Often we sense the shift before we can name it. We all know 'the feeling of spring' — and the same is true for every season. Begin preparing for the next season's energy as you feel the current one turning."
+      }
+    ]
+  },
+  "seasons": [
+    {
+      "id": "spring",
+      "name": "Spring",
+      "element": "Wood",
+      "colour": "#3a7040",
+      "colour_light": "#e8f2e0",
+      "organs": [
+        "Liver",
+        "Gallbladder"
+      ],
+      "climate": "Wind",
+      "body_colour": "Green",
+      "taste": "Sour",
+      "body_parts": [
+        "Eyes",
+        "Tendons",
+        "Nails"
+      ],
+      "direction": "Upward",
+      "keywords": [
+        "Rising",
+        "Beginning",
+        "Vision",
+        "Movement",
+        "Creation"
+      ],
+      "core_emotion_imbalanced": "Anger, irritation, bitterness, frustration",
+      "core_emotion_balanced": "Patience, clarity, vision, the courage to begin",
+      "description": "Spring is the season of the Wood element and the liver — the organ of vision, planning, and the free flow of Qi through the body. After the deep inward rest of winter, energy is ready to move. The liver wakes. It wants to cleanse, release what accumulated during the quieter months, and send energy upward into new possibility.",
+      "organ_detail": {
+        "liver": "The liver governs the free flow of Qi through the entire body — physically and emotionally. It is associated with vision, both literal and metaphorical: the capacity to see clearly, plan ahead, and direct one's life. When the liver is burdened — by rich food, alcohol, suppressed anger, or insufficient movement — we feel irritable, tense, stuck, and unable to see the way forward.",
+        "gallbladder": "The gallbladder governs decision-making and the courage to act on what we know. It is deeply connected to our sense of personal boundaries — knowing what is right for us and having the confidence to act accordingly."
+      },
+      "symptoms_imbalance": [
+        "Irritability, short temper, frustration",
+        "Tension in the neck, shoulders, and jaw",
+        "Headaches, particularly at the temples or top of the head",
+        "Eye strain or dry, tired eyes",
+        "Difficulty making decisions or following through",
+        "Feeling stuck, rigid, or unable to move forward",
+        "Tendon tightness or injury"
+      ],
+      "contributing_causes": [
+        "Suppressed anger or unexpressed frustration",
+        "Too much alcohol, rich food, or processed food",
+        "Insufficient physical movement",
+        "Overwork without adequate rest",
+        "Lack of creative outlet"
+      ],
+      "seasonal_advice": {
+        "movement": "Move the body every day — especially laterally. Walking, yoga, cycling, dancing. The liver and gallbladder meridians run along the sides of the body. Side stretches, twists, and lateral movement directly nourish them.",
+        "food": "Bitter greens, sprouts, asparagus, artichokes, lemon, apple cider vinegar, watercress, dandelion. Cook lightly — steamed, briefly sautéed, or lightly blanched. Reduce alcohol, heavy fats, and processed food.",
+        "emotional": "Work consciously with anger, frustration, and anything that feels stuck. Spring is the optimal time — the energy is already moving upward, making it easier to access and release what has been held.",
+        "sleep": "Begin rising a little earlier as the light increases. The liver and gallbladder work between 23:00 and 03:00 — being asleep for this window is essential for the liver to complete its cleansing work."
+      },
+      "themes": [
+        {
+          "theme": "New Beginnings",
+          "text": "Spring is the season to plant seeds — not just in the garden, but in the life. What do you want to grow this year? What has been waiting through the winter for the warmth to arrive?"
+        },
+        {
+          "theme": "Expectations & Acceptance",
+          "text": "Spring energy can become rigid when we hold too tightly to how things should unfold. Acceptance — not as resignation, but as a willingness to work with what is actually here — is one of the most important practices of the season."
+        },
+        {
+          "theme": "Boundaries",
+          "text": "The gallbladder governs our capacity for clear, firm, healthy boundaries. Spring is the time to examine where your boundaries are too rigid, too diffuse, or simply unclear — and to begin the work of setting them with kindness."
+        },
+        {
+          "theme": "Forgiveness",
+          "text": "Anger held for too long becomes bitterness, which burdens the liver. Forgiveness — of others and of oneself — is liver medicine. Not forgetting, but releasing the grip. Making space for what wants to grow."
+        }
+      ]
+    },
+    {
+      "id": "summer",
+      "name": "Summer",
+      "element": "Fire",
+      "colour": "#8a2030",
+      "colour_light": "#fdf0f0",
+      "organs": [
+        "Heart",
+        "Small Intestine",
+        "Pericardium",
+        "Triple Warmer"
+      ],
+      "climate": "Heat",
+      "body_colour": "Red",
+      "taste": "Bitter",
+      "body_parts": [
+        "Tongue",
+        "Blood vessels",
+        "Complexion"
+      ],
+      "direction": "Outward",
+      "keywords": [
+        "Expansion",
+        "Connection",
+        "Joy",
+        "Warmth",
+        "Manifestation"
+      ],
+      "core_emotion_imbalanced": "Excessive excitement, manic joy, inability to feel genuine warmth",
+      "core_emotion_balanced": "Genuine joy, authentic connection, warmth, the capacity to give and receive love",
+      "description": "Summer is the season of the Fire element and the heart — the seat of the Shen, which in TCM encompasses consciousness, spirit, and the capacity for genuine joy. Energy is at its fullest and most outward. This is the season of connection, of warmth, of being fully present with others and with life itself.",
+      "organ_detail": {
+        "heart": "The heart is the emperor of the organs — the seat of consciousness, spirit, and joy. It houses the Shen and governs all mental activity, awareness, and emotional life. When the heart is at peace, the whole system functions harmoniously. When the heart is disturbed — by excessive stimulation, suppressed emotion, or lack of genuine connection — the entire system feels it.",
+        "small_intestine": "The small intestine separates the pure from the impure — both physically and energetically. It discerns what nourishes from what depletes, what to absorb and what to release. On an emotional level, it governs the capacity to sort through our experiences and make sense of them.",
+        "pericardium": "The pericardium is the heart's protector — it governs intimacy, the capacity to open and connect genuinely. When healthy, we can be fully present with others without losing ourselves.",
+        "triple_warmer": "The triple warmer coordinates the three energy centres of the body — regulating warmth, fluids, and energy distribution. It governs the body's sense of safety and the stress response."
+      },
+      "symptoms_imbalance": [
+        "Palpitations or a sense of unease in the chest",
+        "Difficulty feeling genuine joy — either numbness or forced positivity",
+        "Insomnia or very light, easily disturbed sleep",
+        "Excessive talking or difficulty being still",
+        "Feeling overheated, flushed, or emotionally overwhelmed",
+        "Lack of authentic connection in relationships"
+      ],
+      "contributing_causes": [
+        "Overheating — physical or emotional",
+        "Excessive stimulation and insufficient rest",
+        "Suppressing emotions rather than feeling them",
+        "Imbalance between giving and receiving",
+        "Living inauthentically — performing rather than being"
+      ],
+      "seasonal_advice": {
+        "movement": "Move joyfully — swim, dance, walk in nature. Avoid overheating through intense exercise in the midday heat. The heart meridian peaks at midday; this is a time for ease, not exertion.",
+        "food": "Cooling, hydrating foods: berries, watermelon, cucumber, bitter greens, mung beans, mint. Avoid excessively spicy food and alcohol in the heat. Eat the main meal at midday when digestive fire is strongest.",
+        "emotional": "Work with authenticity — the capacity to be genuinely yourself, with others and alone. Summer invites us to examine where we are performing connection rather than feeling it.",
+        "sleep": "Rest at midday if possible — even twenty minutes supports the heart during its peak window. Ensure the bedroom is cool and quiet."
+      },
+      "themes": [
+        {
+          "theme": "Authenticity",
+          "text": "The heart knows truth. Summer invites us to examine where we are living in alignment with who we genuinely are — and where we are performing a version of ourselves for others."
+        },
+        {
+          "theme": "The Balance of Giving & Receiving",
+          "text": "Fire energy is generous by nature — but it can burn itself out through excessive giving without adequate receiving. Summer asks us to learn to receive as generously as we give. To receive is also to give — it completes the circuit."
+        },
+        {
+          "theme": "Gratitude",
+          "text": "Gratitude is one of the most direct paths to the heart's natural state. Not as a performance or an obligation, but as a genuine turning of attention toward what is already here and good."
+        },
+        {
+          "theme": "Manifestation",
+          "text": "Summer is the season of creation — of bringing what was seeded in spring into fuller expression. Fire transforms potential into reality. What are you actively creating with your energy this season?"
+        }
+      ]
+    },
+    {
+      "id": "late_summer",
+      "name": "Late Summer",
+      "element": "Earth",
+      "colour": "#7a6010",
+      "colour_light": "#fdf8e8",
+      "organs": [
+        "Stomach",
+        "Spleen"
+      ],
+      "climate": "Humidity",
+      "body_colour": "Yellow",
+      "taste": "Sweet",
+      "body_parts": [
+        "Mouth",
+        "Muscles",
+        "Lips"
+      ],
+      "direction": "Stabilising",
+      "keywords": [
+        "Nourishment",
+        "Grounding",
+        "Presence",
+        "Transformation",
+        "Gratitude"
+      ],
+      "core_emotion_imbalanced": "Worry, overthinking, circular thought, inability to feel satisfied",
+      "core_emotion_balanced": "Groundedness, genuine satisfaction, mental clarity, presence",
+      "description": "Late Summer is the fifth season — the golden pause at the centre of the year, often overlooked but quietly essential. This is the season of the Earth element: stable, nourishing, deeply present. Where spring reaches forward and summer expands outward, late summer asks us simply to be here, in the fullness of what is.",
+      "organ_detail": {
+        "stomach": "The stomach receives and begins the transformation of everything we take in — food, experience, and emotion. When the stomach is functioning well, we absorb nourishment efficiently and feel genuinely sustained. When depleted, we may feel bloated, uncomfortable, or perpetually hungry despite eating.",
+        "spleen": "The spleen transforms the raw material received by the stomach into usable energy — for body and mind. It governs thought, concentration, and memory. When the spleen is strong, we think clearly and feel grounded. When it is depleted — by cold food, irregular meals, worry, or overwork — thought becomes heavy and circular."
+      },
+      "symptoms_imbalance": [
+        "Bloating, heaviness, or discomfort after eating",
+        "Persistent overthinking and circular worry",
+        "Difficulty concentrating or sustaining mental focus",
+        "Fatigue that is not relieved by sleep",
+        "Craving for sweet foods",
+        "Feeling ungrounded, scattered, or disconnected from the body"
+      ],
+      "contributing_causes": [
+        "Cold, raw food taken regularly",
+        "Irregular meal times or skipping meals",
+        "Chronic worry and excessive mental activity",
+        "Overwork, especially desk work without physical movement",
+        "Excessive screen time"
+      ],
+      "seasonal_advice": {
+        "movement": "Grounding movement — walking in nature, gentle yoga, foot massage. Avoid excessive sitting. The stomach and spleen meridians run along the front of the body and legs; walking directly activates them.",
+        "food": "Warm, cooked, naturally sweet foods: pumpkin, sweet potato, millet, corn, carrots, parsnip, oats. Eat at consistent times. Sit down to eat. Avoid cold raw food, ice, excessive dairy, and refined sugar — all dampen the digestive fire the spleen depends on.",
+        "emotional": "Work with worry — the tendency to think in circles without resolution. Mindfulness practice is particularly supportive for the Earth element: it grounds the mind in the present, interrupting the loop.",
+        "sleep": "Consistent sleep and wake times deeply support the spleen. The stomach meridian is active from 7–9am; being awake and eating during this window is one of the most supportive things you can do."
+      },
+      "themes": [
+        {
+          "theme": "Stress & the Brain",
+          "text": "The spleen is directly affected by chronic stress and mental overload. Understanding how stress works in the body — and learning to interrupt the stress response — is central to late summer practice."
+        },
+        {
+          "theme": "Mindfulness & Thought",
+          "text": "The Earth element governs our relationship to thought. Late summer is the season to examine our thinking patterns — to notice what we ruminate on, what we worry about, and whether those patterns are serving us."
+        },
+        {
+          "theme": "Grounding",
+          "text": "To be grounded is to be present in the body, in this moment, in this life — rather than living primarily in the head. Late summer invites us to come down from the mental plane and inhabit the physical one more fully."
+        },
+        {
+          "theme": "Nourishment",
+          "text": "What actually nourishes you — body, mind, and spirit? Late summer asks us to examine not just what we eat but what we feed ourselves on: the relationships, the experiences, the inputs that either deplete or replenish."
+        }
+      ]
+    },
+    {
+      "id": "autumn",
+      "name": "Autumn",
+      "element": "Metal",
+      "colour": "#505058",
+      "colour_light": "#f4f4f6",
+      "organs": [
+        "Lungs",
+        "Large Intestine"
+      ],
+      "climate": "Dryness",
+      "body_colour": "White",
+      "taste": "Pungent",
+      "body_parts": [
+        "Nose",
+        "Skin",
+        "Body hair"
+      ],
+      "direction": "Downward",
+      "keywords": [
+        "Release",
+        "Clarity",
+        "Letting go",
+        "Simplicity",
+        "Introspection"
+      ],
+      "core_emotion_imbalanced": "Grief, sadness, melancholy, inability to release what has passed",
+      "core_emotion_balanced": "The capacity to grieve cleanly and completely — and thereby to let go with grace",
+      "description": "Autumn is the season of the Metal element and the lungs — the organ of breath, grief, and the great release. As the natural world begins its long exhale, the body turns inward. The lungs are particularly exposed in autumn to dryness and cold. Supporting them with warm, moistening, pungent foods is one of the most important things we can do for immunity and resilience in the months ahead.",
+      "organ_detail": {
+        "lungs": "The lungs govern breath and, in TCM, the capacity for grief — for genuine release of what has been held. They are the most directly connected of all the organs to the external environment, and to the emotions that the breath carries. Deep breathing is one of the most direct acts of lung nourishment available.",
+        "large_intestine": "The large intestine governs elimination — physical and emotional. Its function is to separate what is still useful from what needs to be released, and to let go of the rest completely. On a deeper level, it governs our relationship to accumulation: the things, ideas, relationships, and identities we hold onto past their natural end."
+      },
+      "symptoms_imbalance": [
+        "Respiratory vulnerability — frequent colds, coughs, or chest tightness",
+        "Dry skin, dry throat, or dry nose",
+        "Persistent sadness or grief that cannot seem to move",
+        "Difficulty letting go — of the past, of people, of ways of being",
+        "Constipation or irregular elimination",
+        "Withdrawal and isolation"
+      ],
+      "contributing_causes": [
+        "Suppressed grief — emotions held rather than expressed and released",
+        "Excessive dairy (creates dampness in the lungs)",
+        "Exposure to cold and dryness without adequate protection",
+        "Shallow breathing",
+        "Holding on — to things, to people, to identities that have run their course"
+      ],
+      "seasonal_advice": {
+        "movement": "Breathwork and slow yoga. Autumn is the season to develop a conscious relationship to the breath — to breathe more fully and more deliberately than at any other time of year.",
+        "food": "Garlic, ginger, onion, leek, radish, daikon, pear, honey, almonds, white mushrooms. Cook longer and lower — slow-cooked soups, stews, and braises. Reduce excessive dairy and very cold food.",
+        "emotional": "Allow grief when it arises. Autumn is the natural season for it — and grief that moves through is grief that heals. Create space for honest reflection on what has been, what has ended, and what needs to be released.",
+        "sleep": "Begin moving toward earlier sleep times. The lungs are at their most active between 3–5am — adequate sleep supports their overnight cleansing work."
+      },
+      "themes": [
+        {
+          "theme": "Grief & Letting Go",
+          "text": "Grief is not a problem to be fixed. It is the natural and healthy response to loss — of people, seasons, roles, and versions of ourselves. Autumn invites us to grieve cleanly and completely, so that we can release what has passed and make genuine space for what comes next."
+        },
+        {
+          "theme": "The Breath",
+          "text": "Autumn is the season to develop a conscious, intentional relationship with the breath. Full yogic breathing, conscious sighing, and deliberate exhalation all directly support the lungs and facilitate the emotional release that autumn asks of us."
+        },
+        {
+          "theme": "Simplicity & Clarity",
+          "text": "The Metal element is associated with purity, refinement, and the reduction of the unnecessary. Autumn invites us to simplify — our homes, our commitments, our relationships, and our inner life — until only what is truly valuable remains."
+        },
+        {
+          "theme": "Creating Space",
+          "text": "Every ending creates space for a new beginning. What are you clearing — physically and energetically — to prepare for the winter's inward journey and next spring's new growth?"
+        }
+      ]
+    },
+    {
+      "id": "winter",
+      "name": "Winter",
+      "element": "Water",
+      "colour": "#2a4a80",
+      "colour_light": "#eef2f8",
+      "organs": [
+        "Kidneys",
+        "Bladder"
+      ],
+      "climate": "Cold",
+      "body_colour": "Black",
+      "taste": "Salty",
+      "body_parts": [
+        "Ears",
+        "Bones",
+        "Hair"
+      ],
+      "direction": "Inward",
+      "keywords": [
+        "Rest",
+        "Introspection",
+        "Restoration",
+        "Stillness",
+        "Deep reserves"
+      ],
+      "core_emotion_imbalanced": "Fear, anxiety, chronic insecurity, inability to rest",
+      "core_emotion_balanced": "Quiet courage, deep inner trust, willpower, the capacity to rest without guilt",
+      "description": "Winter is the season of the Water element and the kidneys — the organ that holds our deepest reserves, our ancestral energy, and our fundamental capacity for rest. In winter, everything is asked to go inward, slow down, and conserve. The body knows this. If we let it, it will show us exactly how to rest.",
+      "organ_detail": {
+        "kidneys": "The kidneys hold our deepest vitality — what TCM calls Jing, or essential life essence. They govern willpower, stamina, the bones, the lower back, and our fundamental sense of inner safety. When the kidneys are depleted — by cold, overwork, insufficient sleep, or chronic fear — we feel profoundly exhausted, fearful, and unable to trust ourselves or the world.",
+        "bladder": "The bladder governs the body's fluid metabolism and the release of what is no longer needed. Its meridian — the longest in the body — runs from the inner corner of the eye, over the crown of the head, down the entire length of the spine, and through the back of the legs. Tension and pain anywhere along this pathway often points to bladder or kidney imbalance."
+      },
+      "symptoms_imbalance": [
+        "Profound fatigue that does not improve with rest",
+        "Lower back pain or weakness",
+        "Fear and anxiety that intensify in the evenings",
+        "Ringing in the ears",
+        "Urinary frequency or urgency",
+        "Feeling fundamentally unsafe or unsupported",
+        "Loss of willpower and difficulty following through"
+      ],
+      "contributing_causes": [
+        "Chronic overwork without adequate rest",
+        "Insufficient sleep, particularly before midnight",
+        "Excessive cold — in environment and in food",
+        "Chronic fear or anxiety",
+        "Excessive sexual activity (which depletes Jing)",
+        "Alcohol and stimulants"
+      ],
+      "seasonal_advice": {
+        "movement": "Slow, warming, restorative movement. Yin yoga, gentle walks, myofascial release. Avoid intense exercise in the cold. Warming exercises like sun salutations keep circulation moving without depleting reserves.",
+        "food": "Black beans, kidney beans, walnuts, black sesame, seaweed, miso, bone broth, chestnuts, beetroot, dark mushrooms, lamb. Cook slowest of all — long-simmered broths and stews. Reduce cold raw food, excessive salt, and alcohol.",
+        "emotional": "Work with fear — examining where it operates beneath the surface of daily life, and what genuine safety feels like in the body. Winter is the season for deep introspection and meditation.",
+        "sleep": "Prioritise sleep above almost everything else in winter. Be asleep by 11pm where possible. The gallbladder and liver do their deepest restorative work between 23:00 and 03:00 — this window of sleep is irreplaceable."
+      },
+      "themes": [
+        {
+          "theme": "Fear & Trust",
+          "text": "Fear is the emotion of the Water element. Healthy kidney energy does not mean the absence of fear — it means the presence of something deeper beneath it. A quiet, unshakeable trust in oneself and in the process of life."
+        },
+        {
+          "theme": "Introspection",
+          "text": "Winter is the season for turning inward — for meditation, journalling, and the kind of deep self-inquiry that is only possible in stillness. What does the quiet reveal when you allow yourself to stop performing and simply be?"
+        },
+        {
+          "theme": "Rest as Medicine",
+          "text": "In a culture that rewards productivity above all else, genuine rest is one of the most radical and necessary acts available to us. Winter is the natural season for it — and the body, given permission, knows exactly how to use it."
+        },
+        {
+          "theme": "Hibernation",
+          "text": "The natural world goes into hibernation in winter — conserving energy, nourishing the deep, and preparing for the spring that is already on its way. We are part of this same system. Giving ourselves permission to withdraw, slow down, and restore is not weakness. It is wisdom."
+        }
+      ]
+    }
+  ]
+}

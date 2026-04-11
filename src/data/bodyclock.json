@@ -1,0 +1,495 @@
+{
+  "meta": {
+    "title": "The Body Clock",
+    "subtitle": "A Practical Guide to Your Organ Meridian Rhythm",
+    "author": "Isabelle Evita Søndergaard",
+    "description": "Twelve organs. Twenty-four hours. One continuous flow of energy moving through you — right now, as you read this."
+  },
+  "introduction": {
+    "title": "What Is the Body Clock?",
+    "text": [
+      "In Traditional Chinese Medicine, energy — Qi — is always in motion. It flows through twelve meridian pathways in a precise 24-hour rhythm, each organ holding its peak for exactly two hours.",
+      "This cycle has been observed and worked with for over four thousand years. It begins at 3am with the lungs, moves through the digestive system during the morning, reaches the heart at midday, and descends through the kidneys as evening comes — before beginning again in the quiet of the night.",
+      "The clock is not a rigid schedule to follow. It is a map of tendency — a way of understanding why the body behaves as it does at different times of day, and what it may need in each moment.",
+      "When an organ is at its peak, it is both most capable and most revealing. Waking at 3am, an afternoon slump, reaching for sugar after lunch — these are not random. They are the body clock speaking."
+    ]
+  },
+  "organs": [
+    {
+      "time_start": "03:00",
+      "time_end": "05:00",
+      "organ": "Lungs",
+      "element": "Metal",
+      "season": "Autumn",
+      "element_colour": "#505058",
+      "description": "The lungs are in deep restoration. The body is at its most still, and the lungs use this window to cleanse and repair. In TCM, the lungs govern grief and the capacity to let go — emotions that are processed quietly during sleep.",
+      "signs_of_imbalance": [
+        "Waking with a cough or breathlessness",
+        "Persistent dry or rattling breath",
+        "Sadness or grief that feels stuck",
+        "Low immunity"
+      ],
+      "practice": "A few slow, conscious breaths before rising help the lungs complete their nightly work and set a calm tone for the day."
+    },
+    {
+      "time_start": "05:00",
+      "time_end": "07:00",
+      "organ": "Large Intestine",
+      "element": "Metal",
+      "season": "Autumn",
+      "element_colour": "#505058",
+      "description": "The colon is primed and ready to release. This is the body's natural window for elimination — physically and emotionally. The large intestine governs the ability to let go of what no longer serves.",
+      "signs_of_imbalance": [
+        "Constipation or irregular elimination",
+        "Holding onto old patterns or emotions",
+        "Dry skin",
+        "Difficulty letting go"
+      ],
+      "practice": "A glass of warm water on waking gently activates the large intestine and supports natural elimination. Add lemon to also stimulate the liver."
+    },
+    {
+      "time_start": "07:00",
+      "time_end": "09:00",
+      "organ": "Stomach",
+      "element": "Earth",
+      "season": "Late Summer",
+      "element_colour": "#7a6010",
+      "description": "Digestive fire is at its absolute height. This is the best time to eat — and to eat well. A warm, nourishing breakfast taken before 9am sets the energy, mood, and mental clarity for the entire day.",
+      "signs_of_imbalance": [
+        "Poor appetite in the morning",
+        "Bloating or discomfort after eating",
+        "Low energy by mid-morning",
+        "Tendency to skip breakfast"
+      ],
+      "practice": "Eat a warm, nourishing breakfast before 9am. Porridge, eggs, or a nourishing soup — the stomach meridian is at its peak and will reward you with sustained energy all morning."
+    },
+    {
+      "time_start": "09:00",
+      "time_end": "11:00",
+      "organ": "Spleen",
+      "element": "Earth",
+      "season": "Late Summer",
+      "element_colour": "#7a6010",
+      "description": "The spleen transforms the morning meal into usable energy — physical and mental. Most people notice their sharpest concentration and most sustained clarity in this window. In TCM, the spleen also governs our ability to digest experience, ideas, and information.",
+      "signs_of_imbalance": [
+        "Mental fog or difficulty concentrating in the morning",
+        "Circular thinking or worry",
+        "Heaviness or fatigue after eating",
+        "Loose stools"
+      ],
+      "practice": "Reserve this window for your most demanding mental work — creative, analytical, or problem-solving. The spleen is converting energy at full capacity. Use it."
+    },
+    {
+      "time_start": "11:00",
+      "time_end": "13:00",
+      "organ": "Heart",
+      "element": "Fire",
+      "season": "Summer",
+      "element_colour": "#8a2030",
+      "description": "The heart holds its strongest energy at midday — and is also most vulnerable to strain. In TCM, the heart is the seat of the Shen — consciousness, spirit, and our capacity for joy. This window calls for warmth, rest, and ease rather than pressure and performance.",
+      "signs_of_imbalance": [
+        "Palpitations or chest tightness at midday",
+        "Restlessness and inability to settle",
+        "Difficulty feeling genuine joy",
+        "Emotional overwhelm"
+      ],
+      "practice": "A light lunch, some sunlight, and perhaps a short rest. The heart deserves this — and TCM notes that more cardiac events occur in this window precisely because the heart is working at full capacity."
+    },
+    {
+      "time_start": "13:00",
+      "time_end": "15:00",
+      "organ": "Small Intestine",
+      "element": "Fire",
+      "season": "Summer",
+      "element_colour": "#8a2030",
+      "description": "The small intestine sorts, separates, and absorbs — nutrients from the meal, but also the impressions and experiences of the morning. A post-lunch dip in energy or a craving for something sweet signals that lunch was not adequate.",
+      "signs_of_imbalance": [
+        "Post-lunch energy slump",
+        "Strong sugar cravings in the afternoon",
+        "Difficulty separating relevant from irrelevant information",
+        "Feeling scattered after lunch"
+      ],
+      "practice": "Give the body time to digest before returning to demanding mental work. Healthy fat, good protein, and time to absorb make all the difference here."
+    },
+    {
+      "time_start": "15:00",
+      "time_end": "17:00",
+      "organ": "Bladder",
+      "element": "Water",
+      "season": "Winter",
+      "element_colour": "#2a4a80",
+      "description": "The bladder filters and clears. The bladder meridian is the longest in the body — it runs from the inner corner of the eye, over the crown of the head, down the entire length of the spine, through the back of the legs, and into the little toe.",
+      "signs_of_imbalance": [
+        "Lower back tension or stiffness in the afternoon",
+        "Neck and shoulder tightness",
+        "Afternoon fatigue that improves with movement",
+        "Headaches at the back of the skull"
+      ],
+      "practice": "Drink warm water or herbal tea. Get up and move — a short walk or five minutes of gentle stretching makes a measurable difference to the whole afternoon."
+    },
+    {
+      "time_start": "17:00",
+      "time_end": "19:00",
+      "organ": "Kidneys",
+      "element": "Water",
+      "season": "Winter",
+      "element_colour": "#2a4a80",
+      "description": "The kidneys hold our deepest reserves — what TCM calls Jing, our fundamental life force. They govern willpower, a sense of inner safety, and the capacity to rest. Evening anxiety, low back ache, or a wave of exhaustion at this hour are the kidneys asking to be replenished.",
+      "signs_of_imbalance": [
+        "Evening anxiety or a sense of dread",
+        "Low back ache or weakness",
+        "Exhaustion that does not improve with rest",
+        "Ringing in the ears"
+      ],
+      "practice": "Yin yoga or gentle stretching at 17:00–19:00. The kidney and bladder meridians run along the back of the legs and spine. Forward folds and long, held yin postures directly nourish these pathways."
+    },
+    {
+      "time_start": "19:00",
+      "time_end": "21:00",
+      "organ": "Pericardium",
+      "element": "Fire",
+      "season": "Summer",
+      "element_colour": "#8a2030",
+      "description": "The pericardium — the membrane surrounding and protecting the heart — governs our capacity for intimacy, warmth, and genuine connection. This is the ideal window for meaningful conversation, gentle creativity, and time with people you love.",
+      "signs_of_imbalance": [
+        "Emotional guardedness in the evenings",
+        "Difficulty feeling warmth or connection",
+        "Feeling unsafe or hyper-vigilant",
+        "Waking in the night feeling overheated"
+      ],
+      "practice": "Screens off. The body is beginning its descent toward sleep. Candlelight, conversation, reading, or music — anything that signals safety and warmth to the nervous system."
+    },
+    {
+      "time_start": "21:00",
+      "time_end": "23:00",
+      "organ": "Triple Warmer",
+      "element": "Fire",
+      "season": "Summer",
+      "element_colour": "#8a2030",
+      "description": "The triple warmer — or San Jiao — coordinates the three energy centres of the body and regulates warmth and temperature. This window is the gateway into deep sleep. The nervous system needs to feel safe and warm in order to cross that threshold.",
+      "signs_of_imbalance": [
+        "Difficulty falling asleep",
+        "A sense of fragmentation — the parts of life not talking to each other",
+        "Feeling overheated or restless at night",
+        "Chronic low-grade anxiety"
+      ],
+      "practice": "A warm bath or foot soak signals safety to the nervous system. Even ten minutes of warm water on the feet before bed has a measurable relaxation effect on the whole body."
+    },
+    {
+      "time_start": "23:00",
+      "time_end": "01:00",
+      "organ": "Gallbladder",
+      "element": "Wood",
+      "season": "Spring",
+      "element_colour": "#3a7040",
+      "description": "The gallbladder governs judgement, decisiveness, and the kind of quiet courage that allows us to act on what we know. It renews itself deeply in this window. Waking between 23:00 and 01:00 often reflects unresolved choices or a habitual difficulty with setting clear boundaries.",
+      "signs_of_imbalance": [
+        "Waking between 11pm and 1am",
+        "Lying awake turning decisions over",
+        "Difficulty making decisions in daily life",
+        "Migraines or pain at the temples"
+      ],
+      "practice": "Be asleep. The gallbladder and liver do their deepest work between 23:00 and 03:00. Being genuinely asleep for this entire window is one of the most powerful health practices available."
+    },
+    {
+      "time_start": "01:00",
+      "time_end": "03:00",
+      "organ": "Liver",
+      "element": "Wood",
+      "season": "Spring",
+      "element_colour": "#3a7040",
+      "description": "The liver cleanses the blood and processes the emotional residue of the day — particularly anger, frustration, and things left unresolved. It is the organ of vision and planning, governing the free flow of Qi throughout the entire body.",
+      "signs_of_imbalance": [
+        "Waking between 1–3am",
+        "Neck and shoulder tension on waking",
+        "Irritability or a short fuse",
+        "Difficulty with long-term planning or vision"
+      ],
+      "practice": "Less alcohol, earlier sleep, and practices that help move stagnant emotion — exercise, breathwork, honest expression — all make a real difference to liver health and sleep quality."
+    }
+  ],
+  "symptoms_guide": [
+    {
+      "symptom": "Waking 3–5am",
+      "organ": "Lungs",
+      "meaning": "Processing grief or immune response. Breathing practice and emotional release support this."
+    },
+    {
+      "symptom": "Morning fog before 9am",
+      "organ": "Stomach",
+      "meaning": "The stomach needs fuel. A warm, early breakfast is the most direct intervention."
+    },
+    {
+      "symptom": "Energy peak 9–11am",
+      "organ": "Spleen",
+      "meaning": "Spleen at full capacity. Use this window for your most demanding mental work."
+    },
+    {
+      "symptom": "Midday restlessness",
+      "organ": "Heart",
+      "meaning": "Heart is at its peak and most vulnerable. Rest, connection, and ease — not pressure."
+    },
+    {
+      "symptom": "Sugar craving 13–15",
+      "organ": "Small Intestine",
+      "meaning": "Insufficient nourishment at lunch. More protein and healthy fat."
+    },
+    {
+      "symptom": "Afternoon stiffness",
+      "organ": "Bladder",
+      "meaning": "Bladder meridian running along the spine and legs. Movement and warm fluids."
+    },
+    {
+      "symptom": "Evening anxiety 17–19",
+      "organ": "Kidneys",
+      "meaning": "Kidneys drawing on reserves they do not have. Rest, warmth, and nourishment."
+    },
+    {
+      "symptom": "Can't wind down at 21",
+      "organ": "Triple Warmer",
+      "meaning": "Nervous system needs safety signals. Warmth, no screens, quiet, consistent bedtime."
+    },
+    {
+      "symptom": "Waking 1–3am",
+      "organ": "Liver",
+      "meaning": "Liver overtaxed. Less alcohol, earlier sleep, practices that release held frustration."
+    },
+    {
+      "symptom": "Indecision at night",
+      "organ": "Gallbladder",
+      "meaning": "Asking for clearer boundaries and more trust in one's own judgement."
+    }
+  ],
+  "food_as_medicine": {
+    "principle": "In TCM, every food carries a temperature, a flavour, and an affinity for particular organs. Eating in alignment with the organ clock means not only when you eat, but what.",
+    "five_flavours": [
+      {
+        "flavour": "Sour",
+        "element": "Wood",
+        "organ": "Liver",
+        "foods": [
+          "Lemon",
+          "Apple cider vinegar",
+          "Fermented foods"
+        ],
+        "note": "Supports liver detoxification and the free flow of Qi. Best in small amounts in the morning."
+      },
+      {
+        "flavour": "Bitter",
+        "element": "Fire",
+        "organ": "Heart",
+        "foods": [
+          "Dark leafy greens",
+          "Dandelion",
+          "Coffee in moderation"
+        ],
+        "note": "Supports the heart and clears heat. Most useful at midday."
+      },
+      {
+        "flavour": "Sweet",
+        "element": "Earth",
+        "organ": "Spleen",
+        "foods": [
+          "Root vegetables",
+          "Grains",
+          "Pumpkin",
+          "Sweet potato"
+        ],
+        "note": "Nourishes the spleen and stomach. Natural sweetness — not refined sugar."
+      },
+      {
+        "flavour": "Pungent",
+        "element": "Metal",
+        "organ": "Lungs",
+        "foods": [
+          "Ginger",
+          "Garlic",
+          "Onion",
+          "Chilli",
+          "Radish"
+        ],
+        "note": "Moves Qi and supports the lungs and large intestine. Warming and dispersing."
+      },
+      {
+        "flavour": "Salty",
+        "element": "Water",
+        "organ": "Kidneys",
+        "foods": [
+          "Sea salt",
+          "Miso",
+          "Seaweed",
+          "Black beans",
+          "Walnuts"
+        ],
+        "note": "Nourishes the kidneys and supports fluid metabolism. Most valuable in winter."
+      }
+    ]
+  },
+  "emotion_and_organs": [
+    {
+      "organ": "Lungs",
+      "emotion": "Grief",
+      "balanced": "The capacity to let go with grace — of people, seasons, and identities that have run their course.",
+      "imbalanced": "Grief that cannot move; sadness that accumulates into heaviness and withdrawal."
+    },
+    {
+      "organ": "Large Intestine",
+      "emotion": "Release",
+      "balanced": "The ability to let go of what is no longer needed — physically, mentally, and emotionally.",
+      "imbalanced": "Holding on long past the natural end — to things, ideas, relationships, or ways of being."
+    },
+    {
+      "organ": "Stomach & Spleen",
+      "emotion": "Worry",
+      "balanced": "Groundedness, presence, and the ability to think clearly without spinning.",
+      "imbalanced": "Circular thinking, overthinking, and a constant sense that things are not quite enough."
+    },
+    {
+      "organ": "Heart",
+      "emotion": "Joy",
+      "balanced": "Genuine, uncomplicated joy and warmth — the capacity to be fully present with others.",
+      "imbalanced": "Forced positivity, frenetic sociability, or conversely a complete closing of the heart."
+    },
+    {
+      "organ": "Small Intestine",
+      "emotion": "Discernment",
+      "balanced": "Clear judgement about what nourishes and what does not — in food, relationships, and information.",
+      "imbalanced": "Confusion, inability to separate the important from the unimportant, scattered thinking."
+    },
+    {
+      "organ": "Bladder",
+      "emotion": "Caution",
+      "balanced": "Appropriate alertness without chronic vigilance — the ability to assess a situation clearly.",
+      "imbalanced": "Excessive nervousness, timidity, or on the other end, recklessness."
+    },
+    {
+      "organ": "Kidneys",
+      "emotion": "Fear",
+      "balanced": "Quiet courage and deep inner trust — the willingness to act despite uncertainty.",
+      "imbalanced": "Fear that feels larger and closer than it actually is; paralysis, avoidance, or chronic anxiety."
+    },
+    {
+      "organ": "Pericardium",
+      "emotion": "Intimacy",
+      "balanced": "The capacity to open, connect, and feel safe enough to be genuinely present with another person.",
+      "imbalanced": "Emotional guardedness, difficulty receiving warmth, or conversely, poor emotional boundaries."
+    },
+    {
+      "organ": "Gallbladder",
+      "emotion": "Decision",
+      "balanced": "Clear judgement, decisiveness, and the courage to act on what you know.",
+      "imbalanced": "Chronic indecision, difficulty with boundaries, and tendency to defer to others."
+    },
+    {
+      "organ": "Liver",
+      "emotion": "Anger",
+      "balanced": "Clarity, direction, and the quiet readiness to begin again — creative vision in its fullest form.",
+      "imbalanced": "Irritability, frustration, rigidity, and a sense of being stuck or constrained."
+    }
+  ],
+  "daily_rhythm": [
+    {
+      "time": "06:00–07:00",
+      "title": "Wake slowly",
+      "guidance": "Warm water, a few conscious breaths, time for the body to eliminate before the day begins. Resist the impulse to check your phone."
+    },
+    {
+      "time": "07:00–09:00",
+      "title": "Eat a real breakfast",
+      "guidance": "Warm, nourishing, and taken sitting down. This is the single most important meal the body clock asks for."
+    },
+    {
+      "time": "09:00–11:00",
+      "title": "Deep work",
+      "guidance": "The spleen is converting breakfast into peak mental energy. Use this window for whatever demands the most from you."
+    },
+    {
+      "time": "12:00–13:00",
+      "title": "Rest and connect",
+      "guidance": "Step away from work. Eat with others if you can. Take a short walk or lie down for twenty minutes. The heart deserves this."
+    },
+    {
+      "time": "15:00–17:00",
+      "title": "Move and hydrate",
+      "guidance": "A walk, herbal tea, gentle stretching. The bladder meridian runs the length of the back — movement prevents the stiffness that builds from sitting still."
+    },
+    {
+      "time": "17:00–19:00",
+      "title": "Wind down the working day",
+      "guidance": "Yin yoga, a gentle practice, or simply slowing the pace. The kidneys are asking to be replenished, not pressed further."
+    },
+    {
+      "time": "Before 19:00",
+      "title": "Finish eating",
+      "guidance": "Give the digestive system time to rest before sleep begins its work."
+    },
+    {
+      "time": "21:00",
+      "title": "Screens off",
+      "guidance": "Candlelight, conversation, reading, music. The triple warmer needs quiet and warmth to ease into rest."
+    },
+    {
+      "time": "By 23:00",
+      "title": "Asleep",
+      "guidance": "The gallbladder and liver do their deepest work between 23:00 and 03:00. Being asleep for this entire window is irreplaceable."
+    }
+  ],
+  "seasons_connection": {
+    "title": "The Clock & the Seasons",
+    "text": "Each organ belongs to one of five elements — and each element governs one of the five seasons. The daily clock and the seasonal clock work together. In winter, the kidneys and bladder are already under greater seasonal pressure. In autumn, the lungs and large intestine need extra care.",
+    "connections": [
+      {
+        "season": "Spring",
+        "element": "Wood",
+        "colour": "#3a7040",
+        "organs": [
+          "Liver (01:00–03:00)",
+          "Gallbladder (23:00–01:00)"
+        ],
+        "note": "Support the liver with movement, bitter greens, early rising, and practices that release tension."
+      },
+      {
+        "season": "Summer",
+        "element": "Fire",
+        "colour": "#8a2030",
+        "organs": [
+          "Heart (11:00–13:00)",
+          "Small Intestine (13:00–15:00)",
+          "Pericardium (19:00–21:00)",
+          "Triple Warmer (21:00–23:00)"
+        ],
+        "note": "Protect the heart with midday rest, connection, and joy. Avoid overheating."
+      },
+      {
+        "season": "Late Summer",
+        "element": "Earth",
+        "colour": "#7a6010",
+        "organs": [
+          "Stomach (07:00–09:00)",
+          "Spleen (09:00–11:00)"
+        ],
+        "note": "Nourish the spleen with warm, simple, regular meals. Reduce worry. Ground the energy."
+      },
+      {
+        "season": "Autumn",
+        "element": "Metal",
+        "colour": "#505058",
+        "organs": [
+          "Lungs (03:00–05:00)",
+          "Large Intestine (05:00–07:00)"
+        ],
+        "note": "Support the lungs with deep breathing, letting go, and warm nourishing food."
+      },
+      {
+        "season": "Winter",
+        "element": "Water",
+        "colour": "#2a4a80",
+        "organs": [
+          "Bladder (15:00–17:00)",
+          "Kidneys (17:00–19:00)"
+        ],
+        "note": "Replenish the kidneys with rest, warmth, stillness, and salty nourishing foods."
+      }
+    ]
+  }
+}

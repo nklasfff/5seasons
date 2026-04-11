@@ -1,0 +1,981 @@
+{
+  "meta": {
+    "title": "Eating Through the Seasons",
+    "subtitle": "Nourishing Recipes for Every Season of the Year",
+    "author": "Isabelle Evita Søndergaard",
+    "total_recipes": 45
+  },
+  "seasons": {
+    "spring": {
+      "name": "Spring",
+      "element": "Wood",
+      "organs": "Liver · Gallbladder",
+      "emotion": "Anger · Patience · Vision",
+      "direction": "Upward",
+      "flavour": "Sour",
+      "colour": "#3a7040",
+      "foods": [
+        "Artichokes",
+        "Asparagus",
+        "Watercress",
+        "Lemon",
+        "Dandelion",
+        "Bitter greens",
+        "Sprouts",
+        "Spring onion"
+      ],
+      "reduce": [
+        "Heavy fats",
+        "Alcohol",
+        "Processed foods"
+      ],
+      "principle": "Cook lightly in spring — steamed, lightly sautéed, or briefly blanched. The liver appreciates freshness and movement."
+    },
+    "summer": {
+      "name": "Summer",
+      "element": "Fire",
+      "organs": "Heart · Small Intestine",
+      "emotion": "Joy · Love · Excitement",
+      "direction": "Outward",
+      "flavour": "Bitter",
+      "colour": "#8a2030",
+      "foods": [
+        "Berries",
+        "Pomegranate",
+        "Bitter greens",
+        "Cucumber",
+        "Mint",
+        "Mung beans",
+        "Watermelon",
+        "Tomatoes"
+      ],
+      "reduce": [
+        "Excessively spicy food",
+        "Alcohol",
+        "Very dry or dehydrating foods"
+      ],
+      "principle": "Cook quickly in summer — stir-frying, grilling, and raw preparation all suit the season's energy. Eat the main meal at midday."
+    },
+    "late_summer": {
+      "name": "Late Summer",
+      "element": "Earth",
+      "organs": "Stomach · Spleen",
+      "emotion": "Worry · Calm · Gratitude",
+      "direction": "Stabilising",
+      "flavour": "Sweet",
+      "colour": "#7a6010",
+      "foods": [
+        "Pumpkin",
+        "Sweet potato",
+        "Millet",
+        "Corn",
+        "Carrots",
+        "Parsnip",
+        "Oats",
+        "Yellow courgette"
+      ],
+      "reduce": [
+        "Cold raw foods",
+        "Ice",
+        "Excessive dairy",
+        "Refined sugar"
+      ],
+      "principle": "Eat warm, regular meals at consistent times. The spleen loves routine and warmth above all else."
+    },
+    "autumn": {
+      "name": "Autumn",
+      "element": "Metal",
+      "organs": "Lungs · Large Intestine",
+      "emotion": "Grief · Clarity · Letting Go",
+      "direction": "Downward",
+      "flavour": "Pungent",
+      "colour": "#505058",
+      "foods": [
+        "Garlic",
+        "Ginger",
+        "Leek",
+        "Radish",
+        "Pear",
+        "Almonds",
+        "Daikon",
+        "White mushrooms"
+      ],
+      "reduce": [
+        "Excess dairy",
+        "Very cold food",
+        "Large raw salads as temperatures drop"
+      ],
+      "principle": "Begin to cook longer and lower in autumn — slow-cooked soups, stews, and braises that warm from the inside out."
+    },
+    "winter": {
+      "name": "Winter",
+      "element": "Water",
+      "organs": "Kidneys · Bladder",
+      "emotion": "Fear · Trust · Deep Calm",
+      "direction": "Inward",
+      "flavour": "Salty",
+      "colour": "#2a4a80",
+      "foods": [
+        "Black beans",
+        "Walnuts",
+        "Black sesame",
+        "Miso",
+        "Seaweed",
+        "Chestnuts",
+        "Beetroot",
+        "Dark mushrooms"
+      ],
+      "reduce": [
+        "Cold raw food",
+        "Excessive salt",
+        "Alcohol"
+      ],
+      "principle": "Cook lowest and slowest in winter. Long-simmered broths, overnight-cooked beans, and slow-roasted roots contain a depth of nourishment that quick cooking cannot replicate."
+    }
+  },
+  "recipes": [
+    {
+      "id": "spring_breakfast_1",
+      "season": "spring",
+      "meal_type": "breakfast",
+      "title": "Lemon Millet Porridge with Toasted Seeds",
+      "serves": "2",
+      "ingredients": [
+        "5½ oz (155g) millet, rinsed",
+        "14fl oz (400ml) water + 3½fl oz (100ml) oat milk",
+        "Zest and juice of 1 lemon",
+        "1 tsp raw honey",
+        "2 tbsp mixed seeds (sunflower, pumpkin, sesame)",
+        "Small handful of fresh mint"
+      ],
+      "method": "Bring millet and water to a boil, reduce heat and simmer 18–20 minutes until soft and creamy, adding oat milk halfway through. Stir in lemon zest and juice. Toast seeds in a dry pan until golden. Serve warm, topped with seeds, a drizzle of honey, and fresh mint.",
+      "why": ""
+    },
+    {
+      "id": "spring_breakfast_2",
+      "season": "spring",
+      "meal_type": "breakfast",
+      "title": "Spring Green Omelette with Herbs",
+      "serves": "2",
+      "ingredients": [
+        "4 eggs, beaten",
+        "Large handful of fresh spinach, roughly chopped",
+        "4 spring onions, sliced",
+        "Small bunch of flat-leaf parsley, chopped",
+        "1 tbsp olive oil",
+        "Salt and freshly ground pepper",
+        "A few drops of lemon juice to finish"
+      ],
+      "method": "Heat oil in a pan over medium heat. Add spring onions and cook one minute. Pour in beaten eggs and let them begin to set at the edges. Scatter spinach and parsley over the surface, season well, and fold gently. Cook until just set — the eggs should be soft, not dry. Finish with a few drops of lemon.",
+      "why": ""
+    },
+    {
+      "id": "spring_breakfast_3",
+      "season": "spring",
+      "meal_type": "breakfast",
+      "title": "Herb Frittata with Watercress & Lemon",
+      "serves": "4",
+      "ingredients": [
+        "6 eggs",
+        "2 handfuls of watercress, roughly chopped",
+        "4 spring onions, sliced",
+        "Small bunch of chives, snipped",
+        "Small bunch of tarragon or flat-leaf parsley, chopped",
+        "2 tbsp olive oil",
+        "Zest of 1 lemon",
+        "Salt and pepper"
+      ],
+      "method": "Preheat grill to medium-high. Whisk eggs with seasoning, lemon zest, and all the herbs. Heat oil in an ovenproof pan, pour in egg mixture and cook gently for 4–5 minutes until the base is set. Transfer to the grill for 3–4 minutes until the top is just golden and the centre set. Serve with a handful of fresh watercress alongside.",
+      "why": ""
+    },
+    {
+      "id": "spring_lunch_1",
+      "season": "spring",
+      "meal_type": "lunch",
+      "title": "Warm Asparagus & Lentil Salad with Lemon Dressing",
+      "serves": "2",
+      "ingredients": [
+        "7oz (200g) green or Puy lentils, cooked",
+        "1 bunch asparagus, woody ends removed",
+        "2 handfuls of rocket",
+        "1 shallot, very finely sliced",
+        "Dressing: 3 tbsp olive oil, juice of 1 lemon, 1 tsp Dijon mustard, 1 tsp honey, salt and pepper"
+      ],
+      "method": "Steam or griddle asparagus until just tender, about 5 minutes. Whisk dressing ingredients together. Combine warm lentils with shallot and half the dressing in a bowl. Arrange on a plate with asparagus and rocket. Drizzle the remaining dressing over the top and serve immediately.",
+      "why": ""
+    },
+    {
+      "id": "spring_lunch_2",
+      "season": "spring",
+      "meal_type": "lunch",
+      "title": "Spring Miso Broth with Greens & Buckwheat Noodles",
+      "serves": "2",
+      "ingredients": [
+        "2 tbsp white miso paste",
+        "28fl oz (800ml) hot water — not boiling",
+        "3½oz (100g) buckwheat noodles, cooked",
+        "2 handfuls of baby spinach",
+        "4 spring onions, sliced",
+        "1 sheet nori, cut into strips",
+        "1 tsp sesame oil",
+        "Optional: 2 soft-boiled eggs"
+      ],
+      "method": "Dissolve miso in hot water — never boil miso, as this destroys the beneficial enzymes. Divide noodles between bowls. Pour over the miso broth. Top with fresh spinach (the broth will wilt it gently), spring onions, nori strips, a drizzle of sesame oil, and egg if using.",
+      "why": ""
+    },
+    {
+      "id": "spring_lunch_3",
+      "season": "spring",
+      "meal_type": "lunch",
+      "title": "Pea, Mint & Feta Bowl with Spring Onion Dressing",
+      "serves": "2",
+      "ingredients": [
+        "9oz (255g) frozen peas, defrosted",
+        "3½oz (100g) feta cheese, crumbled",
+        "2 handfuls of baby gem lettuce, torn",
+        "Large handful of fresh mint leaves",
+        "4 radishes, thinly sliced",
+        "Dressing: 3 tbsp olive oil, juice of ½ lemon, 2 spring onions finely sliced, 1 tsp honey, salt"
+      ],
+      "method": "Whisk dressing ingredients together. Combine peas, lettuce, radishes, and half the mint in a bowl. Pour over dressing and toss gently. Arrange on plates and scatter feta and remaining mint over the top. Serve immediately at room temperature.",
+      "why": ""
+    },
+    {
+      "id": "spring_dinner_1",
+      "season": "spring",
+      "meal_type": "dinner",
+      "title": "Steamed Sea Bass with Ginger, Spring Onion & Brown Rice",
+      "serves": "2",
+      "ingredients": [
+        "2 sea bass fillets",
+        "1-inch (2.5cm) piece fresh ginger, julienned",
+        "4 spring onions, cut into lengths",
+        "2 tbsp light soy sauce",
+        "1 tbsp rice wine or dry sherry",
+        "1 tsp sesame oil",
+        "8½oz (240g) brown rice, cooked"
+      ],
+      "method": "Place fish fillets in a steaming basket lined with spring onions. Top with ginger. Steam over boiling water for 8–10 minutes until just cooked through. Warm soy sauce, rice wine, and sesame oil in a small pan. Pour over the fish the moment it comes out of the steamer. Serve immediately with brown rice.",
+      "why": ""
+    },
+    {
+      "id": "spring_dinner_2",
+      "season": "spring",
+      "meal_type": "dinner",
+      "title": "Artichoke & Chickpea Stew with Lemon Gremolata",
+      "serves": "4",
+      "ingredients": [
+        "14oz (400g) tinned artichoke hearts, drained and halved",
+        "14oz (400g) tinned chickpeas, drained",
+        "1 onion, diced",
+        "3 cloves garlic, sliced",
+        "14fl oz (400ml) vegetable stock",
+        "2 tbsp olive oil",
+        "Salt, pepper, smoked paprika",
+        "Gremolata: zest of 2 lemons, 1 garlic clove minced, large handful flat-leaf parsley chopped"
+      ],
+      "method": "Heat oil in a wide pan. Sauté onion until soft, then add garlic and cook one minute. Add artichokes, chickpeas, stock, and a pinch of paprika. Simmer 20 minutes until thickened. Mix gremolata ingredients together. Serve stew in bowls with a generous spoonful of gremolata on top.",
+      "why": ""
+    },
+    {
+      "id": "spring_dinner_3",
+      "season": "spring",
+      "meal_type": "dinner",
+      "title": "Sesame Soba Noodles with Edamame & Cucumber",
+      "serves": "2",
+      "ingredients": [
+        "6½oz (180g) soba noodles",
+        "5½oz (155g) edamame beans, defrosted",
+        "1 cucumber, julienned",
+        "3 spring onions, sliced",
+        "Dressing: 3 tbsp tahini, 2 tbsp tamari, 1 tbsp rice vinegar, 1 tbsp sesame oil, 1 tsp honey, 2 tbsp warm water"
+      ],
+      "method": "Cook soba noodles according to packet instructions. Rinse under cold water and drain well. Whisk dressing ingredients until smooth — add more water if needed to reach a pourable consistency. Toss noodles with edamame, cucumber, and spring onions. Pour over dressing and mix gently. Serve at room temperature, topped with sesame seeds.",
+      "why": ""
+    },
+    {
+      "id": "summer_breakfast_1",
+      "season": "summer",
+      "meal_type": "breakfast",
+      "title": "Berry & Pomegranate Overnight Oats",
+      "serves": "2",
+      "ingredients": [
+        "5½oz (160g) rolled oats",
+        "14fl oz (400ml) oat milk",
+        "2 tbsp chia seeds",
+        "1 tbsp maple syrup",
+        "5½oz (155g) mixed berries (blueberries, raspberries, strawberries)",
+        "3 tbsp pomegranate seeds",
+        "Small handful of fresh mint"
+      ],
+      "method": "The evening before, mix oats, oat milk, chia seeds, and maple syrup together. Stir well, cover, and refrigerate overnight. In the morning, stir and add a splash more milk if needed. Top with berries, pomegranate seeds, and fresh mint.",
+      "why": ""
+    },
+    {
+      "id": "summer_breakfast_2",
+      "season": "summer",
+      "meal_type": "breakfast",
+      "title": "Watermelon & Mint Smoothie Bowl",
+      "serves": "2",
+      "ingredients": [
+        "1lb 5oz (600g) seedless watermelon, cubed and frozen overnight",
+        "1 lime, juiced",
+        "Small handful of fresh mint",
+        "Toppings: sliced kiwi, coconut flakes, pumpkin seeds, a few fresh berries"
+      ],
+      "method": "Blend frozen watermelon with lime juice until completely smooth — it should be thick enough to eat with a spoon. Add a few mint leaves and pulse once. Pour into bowls and arrange toppings. Serve immediately.",
+      "why": ""
+    },
+    {
+      "id": "summer_breakfast_3",
+      "season": "summer",
+      "meal_type": "breakfast",
+      "title": "Chia Pudding with Mango & Toasted Coconut",
+      "serves": "2",
+      "ingredients": [
+        "5 tbsp chia seeds",
+        "17fl oz (480ml) coconut milk",
+        "1 tbsp maple syrup",
+        "1 tsp vanilla extract",
+        "1 ripe mango, diced",
+        "2 tbsp toasted coconut flakes",
+        "Zest of 1 lime"
+      ],
+      "method": "Mix chia seeds, coconut milk, maple syrup, and vanilla together thoroughly. Leave for 5 minutes, stir again to prevent clumping, then refrigerate overnight or for at least 4 hours until thick and pudding-like. Serve topped with diced mango, toasted coconut, and lime zest.",
+      "why": ""
+    },
+    {
+      "id": "summer_lunch_1",
+      "season": "summer",
+      "meal_type": "lunch",
+      "title": "Bitter Leaf Salad with Red Lentils & Raspberry Dressing",
+      "serves": "2",
+      "ingredients": [
+        "7oz (200g) red lentils, cooked and cooled",
+        "2 large handfuls of radicchio and chicory, torn",
+        "1 small red onion, very thinly sliced",
+        "Handful of toasted walnuts",
+        "Dressing: 3 tbsp olive oil, 2 tbsp raspberry vinegar, 1 tsp honey, salt, pepper"
+      ],
+      "method": "Combine cooled lentils with red onion and walnuts. Whisk dressing ingredients together. Arrange bitter leaves on a plate, top with lentil mixture, and drizzle generously with dressing. Serve at room temperature.",
+      "why": ""
+    },
+    {
+      "id": "summer_lunch_2",
+      "season": "summer",
+      "meal_type": "lunch",
+      "title": "Chilled Cucumber & Avocado Soup",
+      "serves": "2",
+      "ingredients": [
+        "2 cucumbers, roughly chopped",
+        "1 ripe avocado",
+        "14fl oz (400ml) cold vegetable stock",
+        "1 clove garlic",
+        "Juice of 1 lime",
+        "Small handful of fresh coriander",
+        "Salt and white pepper",
+        "To serve: a swirl of yoghurt, thin cucumber ribbons"
+      ],
+      "method": "Place all ingredients except yoghurt and cucumber ribbons in a blender. Blend until completely smooth. Taste and adjust seasoning. Refrigerate for at least 30 minutes. Serve cold, topped with a swirl of yoghurt and thin cucumber ribbons.",
+      "why": ""
+    },
+    {
+      "id": "summer_lunch_3",
+      "season": "summer",
+      "meal_type": "lunch",
+      "title": "Summer Noodle Salad with Tahini & Sesame",
+      "serves": "2",
+      "ingredients": [
+        "6½oz (180g) rice noodles, cooked and cooled",
+        "1 red pepper, thinly sliced",
+        "1 large carrot, julienned",
+        "2 handfuls of shredded red cabbage",
+        "4 spring onions, sliced",
+        "Large handful of fresh coriander",
+        "Dressing: 3 tbsp tahini, 2 tbsp tamari, 1 tbsp lime juice, 1 tsp honey, 1 tsp sesame oil, 2 tbsp warm water"
+      ],
+      "method": "Whisk dressing until smooth, adding more water if needed. Combine all vegetables and noodles in a large bowl. Pour over dressing and toss until everything is well coated. Serve topped with sesame seeds and extra coriander.",
+      "why": ""
+    },
+    {
+      "id": "summer_dinner_1",
+      "season": "summer",
+      "meal_type": "dinner",
+      "title": "Grilled Salmon with Mango Salsa & Mung Bean Rice",
+      "serves": "2",
+      "ingredients": [
+        "2 salmon fillets",
+        "7oz (200g) mung beans, soaked overnight and cooked",
+        "5½oz (160g) jasmine rice, cooked",
+        "Salsa: 1 mango diced, ½ red onion finely diced, 1 small red chilli (seeds removed) sliced, juice of 1 lime, large handful of fresh coriander"
+      ],
+      "method": "Season salmon and grill or pan-fry skin-side down for 4 minutes, then flip and cook 2 more minutes until just cooked through. Mix all salsa ingredients together and season well. Combine warm mung beans and rice. Serve salmon over bean rice with salsa piled generously on top.",
+      "why": ""
+    },
+    {
+      "id": "summer_dinner_2",
+      "season": "summer",
+      "meal_type": "dinner",
+      "title": "Tomato, Lentil & Basil Stew with Polenta",
+      "serves": "4",
+      "ingredients": [
+        "14oz (400g) tinned whole tomatoes",
+        "7oz (200g) red lentils",
+        "1 onion, diced",
+        "3 garlic cloves, sliced",
+        "1pt (570ml) vegetable stock",
+        "2 tbsp olive oil",
+        "Large bunch fresh basil",
+        "Salt and pepper",
+        "7oz (200g) instant polenta + 1pt (570ml) water + 1 tbsp butter"
+      ],
+      "method": "Sauté onion in oil until soft. Add garlic and cook 1 minute. Add tomatoes, lentils, and stock. Simmer 25 minutes until lentils have dissolved into a rich sauce. Stir in torn basil. Make polenta according to packet instructions, finishing with butter. Serve stew over soft polenta.",
+      "why": ""
+    },
+    {
+      "id": "summer_dinner_3",
+      "season": "summer",
+      "meal_type": "dinner",
+      "title": "Stir-Fried Pak Choi with Tofu & Sesame",
+      "serves": "2",
+      "ingredients": [
+        "10½oz (300g) firm tofu, pressed and cubed",
+        "2 large heads pak choi, quartered",
+        "3 cloves garlic, sliced",
+        "¾-inch (2cm) ginger, grated",
+        "2 tbsp tamari",
+        "1 tbsp rice wine vinegar",
+        "1 tsp sesame oil",
+        "1 tbsp coconut oil",
+        "Cooked brown rice to serve"
+      ],
+      "method": "Heat coconut oil in a wok over high heat. Fry tofu cubes until golden on all sides, about 5 minutes. Remove and set aside. Add garlic and ginger to the wok and stir-fry 30 seconds. Add pak choi and toss over high heat until wilted, about 3 minutes. Return tofu. Add tamari and vinegar. Finish with sesame oil. Serve immediately over brown rice.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_breakfast_1",
+      "season": "late_summer",
+      "meal_type": "breakfast",
+      "title": "Golden Millet Porridge with Roasted Pear",
+      "serves": "2",
+      "ingredients": [
+        "5½oz (155g) millet, rinsed",
+        "16fl oz (450ml) water",
+        "5fl oz (150ml) oat milk",
+        "1 tsp turmeric",
+        "1 tsp cinnamon",
+        "1 tbsp maple syrup",
+        "2 pears, halved and cored",
+        "1 tbsp coconut oil",
+        "Toasted hazelnuts to serve"
+      ],
+      "method": "Roast pear halves cut-side down with coconut oil at 180°C (350°F) for 20–25 minutes until soft and golden. Meanwhile, simmer millet in water for 15 minutes, adding oat milk and spices halfway through. Stir until creamy. Serve topped with roasted pear, a drizzle of maple syrup, and chopped hazelnuts.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_breakfast_2",
+      "season": "late_summer",
+      "meal_type": "breakfast",
+      "title": "Oat & Apple Spice Porridge with Walnut Butter",
+      "serves": "2",
+      "ingredients": [
+        "5½oz (160g) rolled oats",
+        "1¼pt (700ml) oat milk",
+        "1 apple, grated",
+        "1 tsp cinnamon",
+        "½ tsp cardamom",
+        "Pinch of ground clove",
+        "1 tbsp maple syrup",
+        "3 tbsp walnut butter or tahini",
+        "Sliced apple and cinnamon to serve"
+      ],
+      "method": "Combine oats, oat milk, grated apple, and spices in a pan. Cook over medium heat, stirring, for 6–8 minutes until thick and creamy. Serve topped with sliced apple, a swirl of walnut butter, and a dusting of cinnamon.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_breakfast_3",
+      "season": "late_summer",
+      "meal_type": "breakfast",
+      "title": "Warming Congee with Sweet Potato & Ginger",
+      "serves": "2",
+      "ingredients": [
+        "4¼oz (120g) short-grain rice",
+        "32fl oz (900ml) light vegetable stock",
+        "1 medium sweet potato, peeled and finely diced",
+        "1-inch (2.5cm) fresh ginger, grated",
+        "1 tbsp white miso paste",
+        "1 tsp sesame oil",
+        "Toasted sesame seeds and sliced spring onion to serve"
+      ],
+      "method": "Combine rice and stock in a pot. Bring to a boil, reduce to the lowest heat and cook uncovered for 35 minutes, stirring occasionally. Add sweet potato and ginger and continue cooking 15–20 minutes until potato is soft and rice has completely broken down. Remove from heat, stir in miso. Serve topped with sesame seeds and spring onion.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_lunch_1",
+      "season": "late_summer",
+      "meal_type": "lunch",
+      "title": "Roasted Pumpkin Soup with Toasted Pumpkin Seeds",
+      "serves": "4",
+      "ingredients": [
+        "2lb 4oz (1kg) pumpkin or butternut squash, cubed",
+        "1 onion, quartered",
+        "3 cloves garlic, unpeeled",
+        "1¾pt (1 litre) vegetable stock",
+        "2 tbsp olive oil",
+        "1 tsp ground ginger",
+        "1 tsp ground cumin",
+        "Salt and pepper",
+        "3 tbsp pumpkin seeds, toasted",
+        "Swirl of crème fraîche or coconut cream to serve"
+      ],
+      "method": "Toss pumpkin, onion, and garlic with oil, ginger, and cumin. Roast at 200°C (400°F) for 30–35 minutes until caramelised and tender. Squeeze garlic out of skins. Transfer everything to a pot with stock and blend until completely smooth. Adjust seasoning. Serve hot, topped with toasted pumpkin seeds and a swirl of cream.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_lunch_2",
+      "season": "late_summer",
+      "meal_type": "lunch",
+      "title": "Yellow Courgette & Chickpea Frittata",
+      "serves": "4",
+      "ingredients": [
+        "6 eggs",
+        "14oz (400g) tinned chickpeas, drained",
+        "2 yellow courgettes, sliced into rounds",
+        "1 onion, sliced",
+        "2 tbsp olive oil",
+        "Large handful of fresh flat-leaf parsley",
+        "Salt and pepper",
+        "1¾oz (50g) feta, crumbled (optional)"
+      ],
+      "method": "Preheat oven to 180°C (350°F). Sauté onion in oil for 5 minutes, add courgette and cook until golden. Add chickpeas and stir to warm through. Beat eggs with salt, pepper, and parsley. Pour over the vegetables. Scatter feta if using. Transfer to oven and bake 15–18 minutes until set and lightly golden on top.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_lunch_3",
+      "season": "late_summer",
+      "meal_type": "lunch",
+      "title": "Corn & Carrot Soup with Ginger & Miso",
+      "serves": "4",
+      "ingredients": [
+        "4 ears of corn (or 14oz/400g frozen sweetcorn)",
+        "3 large carrots, roughly chopped",
+        "1 onion, diced",
+        "¾-inch (2cm) fresh ginger, grated",
+        "1¾pt (1 litre) vegetable stock",
+        "2 tbsp white miso paste",
+        "1 tbsp coconut oil",
+        "Chives and sesame oil to serve"
+      ],
+      "method": "Heat oil and sauté onion until soft. Add ginger and cook 1 minute. Add carrots, corn, and stock. Simmer 25 minutes until carrots are completely tender. Blend until smooth. Remove from heat and stir in miso — never boil miso. Serve with snipped chives and a drizzle of sesame oil.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_dinner_1",
+      "season": "late_summer",
+      "meal_type": "dinner",
+      "title": "Slow-Cooked Sweet Potato & Red Lentil Dhal",
+      "serves": "4",
+      "ingredients": [
+        "9oz (255g) red lentils, rinsed",
+        "2 medium sweet potatoes, peeled and cubed",
+        "14fl oz (400ml) coconut milk",
+        "14fl oz (400ml) vegetable stock",
+        "1 onion, diced",
+        "3 garlic cloves, sliced",
+        "1 tbsp fresh ginger, grated",
+        "1 tsp each: turmeric, ground cumin, ground coriander",
+        "2 tbsp coconut oil",
+        "Juice of ½ lime, fresh coriander, cooked brown rice to serve"
+      ],
+      "method": "Heat oil and sauté onion until soft. Add garlic, ginger, and spices and cook 2 minutes. Add sweet potato, lentils, coconut milk, and stock. Bring to a boil, then reduce and simmer 25–30 minutes until sweet potato is soft and lentils have melted into a thick, golden sauce. Finish with lime juice. Serve over brown rice with fresh coriander.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_dinner_2",
+      "season": "late_summer",
+      "meal_type": "dinner",
+      "title": "Millet-Stuffed Roasted Peppers with Herb Sauce",
+      "serves": "2",
+      "ingredients": [
+        "4 large yellow or red peppers",
+        "7oz (200g) millet, cooked",
+        "1 courgette, finely diced",
+        "1 small onion, diced",
+        "3 tbsp olive oil",
+        "1oz (30g) pine nuts",
+        "Salt, pepper, smoked paprika",
+        "Herb sauce: large bunch parsley, 1 garlic clove, 3 tbsp olive oil, juice of ½ lemon, salt"
+      ],
+      "method": "Halve peppers and remove seeds. Sauté onion and courgette in olive oil until soft. Combine with cooked millet, pine nuts, paprika, salt, and pepper. Fill pepper halves with the mixture. Roast at 190°C (375°F) for 25–30 minutes until peppers are tender and tops are golden. Blend herb sauce ingredients until smooth. Serve with herb sauce.",
+      "why": ""
+    },
+    {
+      "id": "late_summer_dinner_3",
+      "season": "late_summer",
+      "meal_type": "dinner",
+      "title": "Polenta with Roasted Roots & Sage Brown Butter",
+      "serves": "4",
+      "ingredients": [
+        "7oz (200g) quick-cook polenta",
+        "1¾pt (1 litre) vegetable stock",
+        "2oz (55g) Parmesan or nutritional yeast",
+        "2 large parsnips, cut into batons",
+        "2 large carrots, cut into batons",
+        "1 sweet potato, cubed",
+        "3 tbsp olive oil",
+        "Brown butter: 2oz (55g) butter + 12 fresh sage leaves",
+        "Salt and pepper"
+      ],
+      "method": "Toss root vegetables with olive oil, salt, and pepper. Roast at 200°C (400°F) for 30–35 minutes until golden and caramelised. Make polenta: bring stock to a boil, pour in polenta in a thin stream stirring constantly, cook 3–5 minutes until thick. Stir in cheese or yeast. Melt butter in a small pan over medium heat until golden-brown and nutty, add sage leaves and fry until crisp. Pour immediately over polenta and roots.",
+      "why": ""
+    },
+    {
+      "id": "autumn_breakfast_1",
+      "season": "autumn",
+      "meal_type": "breakfast",
+      "title": "Pear & Almond Rice Congee with Honey",
+      "serves": "2",
+      "ingredients": [
+        "4¼oz (120g) short-grain white rice",
+        "32fl oz (900ml) water",
+        "1 pear, peeled and diced",
+        "2 tbsp ground almonds",
+        "1 tsp cinnamon",
+        "1 tbsp raw honey",
+        "Pinch of sea salt"
+      ],
+      "method": "Combine rice and water in a pot. Bring to a boil, then reduce to the lowest possible heat. Cook uncovered for 40–45 minutes, stirring occasionally, until the rice has broken down into a thick, silky porridge. Add pear, almonds, cinnamon, and salt for the final 10 minutes. Serve with a drizzle of raw honey.",
+      "why": ""
+    },
+    {
+      "id": "autumn_breakfast_2",
+      "season": "autumn",
+      "meal_type": "breakfast",
+      "title": "Spiced Oat Porridge with Poached Quince",
+      "serves": "2",
+      "ingredients": [
+        "5½oz (160g) rolled oats",
+        "1¼pt (700ml) oat milk",
+        "1 tsp ground ginger",
+        "½ tsp cinnamon",
+        "¼ tsp ground clove",
+        "Pinch of white pepper",
+        "1 tbsp maple syrup",
+        "Poached quince: 2 quinces or firm pears, 10fl oz (280ml) water, 2 tbsp honey, 1 cinnamon stick, 2 star anise"
+      ],
+      "method": "Poach quince: simmer all poaching ingredients together for 30–40 minutes until tender (use pear for 15 minutes). Make porridge: cook oats with oat milk and all spices over medium heat for 7–8 minutes, stirring until thick and creamy. Serve topped with poached quince and a drizzle of the poaching syrup.",
+      "why": ""
+    },
+    {
+      "id": "autumn_breakfast_3",
+      "season": "autumn",
+      "meal_type": "breakfast",
+      "title": "Autumn Granola with Cinnamon, Pear & Walnuts",
+      "serves": "6",
+      "ingredients": [
+        "9oz (255g) rolled oats",
+        "3oz (85g) walnuts, roughly chopped",
+        "2oz (55g) pumpkin seeds",
+        "1½oz (40g) sunflower seeds",
+        "2 tbsp coconut oil, melted",
+        "3 tbsp maple syrup",
+        "1½ tsp cinnamon",
+        "½ tsp ground ginger",
+        "Pinch of sea salt",
+        "To serve: natural yoghurt, sliced fresh pear"
+      ],
+      "method": "Preheat oven to 160°C (320°F). Combine oats, nuts, and seeds in a bowl. Whisk together coconut oil, maple syrup, spices, and salt. Pour over dry ingredients and mix well until everything is evenly coated. Spread on a lined baking tray. Bake 25–30 minutes, stirring once halfway, until golden and fragrant. Cool completely — it will crisp as it cools. Store in an airtight jar for up to 2 weeks. Serve with yoghurt and fresh pear.",
+      "why": ""
+    },
+    {
+      "id": "autumn_lunch_1",
+      "season": "autumn",
+      "meal_type": "lunch",
+      "title": "Leek & Potato Soup with Garlic Oil",
+      "serves": "4",
+      "ingredients": [
+        "4 large leeks, cleaned and sliced",
+        "4 medium potatoes, peeled and diced",
+        "2pt (1.1 litre) vegetable stock",
+        "2 tbsp butter or olive oil",
+        "Salt and white pepper",
+        "Garlic oil: 4 tbsp olive oil warmed gently with 3 garlic cloves for 10 minutes, then strained"
+      ],
+      "method": "Sauté leeks in butter over low heat for 10 minutes until soft and sweet — do not rush this step. Add potatoes and stock. Simmer 20 minutes until potato is completely tender. Blend until completely smooth. Season well. Serve with a thin drizzle of garlic oil and crusty bread.",
+      "why": ""
+    },
+    {
+      "id": "autumn_lunch_2",
+      "season": "autumn",
+      "meal_type": "lunch",
+      "title": "Roasted Radish & Daikon Grain Bowl",
+      "serves": "2",
+      "ingredients": [
+        "1 daikon radish, peeled and cut into batons",
+        "6 red radishes, halved",
+        "7oz (200g) cooked farro or spelt",
+        "2 handfuls watercress",
+        "Dressing: 2 tbsp white miso, 1 tbsp rice vinegar, 1 tsp sesame oil, 1 tsp honey, 1 tbsp warm water"
+      ],
+      "method": "Toss daikon and radishes with a little oil, salt, and pepper. Roast at 200°C (400°F) for 25 minutes until caramelised and lightly charred at the edges. Whisk miso dressing together until smooth. Layer warm farro with roasted vegetables and watercress. Drizzle generously with dressing.",
+      "why": ""
+    },
+    {
+      "id": "autumn_lunch_3",
+      "season": "autumn",
+      "meal_type": "lunch",
+      "title": "White Bean & Rosemary Soup with Garlic Toast",
+      "serves": "4",
+      "ingredients": [
+        "2 x 14oz (400g) tins white cannellini beans, drained",
+        "1 onion, diced",
+        "4 cloves garlic, sliced",
+        "2 sprigs fresh rosemary",
+        "2 tbsp olive oil",
+        "1¾pt (1 litre) vegetable or chicken stock",
+        "Juice of ½ lemon",
+        "Salt and pepper",
+        "Garlic toast: thick slices sourdough rubbed with garlic and olive oil, grilled until golden"
+      ],
+      "method": "Heat oil in a large pan. Sauté onion and garlic over medium heat until soft and golden, about 8 minutes. Add rosemary and cook 1 minute. Add beans and stock. Simmer 15 minutes. Remove rosemary. Blend half the soup and return to the pot for a thick but textured finish. Add lemon juice. Serve with garlic toast.",
+      "why": ""
+    },
+    {
+      "id": "autumn_dinner_1",
+      "season": "autumn",
+      "meal_type": "dinner",
+      "title": "Slow-Braised Chicken with Garlic, Leek & White Beans",
+      "serves": "4",
+      "ingredients": [
+        "4 chicken thighs, bone-in",
+        "1 whole head of garlic, cloves separated but unpeeled",
+        "3 leeks, sliced",
+        "14oz (400g) tinned white beans, drained",
+        "10fl oz (280ml) chicken or vegetable stock",
+        "2 tbsp olive oil",
+        "Fresh thyme, rosemary",
+        "Salt and pepper"
+      ],
+      "method": "Brown chicken thighs skin-side down in olive oil until deeply golden, about 8 minutes. Remove and set aside. Sauté leeks in the same pan for 5 minutes. Add garlic cloves, thyme, and rosemary. Return chicken. Pour in stock and beans. Cover and braise at 160°C (320°F) for 75–90 minutes until chicken is falling from the bone.",
+      "why": ""
+    },
+    {
+      "id": "autumn_dinner_2",
+      "season": "autumn",
+      "meal_type": "dinner",
+      "title": "Miso-Glazed Tofu with Roasted Turnip & Sesame Rice",
+      "serves": "2",
+      "ingredients": [
+        "10½oz (300g) firm tofu, pressed",
+        "Glaze: 2 tbsp white miso, 1 tbsp mirin, 1 tbsp tamari, 1 tsp sesame oil",
+        "2 medium turnips, peeled and cubed",
+        "5½oz (160g) brown rice, cooked",
+        "2 tbsp sesame seeds, toasted",
+        "3 spring onions, sliced"
+      ],
+      "method": "Cut tofu into thick slabs. Mix glaze ingredients together. Coat tofu and marinate 20 minutes. Toss turnip with oil, salt, and pepper. Roast turnip at 200°C (400°F) for 25 minutes. Grill or pan-fry glazed tofu for 3–4 minutes per side until caramelised. Serve over rice with roasted turnip, sesame seeds, and spring onions.",
+      "why": ""
+    },
+    {
+      "id": "autumn_dinner_3",
+      "season": "autumn",
+      "meal_type": "dinner",
+      "title": "Ginger & Turmeric Immunity Broth with Rice Noodles",
+      "serves": "2",
+      "ingredients": [
+        "1¾pt (1 litre) chicken or vegetable stock",
+        "1½-inch (4cm) fresh ginger, sliced",
+        "¾-inch (2cm) fresh turmeric, grated (or 1 tsp ground)",
+        "3 cloves garlic, crushed",
+        "1 stalk lemongrass, bruised",
+        "2 tbsp miso paste",
+        "3½oz (100g) rice noodles, cooked",
+        "Toppings: spring onion, thin sliced chilli, lime, fresh coriander"
+      ],
+      "method": "Combine stock, ginger, turmeric, garlic, and lemongrass in a pot. Bring to a simmer and cook gently for 20 minutes. Strain the broth through a fine sieve. Remove from heat and stir in miso. Divide noodles between bowls and pour over the hot broth. Top generously with spring onion, chilli, a squeeze of lime, and fresh coriander.",
+      "why": ""
+    },
+    {
+      "id": "winter_breakfast_1",
+      "season": "winter",
+      "meal_type": "breakfast",
+      "title": "Black Sesame & Walnut Congee",
+      "serves": "2",
+      "ingredients": [
+        "3½oz (100g) short-grain rice",
+        "1oz (30g) black sesame seeds",
+        "30fl oz (850ml) water",
+        "5fl oz (150ml) oat milk",
+        "1oz (30g) walnut pieces",
+        "1 tbsp maple syrup",
+        "Pinch of sea salt",
+        "A few drops of sesame oil to finish"
+      ],
+      "method": "Toast black sesame seeds in a dry pan until fragrant. Grind half of them to a rough powder using a mortar or spice grinder. Combine rice, ground sesame, water, and salt in a pot. Simmer on very low heat for 40–45 minutes, stirring occasionally. Add oat milk and whole sesame seeds for the final 5 minutes. Serve topped with walnuts, maple syrup, and a few drops of sesame oil.",
+      "why": ""
+    },
+    {
+      "id": "winter_breakfast_2",
+      "season": "winter",
+      "meal_type": "breakfast",
+      "title": "Spiced Chestnut & Oat Porridge",
+      "serves": "2",
+      "ingredients": [
+        "5½oz (160g) rolled oats",
+        "7oz (200g) cooked chestnuts, roughly crumbled",
+        "1¼pt (700ml) oat milk",
+        "1 tsp five-spice powder",
+        "½ tsp cinnamon",
+        "1 tbsp dark treacle or maple syrup",
+        "Pinch of sea salt",
+        "Toasted walnuts to serve"
+      ],
+      "method": "Warm oat milk in a pan. Add oats and cook over medium-low heat for 6–7 minutes, stirring. Add chestnuts, spices, treacle, and salt. Stir until combined and chestnuts are warmed through. Serve topped with toasted walnuts.",
+      "why": ""
+    },
+    {
+      "id": "winter_breakfast_3",
+      "season": "winter",
+      "meal_type": "breakfast",
+      "title": "Warming Congee with Ginger, Miso & Toasted Seeds",
+      "serves": "2",
+      "ingredients": [
+        "4¼oz (120g) short-grain rice",
+        "32fl oz (900ml) vegetable or chicken stock",
+        "1-inch (2.5cm) fresh ginger, finely grated",
+        "2 tbsp white miso paste",
+        "1 tsp sesame oil",
+        "2 tbsp mixed seeds (sesame, pumpkin, sunflower), toasted",
+        "2 spring onions, sliced",
+        "Optional: a soft-boiled egg"
+      ],
+      "method": "Combine rice and stock in a pot. Bring to a boil, reduce to the lowest possible heat, and simmer uncovered for 40–45 minutes, stirring occasionally, until the rice has completely broken down into a thick, silky porridge. Stir in ginger. Remove from heat and stir in miso and sesame oil. Serve topped with seeds, spring onion, and a soft-boiled egg if using.",
+      "why": ""
+    },
+    {
+      "id": "winter_lunch_1",
+      "season": "winter",
+      "meal_type": "lunch",
+      "title": "Black Bean & Beetroot Soup with Cumin Cream",
+      "serves": "4",
+      "ingredients": [
+        "14oz (400g) tinned black beans, drained",
+        "3 medium beetroots, peeled and cubed",
+        "1 onion, diced",
+        "3 garlic cloves, sliced",
+        "1 tsp each: ground cumin, smoked paprika, ground coriander",
+        "1¾pt (1 litre) vegetable stock",
+        "2 tbsp olive oil",
+        "Salt and pepper",
+        "Cumin cream: 4 tbsp natural yoghurt, ½ tsp toasted ground cumin, pinch of salt"
+      ],
+      "method": "Roast beetroot at 200°C (400°F) for 25 minutes until tender. Sauté onion and garlic in oil until soft and golden. Add spices and cook 1 minute. Add roasted beetroot, black beans, and stock. Simmer 20 minutes. Blend partially — leave some texture. Mix cumin cream together. Serve soup topped with cumin cream and a few whole beans.",
+      "why": ""
+    },
+    {
+      "id": "winter_lunch_2",
+      "season": "winter",
+      "meal_type": "lunch",
+      "title": "Miso Soup with Seaweed, Tofu & Soba",
+      "serves": "2",
+      "ingredients": [
+        "1¾pt (1 litre) dashi or light vegetable stock",
+        "3 tbsp white or dark miso paste",
+        "3½oz (100g) firm tofu, cubed",
+        "1 sheet dried wakame seaweed, rehydrated and drained",
+        "3½oz (100g) soba noodles, cooked",
+        "2 spring onions, sliced",
+        "1 tsp sesame oil"
+      ],
+      "method": "Warm stock gently — do not allow it to boil. Dissolve miso in a ladleful of warm stock, then stir back into the pot. Add tofu and seaweed. Divide noodles between bowls and ladle the soup over the top. Finish with spring onions and a drop of sesame oil.",
+      "why": ""
+    },
+    {
+      "id": "winter_lunch_3",
+      "season": "winter",
+      "meal_type": "lunch",
+      "title": "Warming Kidney Bean & Root Vegetable Stew",
+      "serves": "4",
+      "ingredients": [
+        "2 x 14oz (400g) tins kidney beans, drained",
+        "2 large parsnips, cubed",
+        "2 large carrots, cubed",
+        "2 medium turnips, cubed",
+        "1 onion, diced",
+        "4 garlic cloves, sliced",
+        "14oz (400g) tinned tomatoes",
+        "17fl oz (480ml) vegetable stock",
+        "1 tsp smoked paprika",
+        "1 tsp ground cumin",
+        "2 tbsp olive oil",
+        "Salt, pepper, fresh thyme"
+      ],
+      "method": "Heat oil in a large pot. Sauté onion and garlic until soft. Add spices and thyme, cook 1 minute. Add all root vegetables and stir to coat. Add tomatoes, stock, and beans. Bring to a boil, reduce heat, cover and simmer 35–40 minutes until vegetables are completely tender and the stew has thickened. Adjust seasoning.",
+      "why": ""
+    },
+    {
+      "id": "winter_dinner_1",
+      "season": "winter",
+      "meal_type": "dinner",
+      "title": "Slow-Cooked Lamb & Black Bean Stew with Root Vegetables",
+      "serves": "4",
+      "ingredients": [
+        "1lb 5oz (600g) lamb shoulder, cut into large pieces",
+        "14oz (400g) black beans, soaked overnight and cooked",
+        "2 parsnips, cubed",
+        "2 large carrots, cubed",
+        "1 large onion, diced",
+        "4 garlic cloves, sliced",
+        "14fl oz (400ml) vegetable stock",
+        "7fl oz (200ml) red wine",
+        "2 tbsp tomato purée",
+        "Fresh thyme, rosemary, bay",
+        "2 tbsp olive oil",
+        "Salt and pepper"
+      ],
+      "method": "Brown lamb in batches in olive oil over high heat. Remove. Sauté onion and garlic in the same pot. Add tomato purée and cook 2 minutes. Return lamb. Add wine, stock, herbs, and root vegetables. Cover tightly and cook at 150°C (300°F) for 2½–3 hours until lamb is completely tender. Stir in cooked black beans for the final 20 minutes.",
+      "why": ""
+    },
+    {
+      "id": "winter_dinner_2",
+      "season": "winter",
+      "meal_type": "dinner",
+      "title": "Walnut & Mushroom Risotto with Dark Miso Butter",
+      "serves": "4",
+      "ingredients": [
+        "10½oz (300g) arborio rice",
+        "7oz (200g) mixed dark mushrooms (shiitake, porcini, chestnut), sliced",
+        "3oz (85g) walnuts, roughly chopped",
+        "1 onion, finely diced",
+        "2 garlic cloves, sliced",
+        "5fl oz (150ml) dry white wine",
+        "2pt (1.1 litre) warm vegetable stock",
+        "2 tbsp olive oil",
+        "Miso butter: 2oz (55g) butter blended with 1 tbsp dark miso",
+        "Fresh thyme"
+      ],
+      "method": "Sauté onion in olive oil until completely soft, about 10 minutes. Add garlic, mushrooms, and thyme; cook until mushrooms caramelise. Add rice and stir to coat. Add wine and stir until absorbed. Add stock ladle by ladle, stirring continuously, adding the next ladle only when the previous has been fully absorbed — about 20–25 minutes total. Stir through walnuts and miso butter off the heat. Rest 2 minutes before serving.",
+      "why": ""
+    },
+    {
+      "id": "winter_dinner_3",
+      "season": "winter",
+      "meal_type": "dinner",
+      "title": "Dark Miso Noodle Soup with Mushrooms & Soft Egg",
+      "serves": "2",
+      "ingredients": [
+        "1¾pt (1 litre) good-quality vegetable or dashi stock",
+        "3 tbsp dark (brown) miso paste",
+        "5½oz (155g) ramen or soba noodles, cooked",
+        "3½oz (100g) shiitake mushrooms, sliced",
+        "1¾oz (50g) dried wakame seaweed, rehydrated",
+        "2 eggs, soft-boiled 7 minutes and halved",
+        "1 tbsp tamari",
+        "1 tsp sesame oil",
+        "Toppings: sliced spring onion, black sesame seeds, a strip of nori, chilli oil"
+      ],
+      "method": "Warm the stock in a pot over medium heat. Add shiitake mushrooms and simmer gently for 8 minutes until tender and the stock is deeply flavoured. Remove from heat. Dissolve miso in a ladleful of warm stock, then stir back into the pot — never allow miso to boil. Add tamari and sesame oil. Divide noodles between two deep, warmed bowls. Ladle the hot broth and mushrooms over the noodles. Add rehydrated wakame. Place the halved soft-boiled eggs on top. Finish with spring onion, a pinch of black sesame, a strip of nori, and a drop of chilli oil.",
+      "why": ""
+    }
+  ]
+}

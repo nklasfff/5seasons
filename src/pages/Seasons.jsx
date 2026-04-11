@@ -1,0 +1,82 @@
+import { Link } from 'react-router-dom'
+import seasonsData from '../data/seasons.json'
+import PageHeader from '../components/ui/PageHeader.jsx'
+import Divider from '../components/ui/Divider.jsx'
+import PlaceholderImage from '../components/ui/PlaceholderImage.jsx'
+import { seasonClass } from '../lib/seasonClass.js'
+
+export default function Seasons() {
+  const { meta, seasons } = seasonsData
+
+  return (
+    <div className="spring">
+      <PageHeader label="The Five Seasons" />
+
+      <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
+        {meta.title}
+      </h1>
+      <p className="lead mb-2">{meta.subtitle}</p>
+
+      <Divider />
+
+      <p className="mb-6 text-[15px] leading-[1.82]">{meta.description}</p>
+
+      <div className="mt-10 flex flex-col">
+        {seasons.map((season) => (
+          <SeasonRow key={season.id} season={season} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SeasonRow({ season }) {
+  return (
+    <Link
+      to={`/seasons/${season.id}`}
+      className={`group block ${seasonClass(season.id)}`}
+    >
+      <article
+        className="flex items-start gap-5 border-b py-6 transition-colors"
+        style={{
+          borderColor:
+            'color-mix(in srgb, var(--accent) 18%, transparent)',
+        }}
+      >
+        <PlaceholderImage
+          label={season.name}
+          className="h-[124px] w-[124px] flex-shrink-0 rounded-sm"
+        />
+        <div className="min-w-0 flex-1">
+          <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
+            {season.element}
+          </p>
+          <h2 className="cinzel mt-1 text-[19px] font-light uppercase tracking-[0.18em] text-accent">
+            {season.name}
+          </h2>
+          <p
+            className="mt-1 text-[11px] italic"
+            style={{
+              color: 'color-mix(in srgb, var(--accent) 80%, #5a6a58)',
+            }}
+          >
+            {season.organs.join(' · ')}
+          </p>
+          <p className="mt-3 line-clamp-3 text-[13.5px] leading-[1.7] text-[#333]">
+            {season.description}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+            {season.keywords.slice(0, 4).map((k) => (
+              <span
+                key={k}
+                className="cinzel text-[9px] uppercase tracking-[0.22em] text-muted"
+              >
+                · {k}
+              </span>
+            ))}
+          </div>
+        </div>
+      </article>
+    </Link>
+  )
+}

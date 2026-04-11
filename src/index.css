@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --accent: #3a7040;
+    --accent-light: #e8f2e0;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.82;
+    color: #222222;
+    background: #faf8f5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #182818;
+    font-family: 'Cinzel', serif;
+    font-weight: 300;
+  }
+}
+
+@layer components {
+  .cinzel {
+    font-family: 'Cinzel', serif;
+  }
+
+  .lead {
+    color: #264028;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17.5px;
+    line-height: 1.88;
+  }
+
+  /* Season accent theming via a single wrapper class */
+  .spring {
+    --accent: #3a7040;
+    --accent-light: #e8f2e0;
+  }
+  .summer {
+    --accent: #8a2030;
+    --accent-light: #fdf0f0;
+  }
+  .lsummer {
+    --accent: #7a6010;
+    --accent-light: #fdf8e8;
+  }
+  .autumn {
+    --accent: #505058;
+    --accent-light: #f4f4f6;
+  }
+  .winter {
+    --accent: #2a4a80;
+    --accent-light: #eef2f8;
+  }
+
+  .text-accent {
+    color: var(--accent);
+  }
+  .bg-accent-light {
+    background-color: var(--accent-light);
+  }
+  .border-accent {
+    border-color: var(--accent);
+  }
+}
