@@ -11,6 +11,7 @@ import Pause from './pages/Pause.jsx'
 import PauseSeasonDetail from './pages/PauseSeasonDetail.jsx'
 import BodyClock from './pages/BodyClock.jsx'
 import LivingSystem from './pages/LivingSystem.jsx'
+import Cycle from './pages/Cycle.jsx'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="recipes/:seasonId/:id" element={<RecipeDetail />} />
           <Route path="recipes/:seasonId" element={<RecipeSeasonDetail />} />
           <Route path="living-system" element={<LivingSystem />} />
+          <Route path="cycle" element={<Cycle />} />
         </Route>
       </Routes>
     </>

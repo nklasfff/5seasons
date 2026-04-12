@@ -53,6 +53,12 @@ const EXPLORE_CARDS = [
     description: 'Forty-five nourishing recipes, organised by season',
     image: heroRecipes,
   },
+  {
+    to: '/cycle',
+    title: 'The Cycle',
+    description: 'Your monthly rhythm through the elements',
+    image: heroSeasons,
+  },
 ]
 
 export default function Home() {
@@ -138,7 +144,7 @@ export default function Home() {
       <section className="mt-16">
         <PageHeader label="Explore Further" />
 
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
           {EXPLORE_CARDS.map((card) => (
             <ExploreCard key={card.to} {...card} />
           ))}
