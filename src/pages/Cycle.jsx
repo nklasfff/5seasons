@@ -65,7 +65,7 @@ export default function Cycle() {
   return (
     <div className="spring">
       {/* Hero */}
-      <div className="relative -mx-6 -mt-7 h-[240px] overflow-hidden bg-[#1a2820] md:-mx-16 lg:mt-12">
+      <div className="relative -mx-6 -mt-7 mb-10 h-[240px] overflow-hidden bg-[#1a2820] md:-mx-16 md:-mt-14 md:mb-14 md:h-[300px]">
         <img
           src={heroImage}
           alt=""
