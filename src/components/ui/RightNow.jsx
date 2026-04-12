@@ -184,7 +184,6 @@ function Clock({
           cy={CY}
           r={INNER_R}
           className="clock-center"
-          fill={mode === 'dark' ? '#0e1410' : '#faf8f5'}
           strokeWidth={0.5}
         />
 

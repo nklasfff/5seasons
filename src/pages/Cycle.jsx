@@ -319,7 +319,7 @@ function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick, mode }) {
         })}
 
         {/* Center circle */}
-        <circle cx={CX} cy={CY} r={INNER_R} fill="var(--bg)" />
+        <circle cx={CX} cy={CY} r={INNER_R} className="clock-center" />
 
         {/* Center text - active phase name */}
         <text
