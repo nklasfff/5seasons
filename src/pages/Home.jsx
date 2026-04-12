@@ -13,6 +13,7 @@ import heroBodyClock from '../assets/images/hero-body-clock.jpg'
 import heroPause from '../assets/images/hero-pause.jpg'
 import heroRecipes from '../assets/images/hero-recipes.jpg'
 import heroSeasons from '../assets/images/hero-seasons.jpg'
+import heroCycleImage from '../assets/images/hero-cycle.png'
 import { seasonClass } from '../lib/seasonClass.js'
 import {
   applyTheme,
@@ -57,7 +58,7 @@ const EXPLORE_CARDS = [
     to: '/cycle',
     title: 'The Cycle',
     description: 'Your monthly rhythm through the elements',
-    image: heroSeasons,
+    image: heroCycleImage,
   },
 ]
 
