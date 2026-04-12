@@ -79,6 +79,23 @@ export default function Home() {
           Every two hours, energy shifts to a new organ. The clock below shows where your body's vitality is focused right now.
         </p>
         <RightNow />
+
+        {/* Living System link */}
+        <Link
+          to="/living-system"
+          className="mt-8 flex items-center justify-between border-t pt-6 transition-opacity hover:opacity-75"
+          style={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
+        >
+          <div>
+            <p className="cinzel text-[10px] uppercase tracking-[0.28em] text-accent">
+              The Living System
+            </p>
+            <p className="mt-2 text-[14px] italic text-muted">
+              Understand the deeper dynamic — how your season and this moment work together.
+            </p>
+          </div>
+          <span className="cinzel ml-4 text-[16px] text-accent">→</span>
+        </Link>
       </section>
 
       {/* THE FIVE SEASONS section */}
