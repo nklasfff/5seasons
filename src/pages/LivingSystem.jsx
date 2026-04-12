@@ -74,6 +74,25 @@ function getDynamicDescription(seasonElement, organElement, seasonName, organNam
   return `The ${seasonName} season (${seasonElement}) and the ${organName} meridian (${organElement}) are pulling in different directions. This creative tension asks you to hold both. What the season wants and what your body needs may not be the same — and that's okay. The friction creates something new.`
 }
 
+// Determine current state (harmony, tension, or transformation)
+function getCurrentState(seasonElement, organElement) {
+  if (seasonElement === organElement) return 'harmony'
+
+  const cycle = {
+    Wood: 'Fire',
+    Fire: 'Earth',
+    Earth: 'Metal',
+    Metal: 'Water',
+    Water: 'Wood',
+  }
+
+  if (cycle[seasonElement] === organElement || cycle[organElement] === seasonElement) {
+    return 'transformation'
+  }
+
+  return 'tension'
+}
+
 export default function LivingSystem() {
   const currentSeasonId = useMemo(() => getCurrentSeason(), [])
   const currentOrgan = useMemo(() => getCurrentOrgan(), [])
@@ -84,6 +103,7 @@ export default function LivingSystem() {
   const organElement = currentOrgan.element
 
   const description = getDynamicDescription(seasonElement, organElement, season.name, currentOrgan.organ)
+  const currentState = getCurrentState(seasonElement, organElement)
 
   // Get time window
   const hour = new Date().getHours()
@@ -139,45 +159,97 @@ export default function LivingSystem() {
         {description}
       </p>
 
-      {/* Three illustrations */}
-      <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-        <div className="text-center">
-          <svg viewBox="0 0 200 120" className="mx-auto mb-3 w-full max-w-[200px]">
-            <circle cx="70" cy="60" r="25" fill="var(--accent)" opacity="0.3" />
-            <circle cx="130" cy="60" r="25" fill={getElementColor(organElement)} opacity="0.3" />
-            <line x1="95" y1="60" x2="105" y2="60" stroke="var(--accent)" strokeWidth="1.5" />
-          </svg>
-          <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted">
-            When season and moment align
-          </p>
-        </div>
+      <style>{`
+        @keyframes pulse-harmony {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        @keyframes move-tension-left {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(-5px); }
+        }
+        @keyframes move-tension-right {
+          0%, 100% { transform: translateX(0); }
+          50% { transform: translateX(5px); }
+        }
+        @keyframes radiate-dot {
+          0% { opacity: 0.6; transform: translate(0, 0); }
+          100% { opacity: 0; transform: translate(var(--tx), var(--ty)); }
+        }
+      `}</style>
 
-        <div className="text-center">
-          <svg viewBox="0 0 200 120" className="mx-auto mb-3 w-full max-w-[200px]">
-            <circle cx="70" cy="50" r="30" fill="var(--accent)" opacity="0.3" />
-            <circle cx="130" cy="70" r="20" fill={getElementColor(organElement)} opacity="0.3" />
-            <path d="M 100 50 Q 115 60 130 70" stroke="var(--accent)" strokeWidth="1.5" fill="none" />
-          </svg>
-          <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted">
-            When energies pull in different directions
-          </p>
-        </div>
+      {/* Section 1: Harmony */}
+      <div className="mb-10">
+        <svg viewBox="0 0 280 160" className="mx-auto mb-4 w-full max-w-[280px]">
+          <g style={{ animation: 'pulse-harmony 3s ease-in-out infinite' }}>
+            <circle cx="90" cy="80" r="35" fill="var(--accent)" opacity="0.25" />
+            <circle cx="190" cy="80" r="35" fill={getElementColor(organElement)} opacity="0.25" />
+          </g>
+          <line x1="125" y1="80" x2="155" y2="80" stroke="var(--accent)" strokeWidth="2" opacity="0.5" />
+        </svg>
+        <h3 className="cinzel mb-3 text-center text-[11px] uppercase tracking-[0.28em] text-accent">
+          Harmony
+        </h3>
+        <p className="text-center text-[14px] leading-[1.75] text-muted">
+          When the season and the organ share the same elemental energy, everything flows in one direction.
+          The body and the year are asking the same thing — there is no conflict, only depth and focus.
+        </p>
+      </div>
 
-        <div className="text-center">
-          <svg viewBox="0 0 200 120" className="mx-auto mb-3 w-full max-w-[200px]">
-            <circle cx="85" cy="60" r="25" fill="var(--accent)" opacity="0.3" />
-            <circle cx="115" cy="60" r="25" fill={getElementColor(organElement)} opacity="0.3" />
-            <circle cx="90" cy="50" r="2" fill="var(--accent)" opacity="0.6" />
-            <circle cx="110" cy="70" r="2" fill="var(--accent)" opacity="0.6" />
-            <circle cx="100" cy="45" r="2" fill={getElementColor(organElement)} opacity="0.6" />
-            <circle cx="100" cy="75" r="2" fill={getElementColor(organElement)} opacity="0.6" />
-            <circle cx="95" cy="65" r="2" fill="var(--accent)" opacity="0.6" />
-            <circle cx="105" cy="55" r="2" fill={getElementColor(organElement)} opacity="0.6" />
-          </svg>
-          <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted">
-            When something new is becoming possible
-          </p>
-        </div>
+      {/* Section 2: Creative Tension */}
+      <div className="mb-10">
+        <svg viewBox="0 0 280 160" className="mx-auto mb-4 w-full max-w-[280px]">
+          <g style={{ animation: 'move-tension-left 4s ease-in-out infinite' }}>
+            <circle cx="80" cy="70" r="40" fill="var(--accent)" opacity="0.25" />
+          </g>
+          <g style={{ animation: 'move-tension-right 4s ease-in-out infinite' }}>
+            <circle cx="200" cy="90" r="28" fill={getElementColor(organElement)} opacity="0.25" />
+          </g>
+          <path d="M 120 70 Q 155 80 200 90" stroke="var(--accent)" strokeWidth="2" fill="none" opacity="0.5" />
+        </svg>
+        <h3 className="cinzel mb-3 text-center text-[11px] uppercase tracking-[0.28em] text-accent">
+          Creative Tension
+        </h3>
+        <p className="text-center text-[14px] leading-[1.75] text-muted">
+          When different elements are active, you are being asked to hold two things at once.
+          This is not conflict — it is the friction that makes new patterns possible.
+        </p>
+      </div>
+
+      {/* Section 3: Transformation */}
+      <div className="mb-10">
+        <svg viewBox="0 0 280 160" className="mx-auto mb-4 w-full max-w-[280px]">
+          <circle cx="110" cy="80" r="35" fill="var(--accent)" opacity="0.25" />
+          <circle cx="170" cy="80" r="35" fill={getElementColor(organElement)} opacity="0.25" />
+          <circle cx="130" cy="70" r="2.5" fill="var(--accent)" style={{ animation: 'radiate-dot 3.5s ease-out infinite', '--tx': '-10px', '--ty': '-10px' }} />
+          <circle cx="150" cy="70" r="2.5" fill={getElementColor(organElement)} style={{ animation: 'radiate-dot 3.5s ease-out infinite 0.3s', '--tx': '10px', '--ty': '-10px' }} />
+          <circle cx="130" cy="90" r="2.5" fill="var(--accent)" style={{ animation: 'radiate-dot 3.5s ease-out infinite 0.6s', '--tx': '-10px', '--ty': '10px' }} />
+          <circle cx="150" cy="90" r="2.5" fill={getElementColor(organElement)} style={{ animation: 'radiate-dot 3.5s ease-out infinite 0.9s', '--tx': '10px', '--ty': '10px' }} />
+          <circle cx="140" cy="75" r="2.5" fill="var(--accent)" style={{ animation: 'radiate-dot 3.5s ease-out infinite 1.2s', '--tx': '0px', '--ty': '-12px' }} />
+          <circle cx="140" cy="85" r="2.5" fill={getElementColor(organElement)} style={{ animation: 'radiate-dot 3.5s ease-out infinite 1.5s', '--tx': '0px', '--ty': '12px' }} />
+        </svg>
+        <h3 className="cinzel mb-3 text-center text-[11px] uppercase tracking-[0.28em] text-accent">
+          Transformation
+        </h3>
+        <p className="text-center text-[14px] leading-[1.75] text-muted">
+          When one energy feeds into the next, something is completing and something is beginning.
+          The old and the new coexist briefly — this is the threshold where change happens.
+        </p>
+      </div>
+
+      {/* Current state highlight */}
+      <div className="mb-12 rounded-sm border px-6 py-5" style={{
+        borderColor: 'var(--accent)',
+        background: 'var(--accent-light)'
+      }}>
+        <p className="cinzel mb-2 text-[10px] uppercase tracking-[0.28em] text-accent">
+          Right Now
+        </p>
+        <p className="text-[14px] leading-[1.75]" style={{ color: 'color-mix(in srgb, var(--accent) 85%, var(--text))' }}>
+          {currentState === 'harmony' && `The ${season.name} season and the ${currentOrgan.organ} meridian are in harmony — both ${seasonElement}. This is a moment of natural alignment.`}
+          {currentState === 'transformation' && `The ${season.name} season (${seasonElement}) and the ${currentOrgan.organ} meridian (${organElement}) are in a transformative relationship — one energy is feeding into the next.`}
+          {currentState === 'tension' && `The ${season.name} season (${seasonElement}) and the ${currentOrgan.organ} meridian (${organElement}) are in creative tension — holding different elemental energies at once.`}
+        </p>
       </div>
 
       {/* Right Now For You section */}
