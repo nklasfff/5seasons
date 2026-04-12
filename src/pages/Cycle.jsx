@@ -3,7 +3,6 @@ import cycleData from '../data/cycleData.js'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import heroCycleImage from '../assets/images/hero-cycle.png'
-import { useThemeMode } from '../lib/theme.js'
 
 // Get phase from day
 function getPhaseFromDay(day) {
@@ -28,7 +27,6 @@ export default function Cycle() {
   const [cycleDay, setCycleDay] = useState(() => getCurrentCycleDay())
   const [selectedPhaseId, setSelectedPhaseId] = useState(null)
   const [activeTab, setActiveTab] = useState('body')
-  const mode = useThemeMode()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -64,59 +62,15 @@ export default function Cycle() {
     setSelectedPhaseId(cycleData.phases[newIndex].id)
   }
 
-  const bgColor = mode === 'dark' ? '#0e1410' : '#faf8f5'
-
   return (
     <div className="spring">
       {/* Hero */}
       <div style={{marginLeft: '-24px', marginRight: '-24px', marginTop: '-28px'}}>
-        <div style={{position: 'relative'}}>
-          <img
-            src={heroCycleImage}
-            alt="The Cycle"
-            style={{width: '100%', height: 'auto', display: 'block'}}
-          />
-          {/* Top gradient overlay */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '60px',
-            background: `linear-gradient(to bottom, ${bgColor}, transparent)`,
-            pointerEvents: 'none'
-          }} />
-          {/* Bottom gradient overlay */}
-          <div style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: '60px',
-            background: `linear-gradient(to top, ${bgColor}, transparent)`,
-            pointerEvents: 'none'
-          }} />
-          {/* Left gradient overlay */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            width: '40px',
-            background: `linear-gradient(to right, ${bgColor}, transparent)`,
-            pointerEvents: 'none'
-          }} />
-          {/* Right gradient overlay */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            width: '40px',
-            background: `linear-gradient(to left, ${bgColor}, transparent)`,
-            pointerEvents: 'none'
-          }} />
-        </div>
+        <img
+          src={heroCycleImage}
+          alt="The Cycle"
+          style={{width: '100%', height: 'auto', display: 'block'}}
+        />
       </div>
 
       <HorizontalNav />
