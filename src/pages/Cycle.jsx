@@ -65,7 +65,7 @@ export default function Cycle() {
   return (
     <div className="spring">
       {/* Hero */}
-      <div style={{background: 'transparent', marginLeft: '-24px', marginRight: '-24px', marginTop: '-56px'}}>
+      <div className="-mx-6 -mt-7 md:-mx-16 md:-mt-14 lg:mt-0" style={{background: 'transparent'}}>
         <img
           src={heroCycleImage}
           alt="The Cycle"
