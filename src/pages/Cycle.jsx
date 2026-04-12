@@ -3,6 +3,7 @@ import cycleData from '../data/cycleData.js'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import heroCycleImage from '../assets/images/hero-cycle.png'
+import { useThemeMode } from '../lib/theme.js'
 
 // Get phase from day
 function getPhaseFromDay(day) {
@@ -27,6 +28,7 @@ export default function Cycle() {
   const [cycleDay, setCycleDay] = useState(() => getCurrentCycleDay())
   const [selectedPhaseId, setSelectedPhaseId] = useState(null)
   const [activeTab, setActiveTab] = useState('body')
+  const mode = useThemeMode()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -117,6 +119,7 @@ export default function Cycle() {
           currentPhase={currentPhase}
           selectedPhaseId={selectedPhaseId}
           onPhaseClick={setSelectedPhaseId}
+          mode={mode}
         />
       </div>
 
@@ -206,7 +209,12 @@ function ringSegmentPath(cx, cy, rInner, rOuter, startDeg, endDeg) {
   ].join(' ')
 }
 
-function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick }) {
+function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick, mode }) {
+  // Light mode: default 0.55, hover 0.22
+  // Dark mode: default 0.22, hover 0.40
+  const defaultOpacity = mode === 'dark' ? 0.22 : 0.55
+  const hoverOpacity = mode === 'dark' ? 0.40 : 0.22
+
   // Define phases in clockwise order starting from top
   // Each phase gets 90 degrees, starting from -90 (top)
   const wheelPhases = [
@@ -248,7 +256,7 @@ function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick }) {
         {wheelPhases.map((phase) => {
           const isActive = phase.id === currentPhase.id
           const isSelected = selectedPhaseId === phase.id
-          const fillOpacity = isActive || isSelected ? 0.65 : 0.22
+          const fillOpacity = isActive || isSelected ? 0.65 : defaultOpacity
 
           const d = ringSegmentPath(CX, CY, INNER_R, OUTER_R, phase.startDeg, phase.endDeg)
 
@@ -269,12 +277,12 @@ function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick }) {
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive && !isSelected) {
-                    e.currentTarget.style.fillOpacity = '0.40'
+                    e.currentTarget.style.fillOpacity = String(hoverOpacity)
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive && !isSelected) {
-                    e.currentTarget.style.fillOpacity = '0.22'
+                    e.currentTarget.style.fillOpacity = String(defaultOpacity)
                   }
                 }}
                 onClick={() => onPhaseClick(phase.id)}

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import bodyclockData from '../../data/bodyclock.json'
 import PracticeRow from './PracticeRow.jsx'
 import { seasonClass } from '../../lib/seasonClass.js'
+import { useThemeMode } from '../../lib/theme.js'
 
 const SEASON_NAME_TO_ID = {
   Spring: 'spring',
@@ -42,6 +43,7 @@ export default function RightNow() {
   const { organs } = bodyclockData
   const [now, setNow] = useState(() => new Date())
   const [userSelected, setUserSelected] = useState(null)
+  const mode = useThemeMode()
 
   // Tick every minute so the active segment and the hub time stay in sync.
   useEffect(() => {
@@ -74,6 +76,7 @@ export default function RightNow() {
         selectedColour={selectedColour}
         now={now}
         onSelect={handleSelect}
+        mode={mode}
       />
 
       <WisdomCard organ={selected} colour={selectedColour} />
@@ -119,8 +122,14 @@ function Clock({
   selectedColour,
   now,
   onSelect,
+  mode,
 }) {
   const timeToDeg = (hours) => (hours / 24) * 360 - 90
+
+  // Light mode: default 0.55, hover 0.22
+  // Dark mode: default 0.22, hover 0.40
+  const defaultOpacity = mode === 'dark' ? 0.22 : 0.55
+  const hoverOpacity = mode === 'dark' ? 0.40 : 0.22
 
   return (
     <div className="mx-auto w-full max-w-[360px]">
@@ -148,7 +157,7 @@ function Clock({
               stroke={colour}
               strokeWidth={isActive ? 1.5 : 0.5}
               style={{
-                fillOpacity: isActive ? 0.65 : 0.22,
+                fillOpacity: isActive ? 0.65 : defaultOpacity,
                 strokeOpacity: isActive ? 1.0 : 0.4,
                 cursor: 'pointer',
                 transition:
@@ -156,12 +165,12 @@ function Clock({
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.fillOpacity = '0.40'
+                  e.currentTarget.style.fillOpacity = String(hoverOpacity)
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.fillOpacity = '0.22'
+                  e.currentTarget.style.fillOpacity = String(defaultOpacity)
                 }
               }}
               onClick={() => onSelect(i)}
