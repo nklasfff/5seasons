@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import cycleData from '../data/cycleData.js'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
-import heroImage from '../assets/images/hero-cycle.png'
+import heroCycleImage from '../assets/images/hero-cycle.png'
 
 // Get phase from day
 function getPhaseFromDay(day) {
@@ -65,24 +65,19 @@ export default function Cycle() {
   return (
     <div className="spring">
       {/* Hero */}
-      <div className="relative -mx-6 -mt-7 mb-10 h-[240px] overflow-hidden bg-[#1a2820] md:-mx-16 md:-mt-14 md:mb-14 md:h-[300px]">
-        <img
-          src={heroImage}
-          alt=""
-          className="h-full w-full object-cover opacity-[0.85]"
-        />
-        {/* Dark gradient fade at the bottom */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: 'linear-gradient(to bottom, transparent 30%, #1a2820 100%)'
-          }}
-        />
-        {/* Title at bottom-left */}
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-8 md:px-16 md:pb-10">
-          <h1 className="cinzel text-[20px] font-light uppercase tracking-[0.12em] text-[#e8f0e8] md:text-[22px]">
-            The Cycle
-          </h1>
+      <div className="-mx-6 -mt-7 flex-col overflow-hidden bg-[#1a2820] md:-mx-16 lg:mt-12" style={{height: '70vh'}}>
+        <div className="relative h-full bg-[#1a2820]">
+          <img
+            src={heroCycleImage}
+            alt=""
+            className="h-full w-full object-cover object-center opacity-[0.88]"
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[#1a2820]" />
+          <div className="absolute bottom-8 left-0 right-0 text-center">
+            <p className="cinzel mb-2 text-[9px] font-light uppercase tracking-[0.38em] text-green-200/55">The Energy of the 5 Seasons</p>
+            <h1 className="cinzel text-[22px] font-light uppercase tracking-[0.1em] text-[#e8f0e8]">The Cycle</h1>
+            <p className="text-[13px] italic text-green-200/75">Your monthly rhythm through the five elements</p>
+          </div>
         </div>
       </div>
 
