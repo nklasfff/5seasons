@@ -65,22 +65,24 @@ export default function Cycle() {
   return (
     <div className="spring">
       {/* Hero */}
-      <div className="-mx-6 -mt-7 relative h-[320px] overflow-hidden md:-mx-16 lg:mt-12">
+      <div className="relative -mx-6 -mt-7 h-[240px] overflow-hidden bg-[#1a2820] md:-mx-16 lg:mt-12">
         <img
           src={heroImage}
           alt=""
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover opacity-[0.85]"
         />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
-        {/* Title overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
-          <h1 className="cinzel mb-2 text-center text-[26px] font-light uppercase tracking-[0.12em] text-white md:text-[28px]">
+        {/* Dark gradient fade at the bottom */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 30%, #1a2820 100%)'
+          }}
+        />
+        {/* Title at bottom-left */}
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-8 md:px-16 md:pb-10">
+          <h1 className="cinzel text-[20px] font-light uppercase tracking-[0.12em] text-[#e8f0e8] md:text-[22px]">
             The Cycle
           </h1>
-          <p className="text-center text-[13px] italic text-white/90">
-            Your monthly rhythm through the five elements
-          </p>
         </div>
       </div>
 
@@ -191,99 +193,154 @@ export default function Cycle() {
 /* Cycle Wheel                                                        */
 /* ------------------------------------------------------------------ */
 
-function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick }) {
-  const radius = 140
-  const centerX = 200
-  const centerY = 200
-  const innerRadius = 80
+const CX = 150
+const CY = 150
+const INNER_R = 55
+const OUTER_R = 145
 
+function polar(cx, cy, r, deg) {
+  const rad = (deg * Math.PI) / 180
+  return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) }
+}
+
+function ringSegmentPath(cx, cy, rInner, rOuter, startDeg, endDeg) {
+  const p1 = polar(cx, cy, rOuter, startDeg)
+  const p2 = polar(cx, cy, rOuter, endDeg)
+  const p3 = polar(cx, cy, rInner, endDeg)
+  const p4 = polar(cx, cy, rInner, startDeg)
+  const sweep = endDeg - startDeg
+  const largeArc = sweep > 180 ? 1 : 0
+  return [
+    `M ${p1.x.toFixed(2)} ${p1.y.toFixed(2)}`,
+    `A ${rOuter} ${rOuter} 0 ${largeArc} 1 ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`,
+    `L ${p3.x.toFixed(2)} ${p3.y.toFixed(2)}`,
+    `A ${rInner} ${rInner} 0 ${largeArc} 0 ${p4.x.toFixed(2)} ${p4.y.toFixed(2)}`,
+    'Z',
+  ].join(' ')
+}
+
+function CycleWheel({ currentPhase, selectedPhaseId, onPhaseClick }) {
   // Define phases in clockwise order starting from top
+  // Each phase gets 90 degrees, starting from -90 (top)
   const wheelPhases = [
-    { ...cycleData.phases.find(p => p.id === 'winter'), startAngle: -90, endAngle: 0 },
-    { ...cycleData.phases.find(p => p.id === 'spring'), startAngle: 0, endAngle: 90 },
-    { ...cycleData.phases.find(p => p.id === 'summer'), startAngle: 90, endAngle: 180 },
-    { ...cycleData.phases.find(p => p.id === 'autumn'), startAngle: 180, endAngle: 270 }
+    {
+      ...cycleData.phases.find(p => p.id === 'winter'),
+      startDeg: -90,
+      endDeg: 0,
+      colour: '#2a4a80'
+    },
+    {
+      ...cycleData.phases.find(p => p.id === 'spring'),
+      startDeg: 0,
+      endDeg: 90,
+      colour: '#3a7040'
+    },
+    {
+      ...cycleData.phases.find(p => p.id === 'summer'),
+      startDeg: 90,
+      endDeg: 180,
+      colour: '#8a2030'
+    },
+    {
+      ...cycleData.phases.find(p => p.id === 'autumn'),
+      startDeg: 180,
+      endDeg: 270,
+      colour: '#505058'
+    }
   ]
 
-  // Create path for segment
-  const createSegmentPath = (startAngle, endAngle, outerR, innerR) => {
-    const startRad = (startAngle * Math.PI) / 180
-    const endRad = (endAngle * Math.PI) / 180
-
-    const x1 = centerX + outerR * Math.cos(startRad)
-    const y1 = centerY + outerR * Math.sin(startRad)
-    const x2 = centerX + outerR * Math.cos(endRad)
-    const y2 = centerY + outerR * Math.sin(endRad)
-    const x3 = centerX + innerR * Math.cos(endRad)
-    const y3 = centerY + innerR * Math.sin(endRad)
-    const x4 = centerX + innerR * Math.cos(startRad)
-    const y4 = centerY + innerR * Math.sin(startRad)
-
-    return `M ${x1} ${y1} A ${outerR} ${outerR} 0 0 1 ${x2} ${y2} L ${x3} ${y3} A ${innerR} ${innerR} 0 0 0 ${x4} ${y4} Z`
-  }
+  const activePhaseName = (selectedPhaseId
+    ? cycleData.phases.find(p => p.id === selectedPhaseId)
+    : currentPhase
+  ).name.replace('Inner ', '')
 
   return (
-    <svg viewBox="0 0 400 400" className="mx-auto w-full max-w-[320px]">
-      {wheelPhases.map((phase) => {
-        const isActive = phase.id === currentPhase.id
-        const isSelected = selectedPhaseId === phase.id
-        const opacity = isActive || isSelected ? 0.65 : 0.22
+    <div className="mx-auto w-full max-w-[300px]">
+      <svg viewBox="0 0 300 300" className="block h-auto w-full">
+        {/* Segments */}
+        {wheelPhases.map((phase) => {
+          const isActive = phase.id === currentPhase.id
+          const isSelected = selectedPhaseId === phase.id
+          const fillOpacity = isActive || isSelected ? 0.65 : 0.22
 
-        const midAngle = (phase.startAngle + phase.endAngle) / 2
-        const midRad = (midAngle * Math.PI) / 180
-        const labelRadius = (radius + innerRadius) / 2
-        const labelX = centerX + labelRadius * Math.cos(midRad)
-        const labelY = centerY + labelRadius * Math.sin(midRad)
+          const d = ringSegmentPath(CX, CY, INNER_R, OUTER_R, phase.startDeg, phase.endDeg)
 
-        return (
-          <g key={phase.id}>
-            <path
-              d={createSegmentPath(phase.startAngle, phase.endAngle, radius, innerRadius)}
-              fill={phase.colour}
-              opacity={opacity}
-              className="cursor-pointer transition-opacity hover:opacity-80"
-              onClick={() => onPhaseClick(phase.id)}
-            />
-            <text
-              x={labelX}
-              y={labelY - 8}
-              textAnchor="middle"
-              className="cinzel pointer-events-none text-[10px] uppercase tracking-wider"
-              fill="var(--text)"
-            >
-              {phase.name.replace('Inner ', '')}
-            </text>
-            <text
-              x={labelX}
-              y={labelY + 6}
-              textAnchor="middle"
-              className="cinzel pointer-events-none text-[8px] uppercase tracking-wider"
-              fill="var(--muted)"
-            >
-              Days {phase.days[0]}–{phase.days[1]}
-            </text>
-          </g>
-        )
-      })}
+          // Calculate label position (middle of segment)
+          const midDeg = (phase.startDeg + phase.endDeg) / 2
+          const labelRadius = (INNER_R + OUTER_R) / 2
+          const labelPos = polar(CX, CY, labelRadius, midDeg)
 
-      {/* Center circle */}
-      <circle cx={centerX} cy={centerY} r={innerRadius} fill="var(--bg)" />
+          return (
+            <g key={phase.id}>
+              <path
+                d={d}
+                fill={phase.colour}
+                style={{
+                  fillOpacity,
+                  cursor: 'pointer',
+                  transition: 'fill-opacity 320ms ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive && !isSelected) {
+                    e.currentTarget.style.fillOpacity = '0.40'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive && !isSelected) {
+                    e.currentTarget.style.fillOpacity = '0.22'
+                  }
+                }}
+                onClick={() => onPhaseClick(phase.id)}
+              />
+              {/* Phase name */}
+              <text
+                x={labelPos.x}
+                y={labelPos.y - 6}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="cinzel pointer-events-none"
+                fontSize="10"
+                fill="white"
+                style={{ letterSpacing: '0.1em', fontWeight: 300, textTransform: 'uppercase' }}
+              >
+                {phase.name.replace('Inner ', '')}
+              </text>
+              {/* Day range */}
+              <text
+                x={labelPos.x}
+                y={labelPos.y + 6}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="cinzel pointer-events-none"
+                fontSize="8"
+                fill="white"
+                fillOpacity="0.6"
+                style={{ letterSpacing: '0.1em', fontWeight: 300 }}
+              >
+                Days {phase.days[0]}–{phase.days[1]}
+              </text>
+            </g>
+          )
+        })}
 
-      {/* Center text */}
-      <text
-        x={centerX}
-        y={centerY}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        className="cinzel text-[13px] uppercase tracking-wider"
-        fill="var(--accent)"
-      >
-        {(selectedPhaseId
-          ? cycleData.phases.find(p => p.id === selectedPhaseId)
-          : currentPhase
-        ).name.replace('Inner ', '')}
-      </text>
-    </svg>
+        {/* Center circle */}
+        <circle cx={CX} cy={CY} r={INNER_R} fill="var(--bg)" />
+
+        {/* Center text - active phase name */}
+        <text
+          x={CX}
+          y={CY}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          className="cinzel"
+          fontSize="12"
+          fill="var(--accent)"
+          style={{ letterSpacing: '0.12em', fontWeight: 300, textTransform: 'uppercase' }}
+        >
+          {activePhaseName}
+        </text>
+      </svg>
+    </div>
   )
 }
 
