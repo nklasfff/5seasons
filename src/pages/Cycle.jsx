@@ -65,20 +65,13 @@ export default function Cycle() {
   return (
     <div className="spring">
       {/* Hero */}
-      <div className="-mx-6 -mt-7 flex-col overflow-hidden bg-[#1a2820] md:-mx-16 lg:mt-12" style={{height: '70vh'}}>
-        <div className="relative h-full bg-[#1a2820]">
-          <img
-            src={heroCycleImage}
-            alt=""
-            className="h-full w-full object-cover object-center opacity-[0.88]"
-          />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-[#1a2820]" />
-          <div className="absolute bottom-8 left-0 right-0 text-center">
-            <p className="cinzel mb-2 text-[9px] font-light uppercase tracking-[0.38em] text-green-200/55">The Energy of the 5 Seasons</p>
-            <h1 className="cinzel text-[22px] font-light uppercase tracking-[0.1em] text-[#e8f0e8]">The Cycle</h1>
-            <p className="text-[13px] italic text-green-200/75">Your monthly rhythm through the five elements</p>
-          </div>
-        </div>
+      <div className="-mx-6 -mt-7 md:-mx-16 bg-[#1a2820]" style={{paddingBottom: '8px'}}>
+        <img
+          src={heroCycleImage}
+          alt="The Cycle"
+          className="w-full object-contain"
+          style={{background: '#1a2820'}}
+        />
       </div>
 
       <HorizontalNav />
