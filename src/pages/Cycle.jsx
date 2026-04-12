@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import cycleData from '../data/cycleData.js'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
-import heroImage from '../assets/images/hero-seasons.jpg'
+import heroImage from '../assets/images/hero-cycle.png'
 
 // Get phase from day
 function getPhaseFromDay(day) {
