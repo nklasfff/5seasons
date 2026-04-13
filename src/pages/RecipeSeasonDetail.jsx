@@ -85,7 +85,7 @@ export default function RecipeSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={season.name}
         className="mx-auto mb-6 w-[180px]"
-        style={cardStyle}
+        style={{ ...cardStyle, mixBlendMode: 'multiply' }}
       />
 
       {/* Season name and element */}

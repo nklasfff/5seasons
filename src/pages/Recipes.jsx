@@ -59,7 +59,7 @@ export default function Recipes() {
                 src={SEASON_CARDS[seasonId]}
                 alt={season.name}
                 className="mx-auto mb-4 w-[180px]"
-                style={cardStyle}
+                style={{ ...cardStyle, mixBlendMode: 'multiply' }}
               />
               <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
                 {season.name}
