@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import pauseData from '../data/pause_presence.json'
-import InsightBlock from '../components/ui/InsightBlock.jsx'
-import PracticeRow from '../components/ui/PracticeRow.jsx'
 import StickyNav from '../components/ui/StickyNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import cardSpring from '../assets/images/card-spring.png'
@@ -119,11 +117,32 @@ export default function PauseSeasonDetail() {
 
       {/* Content area */}
       <div className="mt-10 mb-16">
-        {activeSection === 'breath' && (
-          <BreathPracticeSection
-            breathPractice={breathPractice}
-            breathNote={practice.breath_note}
-          />
+        {activeSection === 'breath' && breathPractice && (
+          <div className="space-y-8">
+            <div>
+              <p className="cinzel mb-1 text-[9px] uppercase tracking-[0.28em] text-muted">{breathPractice.suitable_for}</p>
+              <h3 className="cinzel text-[15px] font-light uppercase tracking-[0.16em] text-accent mb-6">{breathPractice.name}</h3>
+              <div className="space-y-5">
+                {breathPractice.steps.map((step, i) => (
+                  <div key={i} className="flex gap-4 items-start">
+                    <span className="cinzel text-[9px] tracking-[0.2em] text-muted flex-shrink-0 mt-1">{String(i + 1).padStart(2, '0')}</span>
+                    <p className="text-[14.5px] leading-[1.8]">{step}</p>
+                  </div>
+                ))}
+              </div>
+              {breathPractice.note && (
+                <p className="mt-6 text-[13px] leading-[1.8] italic text-muted">{breathPractice.note}</p>
+              )}
+              {practice.breath_note && (
+                <p className="mt-4 text-[13px] leading-[1.8] italic text-muted">{practice.breath_note}</p>
+              )}
+            </div>
+            {practice.inner_practice && (
+              <div className="border-t pt-8" style={{ borderColor: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}>
+                <p className="text-[14.5px] leading-[1.8]">{practice.inner_practice}</p>
+              </div>
+            )}
+          </div>
         )}
         {activeSection === 'journal' && (
           <JournalSection
@@ -172,55 +191,6 @@ function NavButton({ label, active, onClick }) {
     >
       {label}
     </button>
-  )
-}
-
-/* ------------------------------------------------------------------ */
-/* BREATH PRACTICE Section                                            */
-/* ------------------------------------------------------------------ */
-
-function BreathPracticeSection({ breathPractice, breathNote }) {
-  if (!breathPractice) {
-    return (
-      <p className="text-[14px] italic text-muted">
-        No breath practice available for this season.
-      </p>
-    )
-  }
-
-  return (
-    <div>
-      <h2 className="cinzel text-[20px] font-light uppercase tracking-[0.14em] text-accent">
-        {breathPractice.name}
-      </h2>
-      <p className="mt-2 text-[12px] italic text-muted">
-        {breathPractice.suitable_for}
-      </p>
-
-      <div className="mt-10">
-        {breathPractice.steps.map((step, i) => (
-          <PracticeRow
-            key={i}
-            title={`${i + 1}.`}
-            description={step}
-          />
-        ))}
-      </div>
-
-      {breathPractice.note && (
-        <InsightBlock label="Note">
-          {breathPractice.note}
-        </InsightBlock>
-      )}
-
-      {breathNote && (
-        <div className="mt-6">
-          <p className="text-[13px] italic leading-[1.75] text-muted">
-            {breathNote}
-          </p>
-        </div>
-      )}
-    </div>
   )
 }
 
