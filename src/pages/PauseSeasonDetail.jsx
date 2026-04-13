@@ -45,7 +45,7 @@ export default function PauseSeasonDetail() {
     setActiveSection(null)
   }, [seasonId])
 
-  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'screen' } : { mixBlendMode: 'multiply' }
 
   if (!practice) {
     return (

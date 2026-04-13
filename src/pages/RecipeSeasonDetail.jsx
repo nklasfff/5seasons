@@ -41,7 +41,7 @@ export default function RecipeSeasonDetail() {
     setActiveMealType('breakfast')
   }, [seasonId])
 
-  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'screen' } : { mixBlendMode: 'multiply' }
 
   if (!season) {
     return (

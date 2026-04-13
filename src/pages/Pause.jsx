@@ -43,7 +43,7 @@ export default function Pause() {
     [breath_practices],
   )
 
-  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'screen' } : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
