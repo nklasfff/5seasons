@@ -31,7 +31,7 @@ export default function SeasonDetail() {
   const nextSeason = SEASON_ORDER[nextIndex]
 
   return (
-    <div className={`${seasonClass(season.id)} pb-28`}>
+    <div className={`${seasonClass(season.id)} pb-20`}>
       {/* Back link */}
       <div className="pt-4 pl-4">
         <Link
@@ -87,11 +87,7 @@ export default function SeasonDetail() {
         </div>
       )}
 
-      {/* Footer: author + season navigation as one natural block */}
-      <div className="mt-16 mb-24 flex flex-col items-center gap-8">
-        <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
-          Isabelle Evita Søndergaard
-        </p>
+      <div className="mt-16 flex flex-col items-center gap-6 pb-8">
         <div className="flex w-full items-center justify-between px-2">
           <Link
             to={`/seasons/${prevSeason}`}
@@ -106,6 +102,9 @@ export default function SeasonDetail() {
             {SEASON_LABELS[nextSeason]} →
           </Link>
         </div>
+        <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
+          Isabelle Evita Søndergaard
+        </p>
       </div>
 
       {/* Scroll to top button */}
