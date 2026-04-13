@@ -9,6 +9,11 @@ import cardSummer from '../assets/images/card-summer.png'
 import cardLateSummer from '../assets/images/card-latesummer.png'
 import cardAutumn from '../assets/images/card-autumn.png'
 import cardWinter from '../assets/images/card-winter.png'
+import cardSpringOld from '../assets/images/card-spring-old.png'
+import cardSummerOld from '../assets/images/card-summer-old.png'
+import cardLateSummerOld from '../assets/images/card-latesummer-old.png'
+import cardAutumnOld from '../assets/images/card-autumn-old.png'
+import cardWinterOld from '../assets/images/card-winter-old.png'
 import heroBodyClock from '../assets/images/hero-body-clock.jpg'
 import heroPause from '../assets/images/hero-pause.jpg'
 import heroRecipes from '../assets/images/hero-recipes.jpg'
@@ -27,6 +32,14 @@ const SEASON_CARDS = {
   late_summer: cardLateSummer,
   autumn: cardAutumn,
   winter: cardWinter,
+}
+
+const SEASON_CARDS_OLD = {
+  spring: cardSpringOld,
+  summer: cardSummerOld,
+  late_summer: cardLateSummerOld,
+  autumn: cardAutumnOld,
+  winter: cardWinterOld,
 }
 
 const EXPLORE_CARDS = [
@@ -72,7 +85,7 @@ export default function Home() {
     applyTheme(next)
   }
 
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const seasonCards = mode === 'dark' ? SEASON_CARDS_OLD : SEASON_CARDS
 
   return (
     <div className="spring">
@@ -121,10 +134,10 @@ export default function Home() {
                 style={{ background: 'transparent' }}
               >
                 <img
-                  src={SEASON_CARDS[season.id]}
+                  src={seasonCards[season.id]}
                   alt={season.name}
                   className="mx-auto mb-4 w-[180px]"
-                  style={cardStyle}
+                  style={mode === 'dark' ? {} : { mixBlendMode: 'multiply' }}
                 />
                 <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
                   {season.name}

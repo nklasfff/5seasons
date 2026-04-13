@@ -8,6 +8,11 @@ import cardSummer from '../assets/images/card-summer.png'
 import cardLateSummer from '../assets/images/card-latesummer.png'
 import cardAutumn from '../assets/images/card-autumn.png'
 import cardWinter from '../assets/images/card-winter.png'
+import cardSpringOld from '../assets/images/card-spring-old.png'
+import cardSummerOld from '../assets/images/card-summer-old.png'
+import cardLateSummerOld from '../assets/images/card-latesummer-old.png'
+import cardAutumnOld from '../assets/images/card-autumn-old.png'
+import cardWinterOld from '../assets/images/card-winter-old.png'
 import { seasonClass } from '../lib/seasonClass.js'
 import { useThemeMode } from '../lib/theme.js'
 
@@ -17,6 +22,14 @@ const SEASON_CARDS = {
   late_summer: cardLateSummer,
   autumn: cardAutumn,
   winter: cardWinter,
+}
+
+const SEASON_CARDS_OLD = {
+  spring: cardSpringOld,
+  summer: cardSummerOld,
+  late_summer: cardLateSummerOld,
+  autumn: cardAutumnOld,
+  winter: cardWinterOld,
 }
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
@@ -45,7 +58,7 @@ export default function PauseSeasonDetail() {
     setActiveSection(null)
   }, [seasonId])
 
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const seasonCards = mode === 'dark' ? SEASON_CARDS_OLD : SEASON_CARDS
 
   if (!practice) {
     return (
@@ -82,10 +95,10 @@ export default function PauseSeasonDetail() {
 
       {/* Season card image - 180px centered */}
       <img
-        src={SEASON_CARDS[seasonId]}
+        src={seasonCards[seasonId]}
         alt={practice.season_name}
         className="mx-auto mb-6 w-[180px]"
-        style={cardStyle}
+        style={mode === 'dark' ? {} : { mixBlendMode: 'multiply' }}
       />
 
       {/* Season name and element */}
