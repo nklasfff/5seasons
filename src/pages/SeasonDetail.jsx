@@ -32,7 +32,7 @@ export default function SeasonDetail() {
   const nextSeason = SEASON_ORDER[nextIndex]
 
   return (
-    <div className={seasonClass(season.id)}>
+    <div className={`${seasonClass(season.id)} pb-28`}>
       {/* Back link */}
       <div className="pt-4 pl-4">
         <Link
@@ -95,13 +95,15 @@ export default function SeasonDetail() {
       </div>
 
       {/* Sticky bottom navigation */}
-      <StickyNav
-        prevLabel={SEASON_LABELS[prevSeason]}
-        prevUrl={`/seasons/${prevSeason}`}
-        nextLabel={SEASON_LABELS[nextSeason]}
-        nextUrl={`/seasons/${nextSeason}`}
-        currentLabel={season.name}
-      />
+      <div className="mt-12">
+        <StickyNav
+          prevLabel={SEASON_LABELS[prevSeason]}
+          prevUrl={`/seasons/${prevSeason}`}
+          nextLabel={SEASON_LABELS[nextSeason]}
+          nextUrl={`/seasons/${nextSeason}`}
+          currentLabel={season.name}
+        />
+      </div>
 
       {/* Scroll to top button */}
       <ScrollToTop />
