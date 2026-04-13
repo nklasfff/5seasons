@@ -39,13 +39,13 @@ function getCurrentOrgan() {
 // Get element color for organ
 function getElementColor(element) {
   const colors = {
-    Wood: '#3a7040',
-    Fire: '#8a2030',
-    Earth: '#7a6010',
-    Metal: '#505058',
-    Water: '#2a4a80',
+    Wood: '#4a8050',
+    Fire: '#903040',
+    Earth: '#8a6820',
+    Metal: '#686870',
+    Water: '#3a5080',
   }
-  return colors[element] || '#3a7040'
+  return colors[element] || '#4a8050'
 }
 
 // Generate dynamic description
