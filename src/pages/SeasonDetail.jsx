@@ -55,11 +55,11 @@ export default function SeasonDetail() {
           {season.element}
         </p>
         <p className="lead mt-8">
-          {season.description.split(/[.!?]/).slice(0, 2).join('. ').trim()}.
+          {season.description}
         </p>
       </div>
 
-      {/* Three navigation buttons */}
+      {/* Five navigation buttons */}
       <div className="flex gap-x-7 border-b pb-2" style={{ borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)' }}>
         <NavButton
           label="Organs"
@@ -70,6 +70,16 @@ export default function SeasonDetail() {
           label="Advice"
           active={activeSection === 'advice'}
           onClick={() => setActiveSection(activeSection === 'advice' ? null : 'advice')}
+        />
+        <NavButton
+          label="Symptoms"
+          active={activeSection === 'symptoms'}
+          onClick={() => setActiveSection(activeSection === 'symptoms' ? null : 'symptoms')}
+        />
+        <NavButton
+          label="Causes"
+          active={activeSection === 'causes'}
+          onClick={() => setActiveSection(activeSection === 'causes' ? null : 'causes')}
         />
         <NavButton
           label="Themes"
@@ -83,6 +93,8 @@ export default function SeasonDetail() {
         <div className="mt-10 mb-16">
           {activeSection === 'organs' && <OrgansContent season={season} />}
           {activeSection === 'advice' && <AdviceContent season={season} />}
+          {activeSection === 'symptoms' && <SymptomsContent season={season} />}
+          {activeSection === 'causes' && <CausesContent season={season} />}
           {activeSection === 'themes' && <ThemesContent season={season} />}
         </div>
       )}
@@ -185,6 +197,40 @@ function AdviceContent({ season }) {
           </div>
         )
       })}
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* SYMPTOMS Content                                                   */
+/* ------------------------------------------------------------------ */
+
+function SymptomsContent({ season }) {
+  return (
+    <div className="space-y-4">
+      {season.symptoms_imbalance.map((symptom, i) => (
+        <div key={i} className="flex gap-4 items-start">
+          <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--accent)' }} />
+          <p className="text-[14.5px] leading-[1.8]">{symptom}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* CAUSES Content                                                     */
+/* ------------------------------------------------------------------ */
+
+function CausesContent({ season }) {
+  return (
+    <div className="space-y-4">
+      {season.contributing_causes.map((cause, i) => (
+        <div key={i} className="flex gap-4 items-start">
+          <span className="mt-2 w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--accent)' }} />
+          <p className="text-[14.5px] leading-[1.8]">{cause}</p>
+        </div>
+      ))}
     </div>
   )
 }
