@@ -68,7 +68,7 @@ function findActivePeriodIndex() {
 }
 
 export default function BodyClock() {
-  const { meta, introduction, organs, daily_rhythm, symptoms_guide } = bodyclockData
+  const { meta, introduction, organs, daily_rhythm, symptoms_guide, emotion_and_organs } = bodyclockData
 
   const organsByName = useMemo(
     () => Object.fromEntries(organs.map((o) => [o.organ, o])),
@@ -146,6 +146,7 @@ export default function BodyClock() {
             activePeriodIndex={activePeriodIndex}
             selectedPeriodIndex={selectedPeriodIndex}
             setSelectedPeriodIndex={setSelectedPeriodIndex}
+            emotionAndOrgans={emotion_and_organs}
           />
         )}
         {activeSection === 'rhythm' && <TodaysRhythmSection items={daily_rhythm} />}
@@ -210,6 +211,7 @@ function TheClockSection({
   activePeriodIndex,
   selectedPeriodIndex,
   setSelectedPeriodIndex,
+  emotionAndOrgans,
 }) {
   // If a period is selected, show its content
   if (selectedPeriodIndex !== null) {
@@ -233,17 +235,47 @@ function TheClockSection({
         </div>
 
         <div className="mt-10 space-y-8">
-          {periodOrgans.map((organ) => (
-            <div key={organ.organ}>
-              <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
-                {organ.organ}
-              </h3>
-              <p className="lead mt-4">{organ.description}</p>
-              {organ.practice && (
-                <InsightBlock label="Practice">{organ.practice}</InsightBlock>
-              )}
-            </div>
-          ))}
+          {periodOrgans.map((organ) => {
+            const emotionEntry = emotionAndOrgans?.find(e => e.organ === organ.organ)
+
+            return (
+              <div key={organ.organ}>
+                <h3 className="cinzel text-[13px] font-light uppercase tracking-[0.24em] text-accent">
+                  {organ.organ}
+                </h3>
+                <p className="lead mt-4">{organ.description}</p>
+                {organ.practice && (
+                  <InsightBlock label="Practice">{organ.practice}</InsightBlock>
+                )}
+
+                {/* Signs of imbalance */}
+                {organ.signs_of_imbalance && (
+                  <div className="mt-4">
+                    <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted mb-3">Signs of imbalance</p>
+                    <div className="space-y-2">
+                      {organ.signs_of_imbalance.map((sign, i) => (
+                        <div key={i} className="flex gap-3 items-start">
+                          <span className="mt-[9px] w-[3px] h-[3px] rounded-full flex-shrink-0" style={{ background: 'var(--accent)' }} />
+                          <p className="text-[13.5px] leading-[1.75]">{sign}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Emotion */}
+                {emotionEntry && (
+                  <div className="mt-6 border-t pt-5" style={{ borderColor: 'color-mix(in srgb, var(--accent) 12%, transparent)' }}>
+                    <p className="cinzel text-[9px] uppercase tracking-[0.28em] text-muted mb-3">Emotion</p>
+                    <div className="space-y-3">
+                      <p className="text-[13.5px] leading-[1.75]"><span className="cinzel text-[9px] uppercase tracking-[0.2em] text-muted mr-2">Balanced</span>{emotionEntry.balanced}</p>
+                      <p className="text-[13.5px] leading-[1.75]"><span className="cinzel text-[9px] uppercase tracking-[0.2em] text-muted mr-2">Imbalanced</span>{emotionEntry.imbalanced}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
 
       </div>
