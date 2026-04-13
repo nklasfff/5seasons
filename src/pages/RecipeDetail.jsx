@@ -5,6 +5,9 @@ import Divider from '../components/ui/Divider.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import { seasonClass } from '../lib/seasonClass.js'
+import summerLunch1 from '../assets/images/summer_lunch_1.png'
+import summerLunch2 from '../assets/images/summer_lunch_2.png'
+import summerLunch3 from '../assets/images/summer_lunch_3.png'
 
 const SEASON_LABELS = {
   spring: 'Spring',
@@ -18,6 +21,12 @@ const MEAL_LABELS = {
   breakfast: 'Breakfast',
   lunch: 'Lunch',
   dinner: 'Dinner',
+}
+
+const RECIPE_IMAGES = {
+  summer_lunch_1: summerLunch1,
+  summer_lunch_2: summerLunch2,
+  summer_lunch_3: summerLunch3,
 }
 
 export default function RecipeDetail() {
@@ -42,6 +51,14 @@ export default function RecipeDetail() {
       <PageHeader
         label={`${SEASON_LABELS[recipe.season]} · ${MEAL_LABELS[recipe.meal_type]}`}
       />
+
+      {RECIPE_IMAGES[recipe.id] && (
+        <img
+          src={RECIPE_IMAGES[recipe.id]}
+          alt={recipe.title}
+          className="mb-6 w-full h-auto"
+        />
+      )}
 
       <h1 className="cinzel mb-3 text-[22px] font-light uppercase tracking-[0.12em] text-heading">
         {recipe.title}
