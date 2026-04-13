@@ -43,7 +43,7 @@ export default function Pause() {
     [breath_practices],
   )
 
-  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
+  const cardStyle = {}
 
   return (
     <div className="spring">

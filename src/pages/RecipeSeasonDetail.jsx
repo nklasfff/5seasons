@@ -41,7 +41,7 @@ export default function RecipeSeasonDetail() {
     setActiveMealType('breakfast')
   }, [seasonId])
 
-  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
+  const cardStyle = {}
 
   if (!season) {
     return (

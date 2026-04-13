@@ -45,7 +45,7 @@ export default function PauseSeasonDetail() {
     setActiveSection(null)
   }, [seasonId])
 
-  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
+  const cardStyle = {}
 
   if (!practice) {
     return (

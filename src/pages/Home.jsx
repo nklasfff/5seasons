@@ -72,7 +72,7 @@ export default function Home() {
     applyTheme(next)
   }
 
-  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
+  const cardStyle = {}
 
   return (
     <div className="spring">

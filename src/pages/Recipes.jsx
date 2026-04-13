@@ -24,7 +24,7 @@ const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 export default function Recipes() {
   const { meta, seasons } = recipesData
   const mode = useThemeMode()
-  const cardStyle = mode === 'dark' ? { borderRadius: '50%', background: '#ffffff' } : {}
+  const cardStyle = {}
 
   return (
     <div className="spring">
