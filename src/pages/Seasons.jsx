@@ -11,7 +11,7 @@ import { useThemeMode } from '../lib/theme.js'
 export default function Seasons() {
   const { meta, seasons } = seasonsData
   const mode = useThemeMode()
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'screen' } : { mixBlendMode: 'multiply' }
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">

@@ -72,7 +72,7 @@ export default function Home() {
     applyTheme(next)
   }
 
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'screen' } : { mixBlendMode: 'multiply' }
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
