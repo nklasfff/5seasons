@@ -3,7 +3,6 @@ import { Link, useParams, Navigate } from 'react-router-dom'
 import seasonsData from '../data/seasons.json'
 import Hero from '../components/ui/Hero.jsx'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
-import StickyNav from '../components/ui/StickyNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import heroImage from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
@@ -88,21 +87,25 @@ export default function SeasonDetail() {
         </div>
       )}
 
-      <div className="mt-16 mb-6">
+      {/* Footer: author + season navigation as one natural block */}
+      <div className="mt-16 mb-24 flex flex-col items-center gap-8">
         <p className="cinzel text-center text-[9px] uppercase tracking-[0.3em] text-muted">
           Isabelle Evita Søndergaard
         </p>
-      </div>
-
-      {/* Sticky bottom navigation */}
-      <div className="mt-12">
-        <StickyNav
-          prevLabel={SEASON_LABELS[prevSeason]}
-          prevUrl={`/seasons/${prevSeason}`}
-          nextLabel={SEASON_LABELS[nextSeason]}
-          nextUrl={`/seasons/${nextSeason}`}
-          currentLabel={season.name}
-        />
+        <div className="flex w-full items-center justify-between px-2">
+          <Link
+            to={`/seasons/${prevSeason}`}
+            className="cinzel text-[9px] uppercase tracking-[0.24em] text-muted transition-colors hover:text-accent"
+          >
+            ← {SEASON_LABELS[prevSeason]}
+          </Link>
+          <Link
+            to={`/seasons/${nextSeason}`}
+            className="cinzel text-[9px] uppercase tracking-[0.24em] text-muted transition-colors hover:text-accent"
+          >
+            {SEASON_LABELS[nextSeason]} →
+          </Link>
+        </div>
       </div>
 
       {/* Scroll to top button */}
