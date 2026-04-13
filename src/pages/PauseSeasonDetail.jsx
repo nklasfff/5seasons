@@ -45,7 +45,7 @@ export default function PauseSeasonDetail() {
     setActiveSection(null)
   }, [seasonId])
 
-  const cardStyle = {}
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   if (!practice) {
     return (
@@ -85,7 +85,7 @@ export default function PauseSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={practice.season_name}
         className="mx-auto mb-6 w-[180px]"
-        style={{ ...cardStyle, mixBlendMode: 'multiply' }}
+        style={cardStyle}
       />
 
       {/* Season name and element */}

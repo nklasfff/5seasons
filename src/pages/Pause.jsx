@@ -43,7 +43,7 @@ export default function Pause() {
     [breath_practices],
   )
 
-  const cardStyle = {}
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -343,7 +343,7 @@ function SeasonsSection({ seasonalPractices, cardStyle }) {
               src={SEASON_CARDS[seasonId]}
               alt={practice.season_name}
               className="mx-auto mb-4 w-[180px]"
-              style={{ ...cardStyle, mixBlendMode: 'multiply' }}
+              style={cardStyle}
             />
             <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
               {practice.season_name}

@@ -72,7 +72,7 @@ export default function Home() {
     applyTheme(next)
   }
 
-  const cardStyle = {}
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -124,7 +124,7 @@ export default function Home() {
                   src={SEASON_CARDS[season.id]}
                   alt={season.name}
                   className="mx-auto mb-4 w-[180px]"
-                  style={{ ...cardStyle, mixBlendMode: 'multiply' }}
+                  style={cardStyle}
                 />
                 <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
                   {season.name}

@@ -11,7 +11,7 @@ import { useThemeMode } from '../lib/theme.js'
 export default function Seasons() {
   const { meta, seasons } = seasonsData
   const mode = useThemeMode()
-  const cardStyle = {}
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -54,7 +54,7 @@ function SeasonRow({ season, cardStyle }) {
           src={seasonCardImages[season.id]}
           alt=""
           className="h-[124px] w-[124px] flex-shrink-0 object-contain"
-          style={{ ...cardStyle, mixBlendMode: 'multiply' }}
+          style={cardStyle}
         />
         <div className="min-w-0 flex-1">
           <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">

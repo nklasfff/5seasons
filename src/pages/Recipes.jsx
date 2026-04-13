@@ -24,7 +24,7 @@ const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 export default function Recipes() {
   const { meta, seasons } = recipesData
   const mode = useThemeMode()
-  const cardStyle = {}
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -59,7 +59,7 @@ export default function Recipes() {
                 src={SEASON_CARDS[seasonId]}
                 alt={season.name}
                 className="mx-auto mb-4 w-[180px]"
-                style={{ ...cardStyle, mixBlendMode: 'multiply' }}
+                style={cardStyle}
               />
               <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
                 {season.name}

@@ -41,7 +41,7 @@ export default function RecipeSeasonDetail() {
     setActiveMealType('breakfast')
   }, [seasonId])
 
-  const cardStyle = {}
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   if (!season) {
     return (
@@ -85,7 +85,7 @@ export default function RecipeSeasonDetail() {
         src={SEASON_CARDS[seasonId]}
         alt={season.name}
         className="mx-auto mb-6 w-[180px]"
-        style={{ ...cardStyle, mixBlendMode: 'multiply' }}
+        style={cardStyle}
       />
 
       {/* Season name and element */}
