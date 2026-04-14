@@ -46,8 +46,8 @@ export default function Recipes() {
             >
               <img
                 src={cardImages[seasonId]}
-                alt={season.name}
-                className="mx-auto mb-4 w-[180px] object-contain"
+                alt=""
+                className="mx-auto mb-4 h-[180px] w-[180px] flex-shrink-0 object-contain"
                 style={cardStyle}
               />
               <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
