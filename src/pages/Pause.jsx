@@ -331,7 +331,7 @@ function SeasonsSection({ seasonalPractices, cardImages, cardStyle }) {
             <img
               src={cardImages[seasonId]}
               alt={practice.season_name}
-              className="mx-auto mb-4 w-[180px]"
+              className="mx-auto mb-4 w-[180px] object-contain"
               style={cardStyle}
             />
             <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">

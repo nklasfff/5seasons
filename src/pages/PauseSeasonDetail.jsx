@@ -73,7 +73,7 @@ export default function PauseSeasonDetail() {
       <img
         src={cardImages[seasonId]}
         alt={practice.season_name}
-        className="mx-auto mb-6 w-[180px]"
+        className="mx-auto mb-6 w-[180px] object-contain"
         style={cardStyle}
       />
 

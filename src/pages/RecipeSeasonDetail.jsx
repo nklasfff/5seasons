@@ -73,7 +73,7 @@ export default function RecipeSeasonDetail() {
       <img
         src={cardImages[seasonId]}
         alt={season.name}
-        className="mx-auto mb-6 w-[180px]"
+        className="mx-auto mb-6 w-[180px] object-contain"
         style={cardStyle}
       />
 
