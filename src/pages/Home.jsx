@@ -10,7 +10,7 @@ import heroRecipes from '../assets/images/hero-recipes.jpg'
 import heroSeasons from '../assets/images/hero-seasons.jpg'
 import heroCycleImage from '../assets/images/hero-cycle.png'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
+import { seasonCardImages, seasonCardImagesOld } from '../lib/seasonImage.js'
 import {
   applyTheme,
   setStoredTheme,
@@ -60,7 +60,8 @@ export default function Home() {
     applyTheme(next)
   }
 
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const cardImages = mode === 'dark' ? seasonCardImagesOld : seasonCardImages
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -109,7 +110,7 @@ export default function Home() {
                 style={{ background: 'transparent' }}
               >
                 <img
-                  src={seasonCardImages[season.id]}
+                  src={cardImages[season.id]}
                   alt={season.name}
                   className="mx-auto mb-4 w-[180px]"
                   style={cardStyle}

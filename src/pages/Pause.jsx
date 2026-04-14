@@ -7,7 +7,7 @@ import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import heroImage from '../assets/images/hero-pause.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
+import { seasonCardImages, seasonCardImagesOld } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
 
 // Four topics for MINDFULNESS & BREATH section
@@ -31,7 +31,8 @@ export default function Pause() {
     [breath_practices],
   )
 
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const cardImages = mode === 'dark' ? seasonCardImagesOld : seasonCardImages
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -87,7 +88,7 @@ export default function Pause() {
           />
         )}
         {activeSection === 'seasons' && (
-          <SeasonsSection seasonalPractices={seasonal_practices} cardStyle={cardStyle} />
+          <SeasonsSection seasonalPractices={seasonal_practices} cardImages={cardImages} cardStyle={cardStyle} />
         )}
       </div>
 
@@ -313,7 +314,7 @@ function MindfulnessBreathSection({
 /* THE SEASONS Section                                                */
 /* ------------------------------------------------------------------ */
 
-function SeasonsSection({ seasonalPractices, cardStyle }) {
+function SeasonsSection({ seasonalPractices, cardImages, cardStyle }) {
   return (
     <div className="space-y-8" style={{ background: 'transparent' }}>
       {seasonalPractices.map((practice) => {
@@ -328,7 +329,7 @@ function SeasonsSection({ seasonalPractices, cardStyle }) {
             style={{ background: 'transparent' }}
           >
             <img
-              src={seasonCardImages[seasonId]}
+              src={cardImages[seasonId]}
               alt={practice.season_name}
               className="mx-auto mb-4 w-[180px]"
               style={cardStyle}

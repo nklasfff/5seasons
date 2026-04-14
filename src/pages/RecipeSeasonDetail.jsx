@@ -4,7 +4,7 @@ import recipesData from '../data/recipes.json'
 import StickyNav from '../components/ui/StickyNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
+import { seasonCardImages, seasonCardImagesOld } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
@@ -29,7 +29,8 @@ export default function RecipeSeasonDetail() {
     setActiveMealType('breakfast')
   }, [seasonId])
 
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const cardImages = mode === 'dark' ? seasonCardImagesOld : seasonCardImages
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   if (!season) {
     return (
@@ -70,7 +71,7 @@ export default function RecipeSeasonDetail() {
 
       {/* Season card image - 180px centered */}
       <img
-        src={seasonCardImages[seasonId]}
+        src={cardImages[seasonId]}
         alt={season.name}
         className="mx-auto mb-6 w-[180px]"
         style={cardStyle}

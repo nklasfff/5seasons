@@ -4,7 +4,7 @@ import Hero from '../components/ui/Hero.jsx'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import heroImage from '../assets/images/hero-recipes.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
+import { seasonCardImages, seasonCardImagesOld } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
@@ -12,7 +12,8 @@ const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 export default function Recipes() {
   const { meta, seasons } = recipesData
   const mode = useThemeMode()
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const cardImages = mode === 'dark' ? seasonCardImagesOld : seasonCardImages
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -44,7 +45,7 @@ export default function Recipes() {
               style={{ background: 'transparent' }}
             >
               <img
-                src={seasonCardImages[seasonId]}
+                src={cardImages[seasonId]}
                 alt={season.name}
                 className="mx-auto mb-4 w-[180px]"
                 style={cardStyle}

@@ -5,13 +5,14 @@ import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import Divider from '../components/ui/Divider.jsx'
 import heroImage from '../assets/images/hero-seasons.jpg'
 import { seasonClass } from '../lib/seasonClass.js'
-import { seasonCardImages } from '../lib/seasonImage.js'
+import { seasonCardImages, seasonCardImagesOld } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
 
 export default function Seasons() {
   const { meta, seasons } = seasonsData
   const mode = useThemeMode()
-  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
+  const cardImages = mode === 'dark' ? seasonCardImagesOld : seasonCardImages
+  const cardStyle = mode === 'dark' ? {} : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -29,14 +30,14 @@ export default function Seasons() {
 
       <div className="flex flex-col" style={{ background: 'transparent' }}>
         {seasons.map((season) => (
-          <SeasonRow key={season.id} season={season} cardStyle={cardStyle} />
+          <SeasonRow key={season.id} season={season} cardImages={cardImages} cardStyle={cardStyle} />
         ))}
       </div>
     </div>
   )
 }
 
-function SeasonRow({ season, cardStyle }) {
+function SeasonRow({ season, cardImages, cardStyle }) {
   return (
     <Link
       to={`/seasons/${season.id}`}
@@ -51,7 +52,7 @@ function SeasonRow({ season, cardStyle }) {
         }}
       >
         <img
-          src={seasonCardImages[season.id]}
+          src={cardImages[season.id]}
           alt=""
           className="h-[124px] w-[124px] flex-shrink-0 object-contain"
           style={cardStyle}
