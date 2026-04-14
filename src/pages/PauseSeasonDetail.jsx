@@ -3,34 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import pauseData from '../data/pause_presence.json'
 import StickyNav from '../components/ui/StickyNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
-import cardSpring from '../assets/images/card-spring.png'
-import cardSummer from '../assets/images/card-summer.png'
-import cardLateSummer from '../assets/images/card-latesummer.png'
-import cardAutumn from '../assets/images/card-autumn.png'
-import cardWinter from '../assets/images/card-winter.png'
-import cardSpringOld from '../assets/images/card-spring-old.png'
-import cardSummerOld from '../assets/images/card-summer-old.png'
-import cardLateSummerOld from '../assets/images/card-latesummer-old.png'
-import cardAutumnOld from '../assets/images/card-autumn-old.png'
-import cardWinterOld from '../assets/images/card-winter-old.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { seasonCardImages } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
-
-const SEASON_CARDS = {
-  spring: cardSpring,
-  summer: cardSummer,
-  late_summer: cardLateSummer,
-  autumn: cardAutumn,
-  winter: cardWinter,
-}
-
-const SEASON_CARDS_OLD = {
-  spring: cardSpringOld,
-  summer: cardSummerOld,
-  late_summer: cardLateSummerOld,
-  autumn: cardAutumnOld,
-  winter: cardWinterOld,
-}
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 const SEASON_NAMES = {
@@ -58,7 +33,7 @@ export default function PauseSeasonDetail() {
     setActiveSection(null)
   }, [seasonId])
 
-  const seasonCards = mode === 'dark' ? SEASON_CARDS_OLD : SEASON_CARDS
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
 
   if (!practice) {
     return (
@@ -95,10 +70,10 @@ export default function PauseSeasonDetail() {
 
       {/* Season card image - 180px centered */}
       <img
-        src={seasonCards[seasonId]}
+        src={seasonCardImages[seasonId]}
         alt={practice.season_name}
         className="mx-auto mb-6 w-[180px]"
-        style={mode === 'dark' ? {} : { mixBlendMode: 'multiply' }}
+        style={cardStyle}
       />
 
       {/* Season name and element */}

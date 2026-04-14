@@ -6,21 +6,9 @@ import HorizontalNav from '../components/layout/HorizontalNav.jsx'
 import InsightBlock from '../components/ui/InsightBlock.jsx'
 import PracticeRow from '../components/ui/PracticeRow.jsx'
 import heroImage from '../assets/images/hero-pause.jpg'
-import cardSpring from '../assets/images/card-spring.png'
-import cardSummer from '../assets/images/card-summer.png'
-import cardLateSummer from '../assets/images/card-latesummer.png'
-import cardAutumn from '../assets/images/card-autumn.png'
-import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { seasonCardImages } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
-
-const SEASON_CARDS = {
-  spring: cardSpring,
-  summer: cardSummer,
-  late_summer: cardLateSummer,
-  autumn: cardAutumn,
-  winter: cardWinter,
-}
 
 // Four topics for MINDFULNESS & BREATH section
 const TOPICS = [
@@ -340,7 +328,7 @@ function SeasonsSection({ seasonalPractices, cardStyle }) {
             style={{ background: 'transparent' }}
           >
             <img
-              src={SEASON_CARDS[seasonId]}
+              src={seasonCardImages[seasonId]}
               alt={practice.season_name}
               className="mx-auto mb-4 w-[180px]"
               style={cardStyle}

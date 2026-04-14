@@ -3,21 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import recipesData from '../data/recipes.json'
 import StickyNav from '../components/ui/StickyNav.jsx'
 import ScrollToTop from '../components/ui/ScrollToTop.jsx'
-import cardSpring from '../assets/images/card-spring.png'
-import cardSummer from '../assets/images/card-summer.png'
-import cardLateSummer from '../assets/images/card-latesummer.png'
-import cardAutumn from '../assets/images/card-autumn.png'
-import cardWinter from '../assets/images/card-winter.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { seasonCardImages } from '../lib/seasonImage.js'
 import { useThemeMode } from '../lib/theme.js'
-
-const SEASON_CARDS = {
-  spring: cardSpring,
-  summer: cardSummer,
-  late_summer: cardLateSummer,
-  autumn: cardAutumn,
-  winter: cardWinter,
-}
 
 const SEASON_ORDER = ['spring', 'summer', 'late_summer', 'autumn', 'winter']
 const SEASON_NAMES = {
@@ -82,7 +70,7 @@ export default function RecipeSeasonDetail() {
 
       {/* Season card image - 180px centered */}
       <img
-        src={SEASON_CARDS[seasonId]}
+        src={seasonCardImages[seasonId]}
         alt={season.name}
         className="mx-auto mb-6 w-[180px]"
         style={cardStyle}

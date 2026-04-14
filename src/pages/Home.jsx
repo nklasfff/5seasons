@@ -4,43 +4,18 @@ import seasonsData from '../data/seasons.json'
 import PageHeader from '../components/ui/PageHeader.jsx'
 import RightNow from '../components/ui/RightNow.jsx'
 import HorizontalNav from '../components/layout/HorizontalNav.jsx'
-import cardSpring from '../assets/images/card-spring.png'
-import cardSummer from '../assets/images/card-summer.png'
-import cardLateSummer from '../assets/images/card-latesummer.png'
-import cardAutumn from '../assets/images/card-autumn.png'
-import cardWinter from '../assets/images/card-winter.png'
-import cardSpringOld from '../assets/images/card-spring-old.png'
-import cardSummerOld from '../assets/images/card-summer-old.png'
-import cardLateSummerOld from '../assets/images/card-latesummer-old.png'
-import cardAutumnOld from '../assets/images/card-autumn-old.png'
-import cardWinterOld from '../assets/images/card-winter-old.png'
 import heroBodyClock from '../assets/images/hero-body-clock.jpg'
 import heroPause from '../assets/images/hero-pause.jpg'
 import heroRecipes from '../assets/images/hero-recipes.jpg'
 import heroSeasons from '../assets/images/hero-seasons.jpg'
 import heroCycleImage from '../assets/images/hero-cycle.png'
 import { seasonClass } from '../lib/seasonClass.js'
+import { seasonCardImages } from '../lib/seasonImage.js'
 import {
   applyTheme,
   setStoredTheme,
   useThemeMode,
 } from '../lib/theme.js'
-
-const SEASON_CARDS = {
-  spring: cardSpring,
-  summer: cardSummer,
-  late_summer: cardLateSummer,
-  autumn: cardAutumn,
-  winter: cardWinter,
-}
-
-const SEASON_CARDS_OLD = {
-  spring: cardSpringOld,
-  summer: cardSummerOld,
-  late_summer: cardLateSummerOld,
-  autumn: cardAutumnOld,
-  winter: cardWinterOld,
-}
 
 const EXPLORE_CARDS = [
   {
@@ -85,7 +60,7 @@ export default function Home() {
     applyTheme(next)
   }
 
-  const seasonCards = mode === 'dark' ? SEASON_CARDS_OLD : SEASON_CARDS
+  const cardStyle = mode === 'dark' ? { mixBlendMode: 'darken' } : { mixBlendMode: 'multiply' }
 
   return (
     <div className="spring">
@@ -134,10 +109,10 @@ export default function Home() {
                 style={{ background: 'transparent' }}
               >
                 <img
-                  src={seasonCards[season.id]}
+                  src={seasonCardImages[season.id]}
                   alt={season.name}
                   className="mx-auto mb-4 w-[180px]"
-                  style={mode === 'dark' ? {} : { mixBlendMode: 'multiply' }}
+                  style={cardStyle}
                 />
                 <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
                   {season.name}
