@@ -69,11 +69,11 @@ export default function RecipeSeasonDetail() {
         </Link>
       </div>
 
-      {/* Season card image - 180px centered */}
+      {/* Season card image - 124px centered */}
       <img
         src={cardImages[seasonId]}
         alt=""
-        className="mx-auto mb-6 h-[180px] w-[180px] flex-shrink-0 object-contain"
+        className="mx-auto mb-6 h-[124px] w-[124px] flex-shrink-0 object-contain"
         style={cardStyle}
       />
 
