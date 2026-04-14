@@ -32,33 +32,41 @@ export default function Recipes() {
       </div>
 
       {/* Five season entries */}
-      <div className="space-y-8" style={{ background: 'transparent' }}>
+      <div className="flex flex-col" style={{ background: 'transparent' }}>
         {SEASON_ORDER.map((seasonId) => {
           const season = seasons[seasonId]
-          const firstSentence = season.principle.split(/[.!?]/)[0].trim() + '.'
 
           return (
             <Link
               key={seasonId}
               to={`/recipes/${seasonId}`}
-              className={`${seasonClass(seasonId)} block transition-opacity hover:opacity-75`}
-              style={{ background: 'transparent' }}
+              className={`group block ${seasonClass(seasonId)}`}
             >
-              <img
-                src={cardImages[seasonId]}
-                alt=""
-                className="mx-auto mb-4 h-[124px] w-[124px] flex-shrink-0 object-contain"
-                style={cardStyle}
-              />
-              <h3 className="cinzel text-center text-[18px] font-light uppercase tracking-[0.14em] text-accent">
-                {season.name}
-              </h3>
-              <p className="cinzel mt-1 text-center text-[9px] uppercase tracking-[0.3em] text-muted">
-                {season.element}
-              </p>
-              <p className="lead mt-4 text-center">
-                {firstSentence}
-              </p>
+              <article
+                className="flex items-start gap-5 border-b py-6 transition-colors"
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--accent) 18%, transparent)',
+                  background: 'transparent',
+                }}
+              >
+                <img
+                  src={cardImages[seasonId]}
+                  alt=""
+                  className="h-[124px] w-[124px] flex-shrink-0 object-contain"
+                  style={cardStyle}
+                />
+                <div className="min-w-0 flex-1">
+                  <p className="cinzel text-[9px] uppercase tracking-[0.3em] text-muted">
+                    {season.element}
+                  </p>
+                  <h2 className="cinzel mt-1 text-[19px] font-light uppercase tracking-[0.18em] text-accent">
+                    {season.name}
+                  </h2>
+                  <p className="mt-3 line-clamp-3 text-[13.5px] leading-[1.7] text-body">
+                    {season.principle}
+                  </p>
+                </div>
+              </article>
             </Link>
           )
         })}
